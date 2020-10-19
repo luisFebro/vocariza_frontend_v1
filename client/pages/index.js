@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-
+/*
+The naming convention for pages is all lowercase. Your root page should thusly be called index.js.
+ */
 export default function Home() {
   return (
     <div className={styles.container}>
