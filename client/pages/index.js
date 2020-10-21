@@ -1,12 +1,63 @@
 import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
+import Layout, { siteTitle } from "../components/_Layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../demo/lib/posts";
 import Link from "next/link";
 import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
 
-/*
+export default function Home({ allPostsData }) {
+    // n1 infos about pre-rendering and co.
+    return (
+        <Layout home>
+            <Head>
+                <title>{siteTitle}</title>
+            </Head>
+            <section className={utilStyles.headingMd}>
+                <p>Product Designer, Languages Freak, biz and Rock 'n' Roll</p>
+                <p>
+                    (This is a sample website - you’ll be building a site like
+                    this on{" "}
+                    <a href="https://nextjs.org/learn">our Next.js tutorial</a>
+                    .)
+                </p>
+            </section>
+            <section
+                className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}
+            >
+                <h2 className={utilStyles.headingLg}>Blog</h2>
+                <ul className={utilStyles.list}>
+                    {allPostsData.map(({ id, date, title }) => (
+                        <li className={utilStyles.listItem} key={id}>
+                            <Link href={`/demo/posts/${id}`}>
+                                <a>{title}</a>
+                            </Link>
+                            <br />
+                            <small className={utilStyles.lightText}>
+                                <Date dateString={date} />
+                            </small>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        </Layout>
+    );
+}
+
+export async function getStaticProps(context) {
+    const allPostsData = getSortedPostsData();
+
+    return {
+        props: {
+            allPostsData,
+        },
+        revalidate: 1, // n2
+    };
+}
+
+/* COMMENTS
+
+n1:
 The naming convention for pages is all lowercase. Your root page should thusly be called index.js.
 PRE-RENDERING: By default, Next.js pre-renders every page. This means that Next.js generates HTML for each page in advance, instead of having it all done by client-side JavaScript. Pre-rendering can result in better performance and SEO.
 
@@ -56,60 +107,9 @@ This approach works well for user dashboard pages, for example. Because a dashbo
 
 SWR
 The team behind Next.js has created a React hook for data fetching called SWR. We highly recommend it if you’re fetching data on the client side. It handles caching, revalidation, focus tracking, refetching on interval, and more.
- */
 
-export default function Home({ allPostsData }) {
-    return (
-        <Layout home>
-            <Head>
-                <title>{siteTitle}</title>
-            </Head>
-            <section className={utilStyles.headingMd}>
-                <p>Product Designer, Languages Freak, biz and Rock 'n' Roll</p>
-                <p>
-                    (This is a sample website - you’ll be building a site like
-                    this on{" "}
-                    <a href="https://nextjs.org/learn">our Next.js tutorial</a>
-                    .)
-                </p>
-            </section>
-            <section
-                className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}
-            >
-                <h2 className={utilStyles.headingLg}>Blog</h2>
-                <ul className={utilStyles.list}>
-                    {allPostsData.map(({ id, date, title }) => (
-                        <li className={utilStyles.listItem} key={id}>
-                            <Link href={`/demo/posts/${id}`}>
-                                <a>{title}</a>
-                            </Link>
-                            <br />
-                            <small className={utilStyles.lightText}>
-                                <Date dateString={date} />
-                            </small>
-                        </li>
-                    ))}
-                </ul>
-            </section>
-        </Layout>
-    );
-}
 
-export async function getStaticProps(context) {
-    const allPostsData = getSortedPostsData();
-
-    return {
-        props: {
-            allPostsData,
-        },
-        revalidate: 1, // n2
-    };
-}
-
-/* COMMENTS
 n2:
 With getStaticProps you don't have to stop relying on dynamic content, as static content can also be dynamic. Incremental Static Regeneration allows you to update existing pages by re-rendering them in the background as traffic comes in.
 Inspired by stale-while-revalidate, background regeneration ensures traffic is served uninterruptedly, always from static storage, and the newly built page is pushed only after it's done generating.
-
-
 */
