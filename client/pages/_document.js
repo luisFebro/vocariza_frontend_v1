@@ -19,7 +19,10 @@ export default MyDocument;
 
 /* COMMENTS
 n1:
-/*
+Document is only rendered in the server, event handlers like onClick won't work
+
+The <Head /> component used here is not the same one from next/head. The <Head /> component used here should only be used for any <head> code that is common for all pages. For all other cases, such as <title> tags, we recommend using next/head in your pages or components.
+
 To avoid duplicate tags in your head you can use the key property, which will make sure the tag is only rendered once, as in the following example:
 
 <Head>
