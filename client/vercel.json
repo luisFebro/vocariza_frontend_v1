@@ -1,5 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/blog", "destination": "https://blog.vocariza.com" }
-  ]
+  "routes": [{ "src": "/blog", "dest": "https://blog.vocariza.com" }]
 }
