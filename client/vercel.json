@@ -1,5 +1,5 @@
 {
-  "redirects": [
+  "rewrites": [
     { "source": "/blog", "destination": "https://blog.vocariza.com" }
   ]
 }
