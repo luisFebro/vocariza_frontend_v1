@@ -1,3 +1,5 @@
 {
-  "routes": [{ "src": "https://blog.vocariza.com", "dest": "/blog" }]
+  "redirects": [
+    { "source": "https://blog.vocariza.com", "destination": "/blog" }
+  ]
 }
