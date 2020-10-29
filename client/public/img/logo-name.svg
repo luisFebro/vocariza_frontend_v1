@@ -10,12 +10,15 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="190.02684mm"
-   height="70.25425mm"
-   viewBox="0 0 190.02685 70.254249"
+   height="66.369492mm"
+   viewBox="0 0 190.02685 66.369491"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="logo-name.svg">
+   sodipodi:docname="logo-name.svg"
+   inkscape:export-filename="C:\_github-projects\languages\vocariza\client\public\img\logo-name.png"
+   inkscape:export-xdpi="63"
+   inkscape:export-ydpi="63">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.99674932"
-     inkscape:cx="322.52947"
-     inkscape:cy="84.939758"
+     inkscape:cx="338.64891"
+     inkscape:cy="84.93974"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,8 +48,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid46"
-       originx="23.999247"
-       originy="-449.42974" />
+       originx="23.99925"
+       originy="-449.42976" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -64,7 +67,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(26.031679,3.3596728)">
+     transform="translate(26.031679,-0.52508219)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.67234635px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#9400d3;fill-opacity:1;stroke:none;stroke-width:0.09180865"
