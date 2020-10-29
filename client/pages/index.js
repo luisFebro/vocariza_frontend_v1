@@ -1,58 +1,59 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/_Layout";
-import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../demo/lib/posts";
 import Link from "next/link";
 import Date from "../components/demo/date";
+import utilStyles from "../styles/utils.module.css";
+import Image from "next/image";
 // import styles from '../styles/Home.module.css'
 
 export default function Home({ allPostsData }) {
-    // n1 infos about pre-rendering and co.
-    return (
-        <Layout home>
-            <Head>
-                <title>{siteTitle}</title>
-            </Head>
-            <section className={utilStyles.headingMd}>
-                <p>Product Designer, Languages Freak, biz and Rock 'n' Roll</p>
-                <p>
-                    (This is a sample website - you’ll be building a site like
-                    this on{" "}
-                    <a href="https://nextjs.org/learn">our Next.js tutorial</a>
-                    .)
-                </p>
-            </section>
-            <section
-                className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}
-            >
-                <h2 className={utilStyles.headingLg}>Blog</h2>
-                <ul className={utilStyles.list}>
-                    {allPostsData.map(({ id, date, title }) => (
-                        <li className={utilStyles.listItem} key={id}>
-                            <Link href={`/demo/posts/${id}`}>
-                                <a>{title}</a>
-                            </Link>
-                            <br />
-                            <small className={utilStyles.lightText}>
-                                <Date dateString={date} />
-                            </small>
-                        </li>
-                    ))}
-                </ul>
-            </section>
-        </Layout>
-    );
+  // n1 infos about pre-rendering and co.
+  return (
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
+      <section className={utilStyles.headingMd}>
+        <p>Memorize Vocabulários para sempre</p>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Image src="/img/logo-name.svg" width="200" height="100" />
+        </div>
+        <p>
+          (This is a sample website - you’ll be building a site like this on{" "}
+          <a href="https://nextjs.org/learn">our Next.js tutorial</a>
+          .)
+        </p>
+      </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              <Link href={`/demo/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </Layout>
+  );
 }
 
 export async function getStaticProps(context) {
-    const allPostsData = getSortedPostsData();
+  const allPostsData = getSortedPostsData();
 
-    return {
-        props: {
-            allPostsData,
-        },
-        revalidate: 1, // n2
-    };
+  return {
+    props: {
+      allPostsData,
+    },
+    revalidate: 1, // n2
+  };
 }
 
 /* COMMENTS
