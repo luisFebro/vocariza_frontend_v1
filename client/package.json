@@ -1,5 +1,6 @@
 {
-  "name": "vocariza-client",
+  "name": "vocariza",
+  "description": "memorize vocabularios para sempre",
   "version": "0.1.0",
   "private": true,
   "scripts": {

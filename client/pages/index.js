@@ -17,7 +17,7 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>Memorize Vocabulários para sempre</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Image src="/img/logo-name.png" width="200" height="100" />
+          <Image src="/img/logo-name.png" width="200" height="100%" />
         </div>
         <p>
           (This is a sample website - you’ll be building a site like this on{" "}

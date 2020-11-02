@@ -1,13 +1,22 @@
 const express = require("express");
 const path = require("path");
+const formData = require("express-form-data");
 const cors = require("cors");
 const mongoose = require("mongoose");
-var sslRedirect = require("heroku-ssl-redirect");
+const helmet = require("helmet");
+const compression = require("compression");
 require("dotenv").config(); // n4
 require("./utils/globalHelpers");
 
 //Init Express
 const app = express();
+
+// protect app with secure headers
+app.use(helmet());
+app.use(helmet.hidePoweredBy());
+
+// compress all responses
+app.use(compression());
 
 const ENVIRONMENT = process.env.NODE_ENV || "development";
 const isProduction = ENVIRONMENT === "production";
@@ -30,35 +39,24 @@ mongoose
 
 // MIDDLEWARES
 app.use(express.json()); //n1
+app.use(express.urlencoded({ extended: true }));
+app.use(formData.parse()); // for images and multimedia in forms.
 app.use(cors()); //n2
-app.use(sslRedirect()); // n5
 
 // routes
-app.use("/api/email", require("./routes/email"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/admin", require("./routes/admin"));
-app.use("/api/database", require("./routes/database"));
-app.use("/api/push-notification", require("./routes/push-notification"));
-// Serve static files such as images, CSS files, and JavaScript files for the React frontend <app></app>
-isProduction && app.use(express.static(path.join(__dirname, "client/build")));
+// app.use("/api/email", require("./routes/email"));
+// app.use("/api/admin", require("./routes/admin"));
+// app.use("/api/database", require("./routes/database"));
+// app.use("/api/notification", require("./routes/notification"));
+// app.use("/api/task", require("./routes/user/task"));
+// app.use("/api/sms", require("./routes/sms"));
+// app.use("/api/pay", require("./routes/pay"));
+// app.use("/api/pro", require("./routes/pro"));
 // END MIDDLEWARES
 
-// This solves the "Not found" issue when loading an URL other than index.html.
-isProduction &&
-    app.get("/*", (req, res) => {
-        //n3
-        res.sendFile(
-            path.join(__dirname + "/client/build/index.html"),
-            (err) => {
-                if (err) {
-                    res.status(500).send(err);
-                }
-            }
-        );
-    });
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
@@ -90,5 +88,25 @@ app.use('/api/staff-booking', require('./routes/staffBooking'));
 //     res.sendFile(path.join(__dirname + 'client/build/index.html')) // the "not found" issue may be occured becase of this path. client requires a slash before.
 // })
 n4: environment varibles works everywhere with dotenv, including controllers
-n5: SSL - secure sockets layer, always redirect to https page.
+*/
+
+/* ARCHIVES
+// Serve static files such as images, CSS files, and JavaScript files for the React frontend <app></app>
+isProduction && app.use(express.static(path.join(__dirname, "client/build")));
+
+// Working with next.js on frontend
+// This solves the "Not found" issue when loading an URL other than index.html.
+isProduction &&
+    app.get("/*", (req, res) => {
+        //n3
+        res.sendFile(
+            path.join(__dirname + "/client/build/index.html"),
+            (err) => {
+                if (err) {
+                    res.status(500).send(err);
+                }
+            }
+        );
+    });
+
 */
