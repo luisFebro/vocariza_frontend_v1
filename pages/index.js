@@ -8,14 +8,11 @@ import Image from "next/image";
 // import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  // n1 infos about pre-rendering and co.
+  // n1 infos about pre-rendering and co....
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <p>Memorize Vocabulários para sempre</p>
+      <Head><title>{siteTitle}</title></Head>
+      <section className={utilStyles.headingMd}><p>Memorize Vocabulários para sempre</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image src="/img/logo-name.png" width="200" height="100%" />
         </div>
