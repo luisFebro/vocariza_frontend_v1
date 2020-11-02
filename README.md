@@ -1,6 +1,6 @@
-# YOU VOCA - memorize vocabulários para sempre!
+# VOCARIZA - memorize vocabulários para sempre!
 
 - Command CLI to start the project:
-`npm install && npm run client-install`
+  `npm install && npm run client-install`
 
 ## Developer: Luis Febro.
