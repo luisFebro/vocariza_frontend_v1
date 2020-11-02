@@ -1,10 +1,12 @@
+import React from 'react';
 // import Layout from "../../../components/_Layout";
 // import { getAllPostIds, getPostData } from "../../../demo/lib/posts";
 // import Head from "next/head";
 // import Date from "../../../components/demo/date";
 // import utilStyles from "../../../styles/utils.module.css";
 
-// export default function Post({ postData }) {
+export default function Post() {
+        return(<h1>Hello Post</h1>)
 //     return (
 //         <Layout>
 //             <Head>
@@ -40,7 +42,7 @@
 //             postData,
 //         },
 //     };
-// }
+}
 
 /* COMMENTS
 n1:
