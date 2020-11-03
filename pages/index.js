@@ -37,13 +37,15 @@ export default function Home({ msg }) {
     );
 }
 
-Home.getInitialProps = async ({ query }) => {
+export const getStaticProps = async ({ query }) => {
     const { data } = await getAPI({
         url: getTestMsg(),
     });
 
     return {
-        msg: data.msg,
+        props: {
+            msg: data.msg,
+        },
     };
 };
 
