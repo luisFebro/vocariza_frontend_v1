@@ -1,19 +1,30 @@
+import { useState } from "react";
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/_Layout";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Image from "next/image";
+import getAPI, { getTestMsg } from "../api/getAPI";
 // import { getSortedPostsData } from "../demo/lib/posts";
 // import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({ msg }) {
+    // const [msg, setMsg] = useState(null);
     // n1 infos about pre-rendering and co.... altering this
+    // useEffect(() => {
+    //     (async () => {
+
+    //     })();
+
+    // }, [])
+
     return (
         <Layout home>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
+            <h1>{msg}</h1>
             <section className={utilStyles.headingMd}>
                 <p>Memorize Vocabulários para sempre</p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -24,16 +35,18 @@ export default function Home() {
     );
 }
 
-// export async function getStaticProps(context) {
-//   const allPostsData = getSortedPostsData();
+export async function getStaticProps(context) {
+    const { data } = await getAPI({
+        url: getTestMsg(),
+    });
 
-//   return {
-//     props: {
-//       allPostsData,
-//     },
-//     revalidate: 1, // n2
-//   };
-// }
+    return {
+        props: {
+            msg: data.msg,
+        },
+        // revalidate: 1, // n2
+    };
+}
 
 /* COMMENTS
 
