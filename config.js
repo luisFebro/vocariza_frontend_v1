@@ -1,6 +1,5 @@
 import getConfig from "next/config";
 const { publicRuntimeConfig = {} } = getConfig() || {};
-console.log("publicRuntimeConfig", publicRuntimeConfig);
 
 /*
 Warning:

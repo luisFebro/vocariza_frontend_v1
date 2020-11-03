@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/_Layout";
 import Link from "next/link";
@@ -9,25 +9,22 @@ import getAPI, { getTestMsg } from "../api/getAPI";
 // import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
 
-export default function Home() {
-    const [msg, setMsg] = useState(null);
+export default function Home({ msg }) {
+    // const [msg, setMsg] = useState(null);
     // n1 infos about pre-rendering and co.... altering this
-    useEffect(() => {
-        (async () => {
-            const { data } = await getAPI({
-                url: getTestMsg(),
-            });
+    // useEffect(() => {
+    //     (async () => {
 
-            setMsg(data.msg);
-        })();
-    }, []);
+    //     })();
+
+    // }, [])
 
     return (
         <Layout home>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
-            <h1>{msg ? msg : "..."}</h1>
+            <h1>{msg}</h1>
             <section className={utilStyles.headingMd}>
                 <p>Memorize Vocabulários para sempre</p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -38,18 +35,18 @@ export default function Home() {
     );
 }
 
-// export async function getStaticProps(context) {
-//     const { data } = await getAPI({
-//         url: getTestMsg(),
-//     });
+export async function getStaticProps(context) {
+    const { data } = await getAPI({
+        url: getTestMsg(),
+    });
 
-//     return {
-//         props: {
-//             msg: data.msg,
-//         },
-//         // revalidate: 1, // n2
-//     };
-// }
+    return {
+        props: {
+            msg: data.msg,
+        },
+        // revalidate: 1, // n2
+    };
+}
 
 /* COMMENTS
 
