@@ -1,8 +1,5 @@
 import getConfig from "next/config";
 const { publicRuntimeConfig = {} } = getConfig() || {};
-console.log("publicRuntimeConfig", publicRuntimeConfig);
-console.log("publicRuntimeConfig.NODE_ENV", publicRuntimeConfig.NODE_ENV);
-console.log("publicRuntimeConfig.NODE_ENV", process.env.NODE_ENV);
 
 const {
     APP_NAME: APP_N,
@@ -14,7 +11,11 @@ const {
     DOMAIN_DEVELOPMENT,
 } = publicRuntimeConfig;
 
-export const API = PRODUCTION ? API_PRODUCTION : API_DEVELOPMENT;
+export const API =
+    process.env.NODE_ENV === "production"
+        ? "https://vocariza.herokuapp.com/api"
+        : "http://localhost:5002/api";
+console.log("API", API);
 export const DOMAIN = PRODUCTION ? DOMAIN_PRODUCTION : DOMAIN_DEVELOPMENT;
 
 export const APP_NAME = APP_N;
