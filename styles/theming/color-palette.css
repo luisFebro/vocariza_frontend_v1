@@ -1,0 +1,97 @@
+@import "../../functions/setContrastedColor";
+
+:root {
+    /*Primary*/
+    --themeP: #9400d3;
+    --themePLight: #ca4cff;
+    --themePDark: #5f00a1;
+
+    /* Secondary */
+    --themeS: #00ffff;
+    --themeSLight: #6effff;
+    --themeSDark: #00cbcc;
+
+    /*surface (such as cards, sheets, and menus) and background*/
+    --themeSurface: #f7f1e3; /*white variant*/
+    --themeBack: #4a148c;
+
+    /*on colors - text*/
+    --mainBlack: #000000;
+    --mainWhite: #ecf0f1;
+
+    --mainFont: "Poppins", sans-serif;
+    /* DARK THEME */
+    --themeBackDark: #000000;
+    --themeSurfaceOverlay: #1f1b24;
+    --themeDarkSurface: #121212; /* dark grey - Dark gray surfaces also reduce eye strain, as light text on a dark gray surface has less contrast than light text on a black surface. */
+    --txtDark: rgba(250, 250, 250, 0.87);
+    --txtDarkS: rgba(250, 250, 250, 0.6); /* white not in a surface */
+    --txtDarkDisabled: rgba(250, 250, 250, 0.38);
+    /* Error colors are used to indicate an error state. The Material baseline dark theme error color is #CF6679. */
+}
+
+.theme-back {
+    background-color: #4a148c !important;
+}
+
+.txt-color-p {
+    color: var(--mainWhite);
+}
+
+.txt-color-s {
+    color: var(--mainBlack);
+}
+
+/* primary colors */
+.theme-p {
+    background-color: var(--themeP);
+}
+.theme-p-light {
+    background-color: var(--themePLight);
+}
+.theme-p-dark {
+    background-color: var(--themePDark);
+}
+
+/* secondary colors */
+.theme-s {
+    background-color: var(--themeS);
+}
+.theme-s-light {
+    background-color: var(--themeSLight);
+}
+.theme-s-dark {
+    background-color: var(--themeSDark);
+}
+
+/* surface and background */
+.theme-surface {
+    background-color: var(--themeSurface);
+}
+.theme-background {
+    background-color: var(--themeBackground);
+}
+
+/*
+DARK MODE
+Light text on dark backgrounds
+When light text appears on dark backgrounds (shown here as white on black) it should use the following opacity levels:
+
+High-emphasis text has an opacity of 87%
+Medium-emphasis text and hint text have opacities of 60%
+Disabled text has an opacity of 38%
+
+Reserve bright colors for smaller surfaces.
+*/
+
+/*
+Secondary colors are best to accent select parts of your UI.:
+Floating action buttons
+Selection controls, like sliders and switches
+Highlighting selected text
+Progress bars
+Links and headlines
+
+To see interfaces:
+https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=4a148c&secondary.color=18FFFF
+ */
