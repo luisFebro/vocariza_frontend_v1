@@ -1,4 +1,5 @@
-import { API } from "../config";
+// import { API } from "../config";
+const API = "https://vocariza.herokuapp.com/api";
 // URLs ONLY
 // user
 export const getTestMsg = () => `${API}/user/test/msg`;
