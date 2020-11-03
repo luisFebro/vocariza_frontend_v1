@@ -5,7 +5,7 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 
 const name = "Luis Febro";
-export const siteTitle = "Vocariza | Aprenda vocabulários para sempre";
+export const siteTitle = "Vocariza | Memorize vocabulários para sempre";
 
 export default function Layout({ children, home }) {
     return (
