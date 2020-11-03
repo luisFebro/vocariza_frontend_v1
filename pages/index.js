@@ -35,7 +35,7 @@ export default function Home({ msg }) {
     );
 }
 
-export async function getStaticProps(context) {
+export async function getInitialProps(context) {
     const { data } = await getAPI({
         url: getTestMsg(),
     });
