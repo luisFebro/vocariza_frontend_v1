@@ -9,18 +9,6 @@ import getAPI, { getTestMsg } from "../api/getAPI";
 // import styles from '../styles/Home.module.css'
 
 export default function Home({ msg }) {
-    // const [msg, setMsg] = useState(null);
-    // n1 infos about pre-rendering and co.... altering this
-    // useEffect(() => {
-    //     (async () => {
-    //         const { data } = await getAPI({
-    //             url: getTestMsg(),
-    //         });
-
-    //         setMsg(data.msg);
-    //     })();
-    // }, []);
-
     return (
         <Layout home>
             <Head>
