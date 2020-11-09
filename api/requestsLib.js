@@ -2,6 +2,12 @@ import { API } from "../config";
 // URLs ONLY
 // user
 export const getTestMsg = () => `${API}/user/test/msg`;
+
+// BLOG
+export const readBlog = (slug) => `${API}/blog/${slug}`;
+export const getStaticBlogPathsList = () => `${API}/blog/list/paths`;
+// END BLOG
+
 // export const updateUser = (userId) => `/api/user/${userId}?noResponse=true`;
 // export const removeUser = (userId) => `/api/user/${userId}`;
 

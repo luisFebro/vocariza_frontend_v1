@@ -11,4 +11,12 @@
     <url>
         <loc>https://vocariza.com/blog/index</loc>
     </url>
+
+    <url>
+        <loc>https://vocariza.com/blog/index2</loc>
+    </url>
+
+    <url>
+        <loc>https://vocariza.com/blog/[slug]</loc>
+    </url>
 </urlset>

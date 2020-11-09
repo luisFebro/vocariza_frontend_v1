@@ -41,11 +41,11 @@ export default function getAPI({
                 clearTimeout(stopRequest);
                 return resolve("Request not ready to trigger");
             }
-            const response = await axios(config);
+            const { data } = await axios(config);
 
             clearTimeout(stopRequest);
 
-            resolve(response);
+            resolve({ data });
         } catch (error) {
             if (axios.isCancel(error)) {
                 // if it is search and cancel is need as a defendor against multiple request, then isSearch is true.
