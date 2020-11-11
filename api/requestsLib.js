@@ -1,8 +1,5 @@
 const { API } = require("../config");
 // URLs ONLY
-// user
-exports.getTestMsg = () => `${API}/user/test/msg`;
-
 // BLOG
 exports.readBlog = (slug) => `${API}/blog/${slug}`;
 exports.getStaticBlogPathsList = () => `${API}/blog/list/paths`;

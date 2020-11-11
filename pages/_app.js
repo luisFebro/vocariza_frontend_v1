@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }) {
         <Fragment>
             <Head>
                 <meta charSet="UTF-8" />
-                <meta httpEquiv="Content-Language" content="pt-br" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
@@ -24,19 +23,10 @@ function MyApp({ Component, pageProps }) {
                 />
                 {/*END TOOLBAR COLOR*/}
 
-                {/*META SEO*/}
-                <link rel="canonical" href="https://vocariza.com" />
-                <meta name="generator" content="https://vocariza.com" />
-                <meta name="author" content="Febro" />
-                <meta
-                    name="description"
-                    content="Memorize vocabulários para sempre"
-                />
                 <meta
                     name="keywords"
                     content="vocabulários, inglês, idioma, memorização, pronúncia, aprendizado, técnicas"
                 />
-                {/* END META SEO*/}
 
                 {/* FAVICON */}
                 <link

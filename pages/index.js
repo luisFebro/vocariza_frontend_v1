@@ -3,20 +3,18 @@ import Layout, { siteTitle } from "../components/_Layout";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Image from "next/image";
-import getAPI, { getTestMsg } from "../api/getAPI";
 // import { getSortedPostsData } from "../demo/lib/posts";
 // import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
 
-export default function Home({ msg }) {
+export default function Home() {
     return (
         <Layout home>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
-            <h1>{msg}</h1>
             <section className={utilStyles.headingMd}>
-                <p>Memorize Vocabulários para sempre</p>
+                <h1>Memorize Vocabulários para sempre</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Image src="/img/logo-name.png" width="200" height="100%" />
                 </div>
@@ -25,17 +23,17 @@ export default function Home({ msg }) {
     );
 }
 
-export const getStaticProps = async ({ query }) => {
-    const { data } = await getAPI({
-        url: getTestMsg(),
-    });
+// export const getStaticProps = async ({ query }) => {
+//     const { data } = await getAPI({
+//         url: getTestMsg(),
+//     });
 
-    return {
-        props: {
-            msg: data.msg,
-        },
-    };
-};
+//     return {
+//         props: {
+//             msg: data.msg,
+//         },
+//     };
+// };
 
 /* COMMENTS
 

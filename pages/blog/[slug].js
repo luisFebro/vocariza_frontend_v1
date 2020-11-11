@@ -1,11 +1,10 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, Fragment } from "react";
 import renderHTML from "react-render-html";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
-import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
-
+import Head from "../../components/Head";
+import { API } from "../../config";
 // NOT WORKED YET
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -23,6 +22,15 @@ const getStyles = () => ({
 export default function SingleBlog({ blog, slug }) {
     const styles = getStyles();
 
+    const getHead = () => (
+        <Head
+            metaTitle={blog.metaTitle}
+            metaDesc={blog.metaDesc}
+            mainPhoto={`${API}/blog/photo/${blog.slug}`}
+            urlPath={`/blog/${slug}`}
+            languages={blog.languages}
+        />
+    );
     // const [related, setRelated] = useState([]);
 
     // const loadRelated = () => {
@@ -38,59 +46,6 @@ export default function SingleBlog({ blog, slug }) {
     // useEffect(() => {
     //     loadRelated();
     // }, []);
-
-    const getHead = () => {
-        const blogPath = `${DOMAIN}/blog/${slug}`;
-
-        const languages = ["br", "en"];
-
-        const generateMultiLangLink = () => {
-            return languages.map((lang) => {
-                let hreflang = lang;
-                let param = `${lang}/`;
-
-                if (lang === "br") {
-                    hreflang = "pt-br";
-                    param = "";
-                }
-
-                return (
-                    <link
-                        rel="alternate"
-                        href={`${DOMAIN}/${param}blog/${slug}`}
-                        hreflang={hreflang}
-                    />
-                );
-            });
-        };
-
-        return (
-            <Head>
-                <title>{blog.metaTitle}</title>
-                <link rel="canonical" href={blogPath} />
-                <meta name="description" content={blog.metaDesc} />
-
-                <meta
-                    property="og:title"
-                    content={`${blog.title} | ${APP_NAME}`}
-                />
-                <meta property="og:description" content={blog.metaDesc} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={blogPath} />
-                <meta property="og:site_name" content={`${APP_NAME}`} />
-                <meta
-                    property="og:image"
-                    content={`${API}/blog/photo/${blog.slug}`}
-                />
-                <meta
-                    property="og:image:secure_url"
-                    ccontent={`${API}/blog/photo/${blog.slug}`}
-                />
-                <meta property="og:image:type" content="image/jpg" />
-                <meta property="fb:app_id" content={`${FB_APP_ID}`} />
-            </Head>
-        );
-    };
 
     // const showBlogCategories = blog =>
     //     blog.categories.map((c, i) => (
