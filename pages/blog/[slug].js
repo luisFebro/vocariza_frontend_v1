@@ -79,9 +79,10 @@ export default function SingleBlog({ blog, slug }) {
     );
 }
 
+// WARNING: important: If
 export async function getStaticPaths() {
     // n3 dsadsadsa
-    const { data } = await axios.get(getStaticBlogPathsList());
+    const { data } = await getAPI({ url: getStaticBlogPathsList() });
     // console.log("data", data);
 
     const list = data && data.map((doc) => `/blog/${doc.slug}`);
