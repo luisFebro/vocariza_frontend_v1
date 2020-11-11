@@ -22,15 +22,15 @@ import { API } from "../../config";
 export default function SingleBlog({ blog, slug }) {
     // const styles = getStyles();
 
-    // const getHead = () => (
-    //     <Head
-    //         metaTitle={blog.metaTitle}
-    //         metaDesc={blog.metaDesc}
-    //         mainPhoto={`${API}/blog/photo/${blog.slug}`}
-    //         urlPath={`/blog/${slug}`}
-    //         languages={blog.languages}
-    //     />
-    // );
+    const getHead = () => (
+        <Head
+            metaTitle={blog.metaTitle}
+            metaDesc={blog.metaDesc}
+            mainPhoto={`${API}/blog/photo/${blog.slug}`}
+            urlPath={`/blog/${slug}`}
+            languages={blog.languages}
+        />
+    );
     // const [related, setRelated] = useState([]);
 
     // const loadRelated = () => {
@@ -71,15 +71,16 @@ export default function SingleBlog({ blog, slug }) {
     //     ));
     // };
 
-    // {getHead()}
     return (
         <Fragment>
+            {getHead()}
             <h1>Hello world! This is my first real world blog!</h1>
         </Fragment>
     );
 }
 
-// WARNING: important: If
+// WARNING: VERY important: If Vercel Deploy is handling after "info  - Collecting page data..."
+// Then, check backend because can have an API issue...
 export async function getStaticPaths() {
     // n3 dsadsadsa
     const { data } = await getAPI({ url: getStaticBlogPathsList() });
