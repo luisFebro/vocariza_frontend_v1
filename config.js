@@ -9,7 +9,7 @@ const API = IS_PROD ? process.env.API_PRODUCTION : process.env.API_DEVELOPMENT;
 
 const DOMAIN = IS_PROD ? "https://vocariza.com" : "https://localhost:3001";
 
-const DOMAIN_PROD = DOMAIN_PRODUCTION;
+const DOMAIN_PROD = "https://vocariza.com";
 const FB_APP_ID = "123";
 
 module.exports = {
