@@ -81,13 +81,13 @@ export default function SingleBlog({ blog, slug }) {
 
 export async function getStaticPaths() {
     // n3
-    // const { data } = await getAPI({ url: getStaticBlogPathsList() });
-    // console.log("data", data);
+    const { data } = await getAPI({ url: getStaticBlogPathsList() });
+    console.log("data", data);
 
     // const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
     return {
-        paths: ["5-vocabularios-mais-dificeis-de-pronunciar-em-ingles"],
+        paths: ["/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles"],
         fallback: true, // n2
     };
 }
