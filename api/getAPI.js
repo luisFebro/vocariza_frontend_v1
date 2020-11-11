@@ -11,7 +11,7 @@ exports.getAPI = (options = {}) => {
         method = "get",
         body, // obj
         params, // obj
-        needAuth = true,
+        needAuth = false,
         timeout = 10000,
         trigger = true,
         dispatch,
@@ -23,27 +23,27 @@ exports.getAPI = (options = {}) => {
     const axiosPromise = async (resolve, reject) => {
         let cancel;
 
-        const stopRequest = setTimeout(() => {
-            cancel();
-        }, timeout);
+        // const stopRequest = setTimeout(() => {
+        //     cancel();
+        // }, timeout);
 
         const config = {
             url,
             method,
             data: body,
             params,
-            headers: chooseHeader({ token: token, needAuth }),
-            cancelToken: new axios.CancelToken((c) => (cancel = c)), // n1
+            // headers: chooseHeader({ token: token, needAuth }),
+            // cancelToken: new axios.CancelToken((c) => (cancel = c)), // n1
         };
 
         try {
-            if (!trigger) {
-                clearTimeout(stopRequest);
-                return resolve("Request not ready to trigger");
-            }
+            // if (!trigger) {
+            //     clearTimeout(stopRequest);
+            //     return resolve("Request not ready to trigger");
+            // }
             const data = await axios(config);
 
-            clearTimeout(stopRequest);
+            // clearTimeout(stopRequest);
 
             resolve(data);
         } catch (error) {
