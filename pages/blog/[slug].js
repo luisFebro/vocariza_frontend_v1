@@ -81,27 +81,34 @@ export default function SingleBlog({ blog, slug }) {
 
 export async function getStaticPaths() {
     // n3 dsadsadsa
-    // const { data } = await getAPI({ url: getStaticBlogPathsList() });
+    const { data } = await getAPI({ url: getStaticBlogPathsList() }).catch(
+        (err) => {
+            console.log(err);
+        }
+    );
     // console.log("data", data);
+    const data = [
+        "/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles",
+        "/blog/shitty",
+    ];
 
-    // const list = data && data.map((doc) => `/blog/${doc.slug}`);
+    const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
     return {
-        paths: ["/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles"],
+        paths: list,
         fallback: true, // n2
     };
 }
 
-export async function getStaticProps(context) {
-    console.log("context", context);
-    // const { slug } = params;
+export async function getStaticProps({ params }) {
+    const { slug } = params;
 
     // const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
     //     console.log("ERROR: " + err);
     // });
 
     return {
-        props: { blog: "a", slug: "fuck" },
+        props: { blog: "a", slug },
         revalidate: 1, // n1 seconds
     };
     // if (data) {
