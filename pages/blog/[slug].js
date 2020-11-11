@@ -86,11 +86,12 @@ export async function getStaticPaths() {
             console.log(err);
         }
     );
+    console.log("data", data);
     // console.log("data", data);
-    const data = [
-        "/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles",
-        "/blog/shitty",
-    ];
+    // const data = [
+    //     "/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles",
+    //     "/blog/shitty",
+    // ];
 
     const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
