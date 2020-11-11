@@ -107,14 +107,12 @@ export async function getStaticProps({ params }) {
         console.log("ERROR: " + err);
     });
 
-    if (data) {
-        const obj = { blog: data, slug };
+    const obj = { blog: data, slug };
 
-        return {
-            props: obj,
-            revalidate: 1, // n1 seconds
-        };
-    }
+    return {
+        props: obj,
+        revalidate: 1, // n1 seconds
+    };
 }
 
 /*
