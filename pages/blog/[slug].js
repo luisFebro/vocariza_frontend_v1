@@ -88,7 +88,7 @@ export async function getStaticPaths() {
 
     return {
         paths: list,
-        fallback: true, // n2
+        fallback: false, // n2
     };
 }
 
@@ -102,7 +102,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: { blog: "a", slug: "fuck" },
-        revalidate: 1, // n1 seconds
+        // revalidate: 1, // n1 seconds
     };
     // if (data) {
     //     const obj = { blog: data, slug };
