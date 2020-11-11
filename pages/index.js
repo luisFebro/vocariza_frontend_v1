@@ -14,7 +14,7 @@ export default function Home() {
                 <title>{siteTitle}</title>
             </Head>
             <section className={utilStyles.headingMd}>
-                <h1>Memorize Vocabulários para sempre</h1>
+                <h1>Memorize Vocabulários para sempre!!!</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Image src="/img/logo-name.png" width="200" height="100%" />
                 </div>

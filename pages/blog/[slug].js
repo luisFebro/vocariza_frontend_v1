@@ -82,7 +82,6 @@ export default function SingleBlog({ blog, slug }) {
 export async function getStaticPaths() {
     // n3
     const { data } = await getAPI({ url: getStaticBlogPathsList() });
-    console.log("data", data);
 
     const list = data.map((doc) => `/blog/${doc.slug}`);
 
