@@ -100,12 +100,13 @@ export async function getStaticProps({ params }) {
     const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
         console.log("ERROR: " + err);
     });
+    console.log("data", data);
 
     if (data) {
         const obj = { blog: data, slug };
 
         return {
-            props: { blog: obj, slug },
+            props: obj,
             revalidate: 1, // n1 seconds
         };
     }
