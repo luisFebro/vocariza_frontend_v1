@@ -80,7 +80,7 @@ export default function SingleBlog({ blog, slug }) {
 }
 
 export async function getStaticPaths() {
-    // n3
+    // n3 dsadsadsa
     // const { data } = await getAPI({ url: getStaticBlogPathsList() });
     // console.log("data", data);
 
