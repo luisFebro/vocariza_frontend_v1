@@ -19,8 +19,8 @@ const getStyles = () => ({
     },
 });
 
+// LESSON: if data obj like blog, then add an empty {} because it gets undefined before get filled;
 export default function SingleBlog({ blog = {} }) {
-    console.log("blog", blog);
     const styles = getStyles();
 
     const getHead = () => (
