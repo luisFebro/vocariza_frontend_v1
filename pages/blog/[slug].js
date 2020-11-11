@@ -22,15 +22,15 @@ const getStyles = () => ({
 export default function SingleBlog({ blog, slug }) {
     const styles = getStyles();
 
-    const getHead = () => (
-        <Head
-            metaTitle={blog.metaTitle}
-            metaDesc={blog.metaDesc}
-            mainPhoto={`${API}/blog/photo/${blog.slug}`}
-            urlPath={`/blog/${slug}`}
-            languages={blog.languages}
-        />
-    );
+    // const getHead = () => (
+    //     <Head
+    //         metaTitle={blog.metaTitle}
+    //         metaDesc={blog.metaDesc}
+    //         mainPhoto={`${API}/blog/photo/${blog.slug}`}
+    //         urlPath={`/blog/${slug}`}
+    //         languages={blog.languages}
+    //     />
+    // );
     // const [related, setRelated] = useState([]);
 
     // const loadRelated = () => {
@@ -71,41 +71,41 @@ export default function SingleBlog({ blog, slug }) {
     //     ));
     // };
 
+    // {getHead()}
     return (
         <Fragment>
-            {getHead()}
             <h1>Hello world! This is my first real world blog!</h1>
         </Fragment>
     );
 }
 
-export async function getStaticPaths() {
-    // n3
-    const { data } = await getAPI({ url: getStaticBlogPathsList() });
+// export async function getStaticPaths() {
+//     // n3
+//     const { data } = await getAPI({ url: getStaticBlogPathsList() });
 
-    const list = data.map((doc) => `/blog/${doc.slug}`);
+//     const list = data.map((doc) => `/blog/${doc.slug}`);
 
-    return {
-        paths: list,
-        fallback: true, // n2
-    };
-}
+//     return {
+//         paths: list,
+//         fallback: true, // n2
+//     };
+// }
 
-export async function getStaticProps({ params }) {
-    const { slug } = params;
+// export async function getStaticProps({ params }) {
+//     const { slug } = params;
 
-    const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
-        console.log("ERROR: " + err);
-    });
+//     const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
+//         console.log("ERROR: " + err);
+//     });
 
-    if (data) {
-        const obj = { blog: data, slug };
-        return {
-            props: obj,
-            revalidate: 1, // n1 seconds
-        };
-    }
-}
+//     if (data) {
+//         const obj = { blog: data, slug };
+//         return {
+//             props: obj,
+//             revalidate: 1, // n1 seconds
+//         };
+//     }
+// }
 
 /*
 
