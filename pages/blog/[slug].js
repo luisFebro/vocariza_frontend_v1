@@ -5,22 +5,24 @@ import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import Head from "../../components/Head";
 import { API } from "../../config";
-// NOT WORKED YET
+// NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
 // import SmallCard from '../../components/blog/SmallCard';
 // import DisqusThread from '../../components/DisqusThread';
 
-// const getStyles = () => ({
-//     featuredImg: {
-//         width: "100%",
-//         maxHeight: "500px",
-//         objectFit: "cover",
-//     },
-// });
+const getStyles = () => ({
+    featuredImg: {
+        width: "100%",
+        maxHeight: "500px",
+        objectFit: "cover",
+    },
+});
 
 export default function SingleBlog({ blog, slug }) {
-    // const styles = getStyles();
+    console.log("slug", slug);
+    console.log("blog", blog);
+    const styles = getStyles();
 
     const getHead = () => (
         <Head
@@ -83,8 +85,12 @@ export default function SingleBlog({ blog, slug }) {
 // Then, check backend because can have an API issue...
 export async function getStaticPaths() {
     // n3 dsadsadsa
-    const { data } = await getAPI({ url: getStaticBlogPathsList() });
-    // console.log("data", data);
+    const { data } = await getAPI({ url: getStaticBlogPathsList() }).catch(
+        (err) => {
+            console.log("ERROR: " + err);
+        }
+    );
+    console.log("data", data);
 
     const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
@@ -100,7 +106,6 @@ export async function getStaticProps({ params }) {
     const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
         console.log("ERROR: " + err);
     });
-    console.log("data", data);
 
     if (data) {
         const obj = { blog: data, slug };
