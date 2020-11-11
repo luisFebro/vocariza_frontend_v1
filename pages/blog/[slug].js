@@ -70,7 +70,6 @@ export default function SingleBlog({ blog, slug }) {
     //         </div>
     //     ));
     // };
-    console.log("getHead", getHead());
 
     return (
         <Fragment>
@@ -106,7 +105,7 @@ export async function getStaticProps({ params }) {
         const obj = { blog: data, slug };
 
         return {
-            props: { blog: "a", slug },
+            props: { blog: obj, slug },
             revalidate: 1, // n1 seconds
         };
     }
