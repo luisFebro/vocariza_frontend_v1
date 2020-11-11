@@ -5,7 +5,6 @@ import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import Head from "../../components/Head";
 import { API } from "../../config";
-const axios = require("axios");
 // NOT WORKED YET
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -83,13 +82,7 @@ export default function SingleBlog({ blog, slug }) {
 export async function getStaticPaths() {
     // n3 dsadsadsa
     const { data } = await axios.get(getStaticBlogPathsList());
-    // const { data } = await getAPI({ url: getStaticBlogPathsList() })
-    console.log("data", data);
     // console.log("data", data);
-    // const data = [
-    //     "/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles",
-    //     "/blog/shitty",
-    // ];
 
     const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
@@ -102,17 +95,18 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const { slug } = params;
 
-    // const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
-    //     console.log("ERROR: " + err);
-    // });
+    const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
+        console.log("ERROR: " + err);
+    });
 
-    return {
-        props: { blog: "a", slug },
-        revalidate: 1, // n1 seconds
-    };
-    // if (data) {
-    //     const obj = { blog: data, slug };
-    // }
+    if (data) {
+        const obj = { blog: data, slug };
+
+        return {
+            props: { blog: "a", slug },
+            revalidate: 1, // n1 seconds
+        };
+    }
 }
 
 /*
