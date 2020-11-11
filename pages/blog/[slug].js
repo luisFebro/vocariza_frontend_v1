@@ -82,8 +82,9 @@ export default function SingleBlog({ blog, slug }) {
 export async function getStaticPaths() {
     // n3
     const { data } = await getAPI({ url: getStaticBlogPathsList() });
+    console.log("data", data);
 
-    const list = data.map((doc) => `/blog/${doc.slug}`);
+    const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
     return {
         paths: list,
@@ -91,21 +92,21 @@ export async function getStaticPaths() {
     };
 }
 
-// export async function getStaticProps({ params }) {
-//     const { slug } = params;
+export async function getStaticProps({ params }) {
+    const { slug } = params;
 
-//     const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
-//         console.log("ERROR: " + err);
-//     });
+    const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
+        console.log("ERROR: " + err);
+    });
 
-//     if (data) {
-//         const obj = { blog: data, slug };
-//         return {
-//             props: obj,
-//             revalidate: 1, // n1 seconds
-//         };
-//     }
-// }
+    if (data) {
+        const obj = { blog: data, slug };
+        return {
+            props: obj,
+            revalidate: 1, // n1 seconds
+        };
+    }
+}
 
 /*
 
