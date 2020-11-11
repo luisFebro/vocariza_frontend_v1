@@ -19,8 +19,7 @@ const getStyles = () => ({
     },
 });
 
-export default function SingleBlog({ blog, slug }) {
-    console.log("slug", slug);
+export default function SingleBlog({ blog = {} }) {
     console.log("blog", blog);
     const styles = getStyles();
 
@@ -90,7 +89,6 @@ export async function getStaticPaths() {
             console.log("ERROR: " + err);
         }
     );
-    console.log("data", data);
 
     const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
@@ -107,12 +105,12 @@ export async function getStaticProps({ params }) {
         console.log("ERROR: " + err);
     });
 
-    const obj = { blog: data, slug };
-
-    return {
-        props: obj,
-        revalidate: 1, // n1 seconds
-    };
+    if (data) {
+        return {
+            props: { blog: data },
+            revalidate: 1, // n1 seconds
+        };
+    }
 }
 
 /*
