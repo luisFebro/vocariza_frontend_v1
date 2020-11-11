@@ -13,7 +13,8 @@ const {
     DOMAIN_DEVELOPMENT,
 } = publicRuntimeConfig;
 
-// const IS_PROD = process.env.NODE_ENV === "production";
+const IS_PROD = process.env.NODE_ENV === "production";
+console.log("IS_PROD", IS_PROD);
 
 const API = IS_PROD ? API_PRODUCTION : API_DEVELOPMENT;
 const DOMAIN = IS_PROD ? DOMAIN_PRODUCTION : DOMAIN_DEVELOPMENT;

@@ -11,16 +11,16 @@ import { API } from "../../config";
 // import SmallCard from '../../components/blog/SmallCard';
 // import DisqusThread from '../../components/DisqusThread';
 
-const getStyles = () => ({
-    featuredImg: {
-        width: "100%",
-        maxHeight: "500px",
-        objectFit: "cover",
-    },
-});
+// const getStyles = () => ({
+//     featuredImg: {
+//         width: "100%",
+//         maxHeight: "500px",
+//         objectFit: "cover",
+//     },
+// });
 
 export default function SingleBlog({ blog, slug }) {
-    const styles = getStyles();
+    // const styles = getStyles();
 
     // const getHead = () => (
     //     <Head
