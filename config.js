@@ -4,7 +4,7 @@ const { publicRuntimeConfig = {} } = require("./next.config.js");
 console.log("publicRuntimeConfig", publicRuntimeConfig);
 
 const {
-    APP_NAME: APP_N,
+    APP_NAME,
     FB_APP_ID: FB_ID,
     IS_PROD,
     API_PRODUCTION,
@@ -18,9 +18,7 @@ const {
 const API = IS_PROD ? API_PRODUCTION : API_DEVELOPMENT;
 const DOMAIN = IS_PROD ? DOMAIN_PRODUCTION : DOMAIN_DEVELOPMENT;
 const DOMAIN_PROD = DOMAIN_PRODUCTION;
-
 const FB_APP_ID = FB_ID;
-const APP_NAME = APP_N;
 
 module.exports = {
     API,
