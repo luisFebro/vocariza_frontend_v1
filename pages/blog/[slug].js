@@ -81,19 +81,19 @@ export default function SingleBlog({ blog, slug }) {
 
 export async function getStaticPaths() {
     // n3
-    const { data } = await getAPI({ url: getStaticBlogPathsList() });
-    console.log("data", data);
+    // const { data } = await getAPI({ url: getStaticBlogPathsList() });
+    // console.log("data", data);
 
-    const list = data && data.map((doc) => `/blog/${doc.slug}`);
+    // const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
     return {
-        paths: list,
-        fallback: false, // n2
+        paths: ["5-vocabularios-mais-dificeis-de-pronunciar-em-ingles"],
+        fallback: true, // n2
     };
 }
 
-export async function getStaticProps({ params }) {
-    console.log("params", params);
+export async function getStaticProps(context) {
+    console.log("context", context);
     // const { slug } = params;
 
     // const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
@@ -102,7 +102,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: { blog: "a", slug: "fuck" },
-        // revalidate: 1, // n1 seconds
+        revalidate: 1, // n1 seconds
     };
     // if (data) {
     //     const obj = { blog: data, slug };
