@@ -1,11 +1,11 @@
-import { API } from "../config";
+const { API } = require("../config");
 // URLs ONLY
 // user
-export const getTestMsg = () => `${API}/user/test/msg`;
+exports.getTestMsg = () => `${API}/user/test/msg`;
 
 // BLOG
-export const readBlog = (slug) => `${API}/blog/${slug}`;
-export const getStaticBlogPathsList = () => `${API}/blog/list/paths`;
+exports.readBlog = (slug) => `${API}/blog/${slug}`;
+exports.getStaticBlogPathsList = () => `${API}/blog/list/paths`;
 // END BLOG
 
 // export const updateUser = (userId) => `/api/user/${userId}?noResponse=true`;

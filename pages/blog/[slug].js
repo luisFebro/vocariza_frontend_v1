@@ -2,7 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, Fragment } from "react";
 import renderHTML from "react-render-html";
-import getAPI, { readBlog, getStaticBlogPathsList } from "../../api/getAPI";
+import { getAPI } from "../../api/getAPI";
+import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 
 // NOT WORKED YET

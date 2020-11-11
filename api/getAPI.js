@@ -1,23 +1,23 @@
-import { chooseHeader } from "../utils/server/getHeaders";
-import axios from "axios";
+const { chooseHeader } = require("../utils/server/getHeaders");
+const axios = require("axios");
 // import { logout } from "../../redux/actions/authActions";
-
-export * from "./requestsLib";
 
 const token = "123"; //localStorage.getItem("token");
 
 // complete promise for inline and programatically requests
-export default function getAPI({
-    url,
-    method = "get",
-    body, // obj
-    params, // obj
-    needAuth = true,
-    timeout = 10000,
-    trigger = true,
-    dispatch,
-    isSearch = false,
-}) {
+exports.getAPI = (options = {}) => {
+    const {
+        url,
+        method = "get",
+        body, // obj
+        params, // obj
+        needAuth = true,
+        timeout = 10000,
+        trigger = true,
+        dispatch,
+        isSearch = false,
+    } = options;
+
     if (!url) return console.log("A URL is required!");
 
     const axiosPromise = async (resolve, reject) => {
@@ -70,7 +70,7 @@ export default function getAPI({
     };
 
     return new Promise(axiosPromise);
-}
+};
 
 // Alternative
 //fetchUsers(data)
