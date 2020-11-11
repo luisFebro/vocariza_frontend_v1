@@ -1,6 +1,6 @@
 // warning:
 // next/config is a stateful module, it's only initialized once Next.js is initialized. It's generally not recommended to use it anywhere other than components/pages, because it depends on Next being initialized. Alternatively you can require('./next.config.js') and read the values that way.
-const { publicRuntimeConfig } = require("./next.config.js");
+const { publicRuntimeConfig = {} } = require("./next.config.js");
 console.log("publicRuntimeConfig", publicRuntimeConfig);
 
 const {
