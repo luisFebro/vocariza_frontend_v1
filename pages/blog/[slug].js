@@ -70,6 +70,7 @@ export default function SingleBlog({ blog, slug }) {
     //         </div>
     //     ));
     // };
+    console.log("getHead", getHead());
 
     return (
         <Fragment>
