@@ -93,19 +93,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const { slug } = params;
+    console.log("params", params);
+    // const { slug } = params;
 
-    const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
-        console.log("ERROR: " + err);
-    });
+    // const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
+    //     console.log("ERROR: " + err);
+    // });
 
-    if (data) {
-        const obj = { blog: data, slug };
-        return {
-            props: obj,
-            revalidate: 1, // n1 seconds
-        };
-    }
+    // if (data) {
+    //     const obj = { blog: data, slug };
+    //     return {
+    //         props: obj,
+    //         revalidate: 1, // n1 seconds
+    //     };
+    // }
 }
 
 /*
