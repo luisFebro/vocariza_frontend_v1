@@ -28,7 +28,7 @@ export default function SingleBlog({ blog = {} }) {
             metaTitle={blog.metaTitle}
             metaDesc={blog.metaDesc}
             mainPhoto={`${API}/blog/photo/${blog.slug}`}
-            urlPath={`/blog/${slug}`}
+            urlPath={`/blog/${blog.slug}`}
             languages={blog.languages}
         />
     );
