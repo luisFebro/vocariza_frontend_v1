@@ -5,6 +5,7 @@ import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import Head from "../../components/Head";
 import { API } from "../../config";
+const axios = require("axios");
 // NOT WORKED YET
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -81,11 +82,8 @@ export default function SingleBlog({ blog, slug }) {
 
 export async function getStaticPaths() {
     // n3 dsadsadsa
-    const { data } = await getAPI({ url: getStaticBlogPathsList() }).catch(
-        (err) => {
-            console.log(err);
-        }
-    );
+    const { data } = await axios.get(getStaticBlogPathsList());
+    // const { data } = await getAPI({ url: getStaticBlogPathsList() })
     console.log("data", data);
     // console.log("data", data);
     // const data = [
