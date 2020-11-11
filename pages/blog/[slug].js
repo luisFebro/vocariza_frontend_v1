@@ -100,12 +100,12 @@ export async function getStaticProps({ params }) {
     //     console.log("ERROR: " + err);
     // });
 
+    return {
+        props: { blog: "a", slug: "fuck" },
+        revalidate: 1, // n1 seconds
+    };
     // if (data) {
     //     const obj = { blog: data, slug };
-    //     return {
-    //         props: obj,
-    //         revalidate: 1, // n1 seconds
-    //     };
     // }
 }
 

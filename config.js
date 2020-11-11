@@ -11,12 +11,11 @@ const {
 } = publicRuntimeConfig;
 
 const IS_PROD = process.env.NODE_ENV === "production";
-console.log("IS_PROD", IS_PROD);
-
+// this needs to be here because gets undefined in next.config.js
 const API = IS_PROD
     ? "https://vocariza.herokuapp.com/api"
     : "http://localhost:5002/api";
-console.log("API", API);
+
 const DOMAIN = IS_PROD ? DOMAIN_PRODUCTION : DOMAIN_DEVELOPMENT;
 const DOMAIN_PROD = DOMAIN_PRODUCTION;
 const FB_APP_ID = FB_ID;
