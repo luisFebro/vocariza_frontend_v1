@@ -4,7 +4,6 @@ import renderHTML from "react-render-html";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import Head from "../../components/Head";
-import { API } from "../../config";
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -23,14 +22,44 @@ const getStyles = () => ({
 export default function SingleBlog({ blog = {} }) {
     const styles = getStyles();
 
-    const getHead = () => (
+    const Head = () => (
         <Head
             metaTitle={blog.metaTitle}
             metaDesc={blog.metaDesc}
-            mainPhoto={`${API}/blog/photo/${blog.slug}`}
+            mainPhoto={blog.photo}
             urlPath={`/blog/${blog.slug}`}
             languages={blog.languages}
         />
+    );
+
+    const showHeader = () => <header className="">I am the nav stuff</header>;
+
+    const showArticleEntry = () => (
+        <Fragment>
+            <section className="entry-header">
+                <h1 className="">{blog.title}</h1>
+            </section>
+            <section>
+                <figure>
+                    <img
+                        src={"/img/blog/7-pronunce.jpg"}
+                        alt={blog.title}
+                        className="img img-fluid"
+                        style={styles.featuredImg}
+                    />
+                </figure>
+            </section>
+        </Fragment>
+    );
+
+    const showArticleMainContent = () => (
+        <Fragment>
+            <main>
+                <section className="col-md-12 lead">
+                    {renderHTML(blog.body)}
+                </section>
+            </main>
+        </Fragment>
     );
     // const [related, setRelated] = useState([]);
 
@@ -74,8 +103,12 @@ export default function SingleBlog({ blog = {} }) {
 
     return (
         <Fragment>
-            {getHead()}
-            <h1>Hello world! This is my first real world blog!</h1>
+            {Head()}
+            {showHeader()}
+            <article>
+                {showArticleEntry()}
+                {showArticleMainContent()}
+            </article>
         </Fragment>
     );
 }

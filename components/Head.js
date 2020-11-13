@@ -3,7 +3,7 @@ import { default as NextHead } from "next/head";
 import { DOMAIN, APP_NAME, FB_APP_ID } from "../config";
 
 const getMultiLangMeta = ({ languages, urlPath }) => {
-    return languages.map((lang) => {
+    return languages.map((lang, ind) => {
         let hreflang = lang.trim();
         let param = `/${hreflang}`;
 
@@ -13,11 +13,13 @@ const getMultiLangMeta = ({ languages, urlPath }) => {
         }
 
         return (
-            <link
-                rel="alternate"
-                href={`${DOMAIN}${param}${urlPath}`}
-                hrefLang={hreflang}
-            />
+            <Fragment key={ind}>
+                <link
+                    rel="alternate"
+                    href={`${DOMAIN}${param}${urlPath}`}
+                    hrefLang={hreflang}
+                />
+            </Fragment>
         );
     });
 };
