@@ -1,15 +1,23 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useState, useEffect, Fragment } from "react";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import HeadNext from "../../components/HeadNext";
+import renderHTML from "react-render-html";
+// import dynamic from "next/dynamic";
 
 // const HTML = dynamic(
 //   () => import("react-render-html"),
 //   { ssr: false }
 // )
 // console.log("HTML", HTML);
+
+/**
+ * Convert a template string into HTML DOM nodes
+ * @param  {String} str The template string
+ * @return {Node}       The template HTML
+ */
+
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -27,6 +35,15 @@ const getStyles = () => ({
 // LESSON: if data obj like blog, then add an empty {} because it gets undefined before get filled;
 export default function SingleBlog({ blog = {} }) {
     const styles = getStyles();
+
+    const [renderDone, setRenderDone] = useState(false);
+
+    let HTML;
+
+    useEffect(() => {
+        HTML = require("react-render-html");
+        setRenderDone(true);
+    }, []);
 
     const Head = () => (
         <HeadNext
@@ -63,7 +80,9 @@ export default function SingleBlog({ blog = {} }) {
     const showArticleMainContent = () => (
         <Fragment>
             <main>
-                <section className="col-md-12 lead">{blog.body}</section>
+                <section className="col-md-12 lead">
+                    {renderHTML(`<section>${blog.body}</section>`)}
+                </section>
             </main>
         </Fragment>
     );
