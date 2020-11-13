@@ -1,5 +1,7 @@
+// Lesson: do not use default as HeadNext because cause memory leaking somehow on next.js
+// Fix only after rename back to original Head import name.
 import { Fragment } from "react";
-import { default as NextHead } from "next/head";
+import Head from "next/head";
 import { DOMAIN, APP_NAME, FB_APP_ID } from "../config";
 
 const getMultiLangMeta = ({ languages, urlPath }) => {
@@ -24,7 +26,7 @@ const getMultiLangMeta = ({ languages, urlPath }) => {
     });
 };
 
-export default function Head({
+export default function HeadNext({
     metaTitle,
     metaDesc,
     mainPhoto,
@@ -55,12 +57,12 @@ export default function Head({
 
     const needLang = languages && languages.length >= 2;
     return (
-        <NextHead>
+        <Head>
             <title>{metaTitle}</title>
             <link rel="canonical" href={currUrl} />
             <meta name="description" content={metaDesc} />
             {needLang && getMultiLangMeta({ languages, urlPath })}
             {getOpenGraphMeta()}
-        </NextHead>
+        </Head>
     );
 }

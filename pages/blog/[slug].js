@@ -3,7 +3,7 @@ import { useState, useEffect, Fragment } from "react";
 import renderHTML from "react-render-html";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
-import Head from "../../components/Head";
+import HeadNext from "../../components/HeadNext";
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -13,7 +13,7 @@ import Head from "../../components/Head";
 const getStyles = () => ({
     featuredImg: {
         width: "100%",
-        maxHeight: "500px",
+        maxHeight: "300px",
         objectFit: "cover",
     },
 });
@@ -23,7 +23,7 @@ export default function SingleBlog({ blog = {} }) {
     const styles = getStyles();
 
     const Head = () => (
-        <Head
+        <HeadNext
             metaTitle={blog.metaTitle}
             metaDesc={blog.metaDesc}
             mainPhoto={blog.photo}
@@ -42,8 +42,10 @@ export default function SingleBlog({ blog = {} }) {
             <section>
                 <figure>
                     <img
-                        src={"/img/blog/7-pronunce.jpg"}
+                        src={"/img/blog/7-pronounce.jpg"}
                         alt={blog.title}
+                        height={400}
+                        width=""
                         className="img img-fluid"
                         style={styles.featuredImg}
                     />

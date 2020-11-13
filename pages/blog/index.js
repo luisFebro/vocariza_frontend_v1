@@ -1,4 +1,4 @@
-import Head from "next/head";
+import HeadNext from "../../components/HeadNext";
 import Link from "next/link";
 import { useState, Fragment } from "react";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
@@ -19,37 +19,14 @@ function Blogs({
     blogSkip,
     router,
 }) {
-    const getHead = () => (
-        <Head>
-            <title>Blogs | {APP_NAME}</title>
-            <meta
-                name="description"
-                content="Programming blogs and tutorials on react node next vue php laravel and web developoment"
-            />
-            <link rel="canonical" href={`${DOMAIN}${router.pathname}`} />
-            <meta
-                property="og:title"
-                content={`Latest web developoment tutorials | ${APP_NAME}`}
-            />
-            <meta
-                property="og:description"
-                content="Programming blogs and tutorials on react node next vue php laravel and web developoment"
-            />
-            <meta property="og:type" content="webiste" />
-            <meta property="og:url" content={`${DOMAIN}${router.pathname}`} />
-            <meta property="og:site_name" content={`${APP_NAME}`} />
-
-            <meta
-                property="og:image"
-                content={`${DOMAIN}/static/images/seoblog.jpg`}
-            />
-            <meta
-                property="og:image:secure_url"
-                ccontent={`${DOMAIN}/static/images/seoblog.jpg`}
-            />
-            <meta property="og:image:type" content="image/jpg" />
-            <meta property="fb:app_id" content={`${FB_APP_ID}`} />
-        </Head>
+    const Head = () => (
+        <HeadNext
+            metaTitle={`Blogs | ${APP_NAME}`}
+            metaDesc="Vocariza - memorizar vocabulários em Inglês para sempre"
+            mainPhoto="/img/logo.png"
+            urlPath={`/blog`}
+            languages={null}
+        />
     );
 
     const [limit, setLimit] = useState(blogsLimit);
@@ -119,7 +96,7 @@ function Blogs({
 
     return (
         <Fragment>
-            {getHead()}
+            {Head()}
             <h1>Hello World! I am the blog Index</h1>
         </Fragment>
     );

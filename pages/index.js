@@ -1,4 +1,4 @@
-import Head from "next/head";
+import HeadNext from "../components/HeadNext";
 import Layout, { siteTitle } from "../components/_Layout";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
@@ -8,13 +8,21 @@ import Image from "next/image";
 // import styles from '../styles/Home.module.css'
 
 export default function Home() {
+    const Head = () => (
+        <HeadNext
+            metaTitle={siteTitle}
+            metaDesc="Descubra as melhores técnicas de memorização de vocabulários em Inglês com repetição espaçada"
+            mainPhoto="/img/logo.png"
+            urlPath={`/`}
+            languages={null}
+        />
+    );
+
     return (
         <Layout home>
-            <Head>
-                <title>{siteTitle}</title>
-            </Head>
+            {Head()}
             <section className={utilStyles.headingMd}>
-                <h1>Memorize Vocabulários para sempre!!!</h1>
+                <h1>Memorize Vocabulários para sempre</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Image src="/img/logo-name.png" width="200" height="100%" />
                 </div>
