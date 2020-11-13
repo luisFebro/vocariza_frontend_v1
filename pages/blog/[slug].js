@@ -1,9 +1,15 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useState, useEffect, Fragment } from "react";
-import renderHTML from "react-render-html";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import HeadNext from "../../components/HeadNext";
+
+// const HTML = dynamic(
+//   () => import("react-render-html"),
+//   { ssr: false }
+// )
+// console.log("HTML", HTML);
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
 // import { listRelated } from '../../actions/blog';
@@ -57,9 +63,7 @@ export default function SingleBlog({ blog = {} }) {
     const showArticleMainContent = () => (
         <Fragment>
             <main>
-                <section className="col-md-12 lead">
-                    {renderHTML(blog.body)}
-                </section>
+                <section className="col-md-12 lead">{blog.body}</section>
             </main>
         </Fragment>
     );
