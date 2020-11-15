@@ -3,20 +3,7 @@ import { useState, useEffect, Fragment } from "react";
 import { getAPI } from "../../api/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import HeadNext from "../../components/HeadNext";
-import renderHTML from "react-render-html";
-// import dynamic from "next/dynamic";
-
-// const HTML = dynamic(
-//   () => import("react-render-html"),
-//   { ssr: false }
-// )
-// console.log("HTML", HTML);
-
-/**
- * Convert a template string into HTML DOM nodes
- * @param  {String} str The template string
- * @return {Node}       The template HTML
- */
+import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
 
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
@@ -24,18 +11,8 @@ import renderHTML from "react-render-html";
 // import SmallCard from '../../components/blog/SmallCard';
 // import DisqusThread from '../../components/DisqusThread';
 
-const getStyles = () => ({
-    featuredImg: {
-        width: "100%",
-        maxHeight: "300px",
-        objectFit: "cover",
-    },
-});
-
 // LESSON: if data obj like blog, then add an empty {} because it gets undefined before get filled;
 export default function SingleBlog({ blog = {} }) {
-    const styles = getStyles();
-
     const [renderDone, setRenderDone] = useState(false);
 
     let HTML;
@@ -60,7 +37,7 @@ export default function SingleBlog({ blog = {} }) {
     const showArticleEntry = () => (
         <Fragment>
             <section className="entry-header">
-                <h1 className="">{blog.title}</h1>
+                <h1 className="mx-md-5 mx-3 text-title">{blog.title}</h1>
             </section>
             <section>
                 <figure>
@@ -69,18 +46,26 @@ export default function SingleBlog({ blog = {} }) {
                         alt={blog.title}
                         height={400}
                         width=""
-                        className="img img-fluid"
-                        style={styles.featuredImg}
+                        className="img img-fluid featured-img"
                     />
                 </figure>
             </section>
+            <style jsx>
+                {`
+                    .featured-img {
+                        width: 100%;
+                        max-height: 300px;
+                        object-fit: cover;
+                    }
+                `}
+            </style>
         </Fragment>
     );
 
     const showArticleMainContent = () => (
         <Fragment>
             <main>
-                <section className="col-md-12 lead">
+                <section className="mx-md-5 ml-3 mr-2 text-normal text-justify">
                     {renderHTML(`<section>${blog.body}</section>`)}
                 </section>
             </main>
@@ -130,7 +115,7 @@ export default function SingleBlog({ blog = {} }) {
         <Fragment>
             {Head()}
             {showHeader()}
-            <article>
+            <article className="container-fluid">
                 {showArticleEntry()}
                 {showArticleMainContent()}
             </article>

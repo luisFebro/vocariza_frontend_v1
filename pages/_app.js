@@ -1,6 +1,10 @@
 import { Fragment } from "react";
 import Head from "next/head";
-import "../styles/globals.css";
+import "../styles/App.scss"; // LESSON: do not use .module.css for global.
+
+// GLOBAL STYLING
+import "../styles/theming/core.scss";
+// END GLOBAL STYLING
 
 function MyApp({ Component, pageProps }) {
     // n1 about global stuff
@@ -60,6 +64,15 @@ function MyApp({ Component, pageProps }) {
                 />
                 <meta name="theme-color" content="#ffffff" />
                 {/* END FAVICON */}
+
+                {/* GOOGLE FONTS */}
+                <link
+                    rel="prefetch"
+                    href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+                    as="style"
+                    onLoad="this.onload=null;this.rel='stylesheet'"
+                />
+                {/* END GOOGLE FONTS */}
             </Head>
             <Component {...pageProps} />
         </Fragment>
