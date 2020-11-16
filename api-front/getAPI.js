@@ -1,23 +1,23 @@
-const { chooseHeader } = require("../utils/server/getHeaders");
-const axios = require("axios");
-// import { logout } from "../../redux/actions/authActions";
+import { chooseHeader } from "../utils/server/getHeaders";
+// import { logout } from "../redux/actions/authActions";
+import axios from "axios";
 
-const token = "123"; //localStorage.getItem("token");
+export * from "./requestsLib";
+
+const token = localStorage.getItem("token");
 
 // complete promise for inline and programatically requests
-exports.getAPI = (options = {}) => {
-    const {
-        url,
-        method = "get",
-        body, // obj
-        params, // obj
-        needAuth = true,
-        timeout = 10000,
-        trigger = true,
-        dispatch,
-        isSearch = false,
-    } = options;
-
+export default function getAPI({
+    url,
+    method = "get",
+    body, // obj
+    params, // obj
+    needAuth = true,
+    timeout = 10000,
+    trigger = true,
+    dispatch,
+    isSearch = false,
+}) {
     if (!url) return console.log("A URL is required!");
 
     const axiosPromise = async (resolve, reject) => {
@@ -41,11 +41,11 @@ exports.getAPI = (options = {}) => {
                 clearTimeout(stopRequest);
                 return resolve("Request not ready to trigger");
             }
-            const { data } = await axios(config);
+            const response = await axios(config);
 
             clearTimeout(stopRequest);
 
-            resolve({ data });
+            resolve(response);
         } catch (error) {
             if (axios.isCancel(error)) {
                 // if it is search and cancel is need as a defendor against multiple request, then isSearch is true.
@@ -61,16 +61,16 @@ exports.getAPI = (options = {}) => {
 
                 const { status } = error.response;
                 const gotExpiredToken = status === 401;
-                if (gotExpiredToken && dispatch)
-                    // logout(dispatch, { needSnackbar: true });
+                // if (gotExpiredToken && dispatch)
+                //     logout(dispatch, { needSnackbar: true });
 
-                    reject(error.response.data);
+                reject(error.response.data);
             }
         }
     };
 
     return new Promise(axiosPromise);
-};
+}
 
 // Alternative
 //fetchUsers(data)

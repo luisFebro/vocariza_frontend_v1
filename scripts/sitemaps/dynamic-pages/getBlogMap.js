@@ -1,8 +1,8 @@
 const fs = require("fs");
 const globby = require("globby");
 const { DOMAIN_PROD } = require("../../../config");
-const { getAPI } = require("../../../api/getAPI");
-const { getStaticBlogPathsList } = require("../../../api/requestsLib");
+const { getAPIBack } = require("../../../api-front/getAPIBack");
+const { getStaticBlogPathsList } = require("../../../api-front/requestsLib");
 
 const getDate = new Date().toISOString();
 
@@ -16,7 +16,7 @@ async function getBlogMap() {
         "!pages/api",
     ]);
 
-    const { data } = await getAPI({ url: getStaticBlogPathsList() });
+    const { data } = await getAPIBack({ url: getStaticBlogPathsList() });
     const paths = data.map((doc) => doc.slug);
 
     const pagesSitemap = `

@@ -5,7 +5,9 @@
 const IS_PROD = process.env.NODE_ENV === "production";
 // this needs to be here because gets undefined in next.config.js
 const APP_NAME = "Vocariza";
-const API = IS_PROD ? process.env.API_PRODUCTION : process.env.API_DEVELOPMENT;
+const API = IS_PROD
+    ? "https://vocariza.herokuapp.com/api"
+    : "http://localhost:5002/api";
 const DOMAIN = IS_PROD ? "https://vocariza.com" : "https://localhost:3001";
 
 const DOMAIN_PROD = "https://vocariza.com";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect, Fragment } from "react";
-import { getAPI } from "../../api/getAPI";
+import { getAPI } from "../../api-front/getAPI";
 import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
@@ -37,7 +37,9 @@ export default function SingleBlog({ blog = {} }) {
     const showArticleEntry = () => (
         <Fragment>
             <section className="entry-header">
-                <h1 className="mx-md-5 mx-3 text-title">{blog.title}</h1>
+                <h1 className="mx-md-5 mx-3 text-title text-center">
+                    {blog.title}
+                </h1>
             </section>
             <section>
                 <figure>
