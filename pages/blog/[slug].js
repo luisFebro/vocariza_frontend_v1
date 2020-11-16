@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect, Fragment } from "react";
 import { getAPI } from "../../api-front/getAPI";
-import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
+import { readBlog, getStaticBlogPathsList } from "../../api-front/requestsLib";
 import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
 
