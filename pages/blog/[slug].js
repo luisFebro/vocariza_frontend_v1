@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect, Fragment } from "react";
-import getAPI from "../../api-front/getAPI";
+import { getAPIBack } from "../../api-front/getAPIBack";
 import { readBlog, getStaticBlogPathsList } from "../../api-front/requestsLib";
 import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
@@ -129,7 +129,7 @@ export default function SingleBlog({ blog = {} }) {
 // Then, check backend because can have an API issue...
 export async function getStaticPaths() {
     // n3 dsadsadsa
-    const { data } = await getAPI({ url: getStaticBlogPathsList() }).catch(
+    const { data } = await getAPIBack({ url: getStaticBlogPathsList() }).catch(
         (err) => {
             console.log("ERROR: " + err);
         }
@@ -146,7 +146,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const { slug } = params;
 
-    const { data } = await getAPI({ url: readBlog(slug) }).catch((err) => {
+    const { data } = await getAPIBack({ url: readBlog(slug) }).catch((err) => {
         console.log("ERROR: " + err);
     });
 
