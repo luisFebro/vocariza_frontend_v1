@@ -23,7 +23,7 @@ export default function Watson() {
                 id="text"
                 rows="6"
                 cols="80"
-                value="hello Luis Febro "
+                value="Hi there! I am your assistent!"
             ></textarea>
             <p>
                 <button id="button" onClick={runTTS}>
