@@ -1,0 +1,42 @@
+/*MAIN SHADOW AND HOVER*/
+.shadow-elevation-white {
+    filter: drop-shadow(0.001em 0.1em 0.1em var(--mainWhite));
+}
+
+.shadow-elevation-black {
+    /*recommended*/
+    filter: drop-shadow(0.001em 0.001em 0.15em var(--mainDark));
+}
+
+.shadow-elevation {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.2), 0 15px 12px rgba(0, 0, 0, 0.12); /* from babadoo project */
+    /*recommendaded only squared pictures, cards and static square shapes*/
+    /*box-shadow: 0 31px 120px -6px rgba(0, 0, 0, 0.35);*/
+}
+
+.icon-shadow {
+    filter: drop-shadow(0.5px 0.5px 1.5px black);
+}
+
+.shape-elevation,
+.card-elevation,
+.svg-elevation {
+    filter: drop-shadow(0.001em 0.1em 0.1em var(--mainDark));
+}
+
+.shadow-elevation-soft {
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2), 0 10px 8px rgba(0, 0, 0, 0.12);
+}
+
+.tranparent-img-shadow,
+.main-letters-shadow {
+    font-size: 1.9rem;
+    filter: drop-shadow(0.001em 0.1em 0.1em var(--mainDark));
+}
+
+.main-letters-shadow:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0.001em 0.1em 0.1em var(--mainYellow));
+}
+
+/*END MAIN SHADOW AND HOVER*/

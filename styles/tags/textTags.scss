@@ -1,0 +1,126 @@
+::-moz-selection {
+    /* Code for Firefox */
+    color: #fff;
+    background: var(--themeP);
+}
+
+::selection {
+    color: #fff;
+    background: var(--themeP);
+}
+
+a {
+    color: var(--mainPurple);
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--themeP);
+}
+
+mark {
+    background-color: var(--themeP);
+    color: #fff;
+}
+
+h2 {
+    font: bold 25px "Poppins", sans-serif;
+    letter-spacing: 0.01em;
+    color: var(--themeP);
+}
+
+// p {
+//     font: normal 20px "Poppins", sans-serif;
+//     letter-spacing: 0.01em;
+// }
+
+@media screen and (min-width: 320px) {
+    h2 {
+        font: bold calc(25px + (30 - 25) * ((100vw - 300px) / (1000 - 300)))
+                "Poppins",
+            sans-serif;
+        letter-spacing: 0.01em;
+    }
+
+    // p {
+    //     font: normal calc(20px + (26 - 20) * ((100vw - 300px) / (1000 - 300)))
+    //         "Poppins",
+    //         sans-serif;
+    // }
+}
+
+@media screen and (min-width: 1000px) {
+    h2 {
+        font: bold 30px "Poppins", sans-serif;
+        letter-spacing: 0.01em;
+    }
+
+    // p {
+    //     font: normal 23px "Poppins", sans-serif;
+    // }
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+
+    & li:before {
+        margin-left: 10px;
+        content: "";
+        position: relative;
+        left: -10px;
+        background-color: var(--themeP);
+
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+    }
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid rgba(148, 0, 211, 0.2); // themeP in rgb
+    margin: 1.5em 0px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+
+    &:before {
+        color: rgba(148, 0, 211, 0.2);
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.1em;
+        vertical-align: -0.4em;
+    }
+
+    & p {
+        display: inline;
+    }
+}
+
+/* pressed effect link exemple
+a {
+  background-color: red;
+  box-shadow: 0 5px 0 darkred;
+  color: white;
+  padding: 1em 1.5em;
+  border: none;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background-color: #ce0606;
+  cursor: pointer;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+ */

@@ -1,4 +1,5 @@
-import DateFnsUtils from "@date-io/date-fns";
+// import DateFnsUtils from "@date-io/date-fns";
+import { parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import getDayMonthBr from "./getDayMonthBr"; // 20 de Junho de 2020 is better than 20º de junho, 2020...
 import formatDistance from "date-fns/formatDistance";
@@ -18,7 +19,7 @@ const localeObj = {
     ptBR,
 };
 
-const dateFnsUtils = DateFnsUtils;
+// const dateFnsUtils = DateFnsUtils;
 const ptBRLocale = ptBR;
 
 const treatZero = (number) => {
@@ -66,9 +67,12 @@ const endWeek = endOfWeek(new Date(), { weekStartsOn: 1 });
 const startWeek = startOfWeek(new Date(), { weekStartsOn: 1 });
 
 const formatSlashDMY = (newDate = new Date()) => format(newDate, "dd/MM/yyyy");
+const formatFree = (newDate = new Date(), pattern) =>
+    format(newDate, pattern, { locale: ptBR });
 
 export {
-    dateFnsUtils,
+    // dateFnsUtils,
+    parseISO,
     ptBRLocale,
     formatDMY,
     formatSlashDMY,
@@ -81,6 +85,7 @@ export {
     isScheduledDate,
     endWeek,
     startWeek,
+    formatFree,
 };
 
 // reference: https://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time

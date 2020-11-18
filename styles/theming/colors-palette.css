@@ -28,48 +28,6 @@
     /* Error colors are used to indicate an error state. The Material baseline dark theme error color is #CF6679. */
 }
 
-.theme-back {
-    background-color: #4a148c !important;
-}
-
-.txt-color-p {
-    color: var(--mainWhite);
-}
-
-.txt-color-s {
-    color: var(--mainBlack);
-}
-
-/* primary colors */
-.theme-p {
-    background-color: var(--themeP);
-}
-.theme-p-light {
-    background-color: var(--themePLight);
-}
-.theme-p-dark {
-    background-color: var(--themePDark);
-}
-
-/* secondary colors */
-.theme-s {
-    background-color: var(--themeS);
-}
-.theme-s-light {
-    background-color: var(--themeSLight);
-}
-.theme-s-dark {
-    background-color: var(--themeSDark);
-}
-
-/* surface and background */
-.theme-surface {
-    background-color: var(--themeSurface);
-}
-.theme-background {
-    background-color: var(--themeBackground);
-}
-
 /*
 DARK MODE
 Light text on dark backgrounds

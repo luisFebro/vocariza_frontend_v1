@@ -26,15 +26,6 @@ body {
     box-sizing: border-box;
 }
 
-a {
-    color: #0070f3;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
 article,
 aside,
 footer,
@@ -87,11 +78,6 @@ pre {
     font-size: 1em;
 }
 
-a {
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
-
 abbr[title] {
     border-bottom: none;
     text-decoration: underline;
@@ -110,11 +96,6 @@ dfn {
     font-style: italic;
 }
 
-mark {
-    background-color: #ff0;
-    color: #000;
-}
-
 small {
     font-size: 80%;
 }
@@ -131,23 +112,6 @@ button {
     border-width: 2 !important;
     border-style: outset !important;
     border-color: white !important;
-}
-
-/* MOBILE CAROUSEL PERSISTENT STYLE */
-.is-selected {
-    color: var(--mainWhite) !important;
-    background-color: var(--lightPurple) !important; /* var(--lightPurple) */
-}
-
-::-moz-selection {
-    /* Code for Firefox */
-    color: #fff;
-    background: var(--themeP);
-}
-
-::selection {
-    color: #fff;
-    background: var(--themeP);
 }
 
 /* COMMENTS
