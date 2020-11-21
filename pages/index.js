@@ -1,7 +1,6 @@
 import HeadNext from "../components/HeadNext";
-import Layout, { siteTitle } from "../components/_Layout";
+import Layout, { siteTitle } from "../components/_layout";
 import Link from "next/link";
-import utilStyles from "../styles/utils.module.css";
 import Image from "next/image";
 // import { getSortedPostsData } from "../demo/lib/posts";
 // import Date from "../components/demo/date";
@@ -12,7 +11,7 @@ export default function Home() {
         <HeadNext
             metaTitle={siteTitle}
             metaDesc="Descubra as melhores técnicas de memorização de vocabulários em Inglês com repetição espaçada"
-            mainPhoto="/img/logo.png"
+            mainPhoto="/img/logo/logo.png"
             urlPath={`/`}
             languages={null}
         />
@@ -21,7 +20,7 @@ export default function Home() {
     return (
         <Layout home>
             {Head()}
-            <section className={utilStyles.headingMd}>
+            <section>
                 <h1>Memorize Vocabulários para sempre</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Image src="/img/logo-name.png" width="200" height="100%" />

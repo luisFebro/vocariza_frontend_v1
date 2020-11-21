@@ -64,12 +64,21 @@ h2 {
     // }
 }
 
+// LISTS
+ul.no-list-style {
+    // for ul and ol tags
+    list-style: none !important;
+    & li:before {
+        display: none !important;
+    }
+}
+
 ul {
     list-style-type: none;
     padding: 0;
 
     & li:before {
-        margin-left: 10px;
+        margin-left: 25px;
         content: "";
         position: relative;
         left: -10px;

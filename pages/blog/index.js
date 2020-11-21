@@ -2,23 +2,23 @@ import HeadNext from "../../components/HeadNext";
 import Link from "next/link";
 import { useState, Fragment } from "react";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
-import { withRouter } from "next/router";
+import { useRouter } from "next/router";
+import Layout from "../../components/_layout";
 
 // import Layout from '../../components/Layout';
 // import { listBlogsWithCategoriesAndTags } from '../../actions/blog';
 // import Card from '../../components/blog/Card';
 
-export default withRouter(Blogs);
-
-function Blogs({
+export default function Blogs({
     blogs,
     categories,
     tags,
     totalBlogs,
     blogsLimit,
     blogSkip,
-    router,
 }) {
+    const router = useRouter();
+
     const Head = () => (
         <HeadNext
             metaTitle={`Blogs | ${APP_NAME}`}
@@ -95,10 +95,10 @@ function Blogs({
     // };
 
     return (
-        <Fragment>
+        <Layout>
             {Head()}
             <h1>Hello World! I am the blog Index</h1>
-        </Fragment>
+        </Layout>
     );
 }
 

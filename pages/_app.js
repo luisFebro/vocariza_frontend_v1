@@ -1,13 +1,33 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import "../styles/App.scss"; // LESSON: do not use .module.css for global.
 
-// GLOBAL STYLING
-import "../styles/theming/core.scss";
-// END GLOBAL STYLING
-
 function MyApp({ Component, pageProps }) {
-    // n1 about global stuff
+    const router = useRouter();
+
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            console.log("App is changing to: ", url);
+        };
+
+        router.events.on("routeChangeStart", handleRouteChange); // n1
+
+        const handleRouteChangeError = (err, url) => {
+            if (err.cancelled) {
+                console.log(`Route to ${url} was cancelled!`);
+            }
+        };
+
+        router.events.on("routeChangeError", handleRouteChangeError);
+        // If the component is unmounted, unsubscribe
+        // from the event with the `off` method:
+        return () => {
+            router.events.off("routeChangeStart", handleRouteChange);
+            router.events.off("routeChangeError", handleRouteChangeError);
+        };
+    }, []);
+
     return (
         <Fragment>
             <Head>
@@ -26,11 +46,6 @@ function MyApp({ Component, pageProps }) {
                     content="#9400d3"
                 />
                 {/*END TOOLBAR COLOR*/}
-
-                <meta
-                    name="keywords"
-                    content="vocabulários, inglês, idioma, memorização, pronúncia, aprendizado, técnicas"
-                />
 
                 {/* FAVICON */}
                 <link
@@ -80,6 +95,11 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+/* COMMENTS
+n1: Router events should be registered when a component mounts (useEffect or componentDidMount / componentWillUnmount) or imperatively when an event happens.
+n2: If a route load is cancelled (for example, by clicking two links rapidly in succession), routeChangeError will fire. And the passed err will contain a cancelled property set to true
+*/
 
 /*
 This App component is the top-level component which will be common across all the different pages. You can use this App component to keep state when navigating between pages, for example.

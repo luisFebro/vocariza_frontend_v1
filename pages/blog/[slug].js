@@ -6,6 +6,7 @@ import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
 import Img from "../../components/Img";
 import AuthorAndDate from "../../components/blog/AuthorAndDate";
+import Layout from "../../components/_layout";
 
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
@@ -25,11 +26,25 @@ export default function SingleBlog({ blog = {} }) {
         />
     );
 
-    const showHeader = () => <header className="">I am the nav stuff</header>;
+    const displayPurpleLine = () => (
+        <Fragment>
+            <div className="ml-3 ml-md-5 mt-5 purple-line"></div>
+            <style jsx>
+                {`
+                    .purple-line {
+                        width: 100px;
+                        height: 3px;
+                        background: var(--themePDark);
+                    }
+                `}
+            </style>
+        </Fragment>
+    );
 
     const showArticleEntry = () => (
         <Fragment>
             <section className="entry-header">
+                {displayPurpleLine()}
                 <h1 className="text-purple mx-3 text-title text-md-center">
                     {blog.title}
                 </h1>
@@ -98,14 +113,13 @@ export default function SingleBlog({ blog = {} }) {
     // };
 
     return (
-        <Fragment>
+        <Layout>
             {Head()}
-            {showHeader()}
-            <article className="container-fluid">
+            <article>
                 {showArticleEntry()}
                 {showArticleMainContent()}
             </article>
-        </Fragment>
+        </Layout>
     );
 }
 
