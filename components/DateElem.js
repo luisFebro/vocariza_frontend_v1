@@ -5,7 +5,7 @@ export default function DateElem({ dateString }) {
 
     return (
         <time dateTime={date}>
-            {formatFree(dateString, "d 'de' LLLL, yyyy")}
+            {dateString && formatFree(dateString, "d 'de' LLLL, yyyy")}
         </time>
     );
 }

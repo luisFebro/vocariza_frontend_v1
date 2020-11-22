@@ -122,6 +122,7 @@ export default function SingleBlog({ blog = {} }) {
 
 // WARNING: VERY important: If Vercel Deploy is handling after "info  - Collecting page data..."
 // Then, check backend because can have an API issue...
+// 2. Verify if dates are getting undefined values when passing to server side.
 export async function getStaticPaths() {
     // n3 dsadsadsa
     const { data } = await getAPIBack({ url: getStaticBlogPathsList() }).catch(
