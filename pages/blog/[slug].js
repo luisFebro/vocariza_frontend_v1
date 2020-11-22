@@ -115,7 +115,10 @@ export default function SingleBlog({ blog = {} }) {
     return (
         <Layout>
             {Head()}
-            <article>{showArticleEntry()}</article>
+            <article>
+                {showArticleEntry()}
+                {showArticleMainContent()}
+            </article>
         </Layout>
     );
 }

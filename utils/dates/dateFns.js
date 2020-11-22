@@ -67,8 +67,9 @@ const endWeek = endOfWeek(new Date(), { weekStartsOn: 1 });
 const startWeek = startOfWeek(new Date(), { weekStartsOn: 1 });
 
 const formatSlashDMY = (newDate = new Date()) => format(newDate, "dd/MM/yyyy");
+// it requires to check if newDate is valid. Otherwise invalid range error will be thrown.
 const formatFree = (newDate = new Date(), pattern) =>
-    format(parseISO(newDate), pattern, { locale: ptBR });
+    newDate && format(parseISO(newDate), pattern, { locale: ptBR });
 
 export {
     // dateFnsUtils,
