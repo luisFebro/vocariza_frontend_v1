@@ -112,7 +112,12 @@ export default function SingleBlog({ blog = {} }) {
     //     ));
     // };
 
-    return <Layout>{Head()}</Layout>;
+    return (
+        <Layout>
+            {Head()}
+            <article>{showArticleEntry()}</article>
+        </Layout>
+    );
 }
 
 // WARNING: VERY important: If Vercel Deploy is handling after "info  - Collecting page data..."
