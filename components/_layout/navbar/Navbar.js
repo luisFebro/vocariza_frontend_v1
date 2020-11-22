@@ -1,6 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import NavMenus from "./items/NavMenus";
+import Logo from "./items/Logo";
+import ProfilePic from "./items/ProfilePic";
 // import { useStoreState, useStoreDispatch } from "easy-peasy";
 // import { logout } from "../../../redux/actions/authActions";
 // import RadiusBtn from "../../../components/buttons/RadiusBtn";
@@ -14,110 +17,21 @@ import Link from "next/link";
 // const isSmall = window.Helper.isSmallScreen();
 export default function Navbar() {
     const router = useRouter();
-
     const path = router.pathname;
-    const isHome = path === "/";
-
-    const showLogo = () => {
-        const handleLogoPath = () => {
-            if (isHome) return "/img/logo/logo-name-header.svg";
-            if (path.includes("/blog"))
-                return "/img/logo/logo-name-header-blog.svg";
-        };
-
-        return (
-            <Fragment>
-                <Link href="/">
-                    <a className="text-decoration-none">
-                        <img
-                            className="logo"
-                            src={handleLogoPath()}
-                            alt="logo da vocariza"
-                        />
-                    </a>
-                </Link>
-                <style jsx>
-                    {`
-                        .logo {
-                            display: block;
-                            self-align: center;
-                            width: 200px;
-                            height: 50px;
-                            padding: 5px;
-                            margin-bottom: 5px;
-                        }
-
-                        @media screen and (min-width: 768px) {
-                            .logo {
-                                display: block;
-                                padding: 5px 20px;
-                            }
-                        }
-                    `}
-                </style>
-            </Fragment>
-        );
-    };
-
-    const showNav = () => (
-        <Fragment>
-            <nav className="nav-main push-right">
-                <ul className="m-0 nav-menu no-list-style">
-                    <li className="nav-menu-item">Acesso</li>
-                    <li className="nav-menu-item">Blog</li>
-                </ul>
-            </nav>
-            <style jsx>
-                {`
-                    .push-right {
-                        margin-left: auto;
-                    }
-
-                    .nav-main {
-                        display: none;
-                    }
-
-                    .nav-menu {
-                        display: flex;
-                        align-items: center;
-                        flex-flow: wrap;
-                        justify-content: flex-end;
-                    }
-
-                    .nav-menu-item {
-                        padding: 15px;
-                        font-size: 1.2em;
-                        line-height: 0.01;
-                        margin: 0 15px;
-                    }
-
-                    @media screen and (min-width: 1200px) {
-                        .nav-menu-item {
-                            margin: 0 35px;
-                        }
-                    }
-
-                    @media screen and (min-width: 768px) {
-                        .nav-main {
-                            display: block;
-                        }
-                    }
-                `}
-            </style>
-        </Fragment>
-    );
 
     return (
         <Fragment>
-            <header className="site-header">
-                {showLogo()}
-                {showNav()}
+            <header className="site-header shadow-elevation-black">
+                <Logo Link={Link} path={path} />
+                <NavMenus Link={Link} path={path} />
+                <ProfilePic />
             </header>
             <style jsx>
                 {`
                     .site-header {
                         display: flex;
                         justify-content: center;
+                        align-items: center;
                         margin: 0;
                         padding: 0;
                         background: var(--themePDark);
