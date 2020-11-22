@@ -68,7 +68,7 @@ const startWeek = startOfWeek(new Date(), { weekStartsOn: 1 });
 
 const formatSlashDMY = (newDate = new Date()) => format(newDate, "dd/MM/yyyy");
 const formatFree = (newDate = new Date(), pattern) =>
-    format(newDate, pattern, { locale: ptBR });
+    format(parseISO(newDate), pattern, { locale: ptBR });
 
 export {
     // dateFnsUtils,
