@@ -4,8 +4,8 @@ export default function DateElem({ dateString }) {
     const date = parseISO(dateString); // n1 n2 about dateTime attr
 
     return (
-        <time dateTime={dateString}>
-            {formatFree(date, "d 'de' LLLL, yyyy")}
+        <time dateTime={date}>
+            {formatFree(dateString, "d 'de' LLLL, yyyy")}
         </time>
     );
 }
