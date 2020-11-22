@@ -117,36 +117,36 @@ export default function SingleBlog({ blog = {} }) {
 
 // WARNING: VERY important: If Vercel Deploy is handling after "info  - Collecting page data..."
 // Then, check backend because can have an API issue...
-// export async function getStaticPaths() {
-//     // n3 dsadsadsa
-//     const { data } = await getAPIBack({ url: getStaticBlogPathsList() }).catch(
-//         (err) => {
-//             console.log("ERROR: " + err);
-//         }
-//     );
+export async function getStaticPaths() {
+    // n3 dsadsadsa
+    const { data } = await getAPIBack({ url: getStaticBlogPathsList() }).catch(
+        (err) => {
+            console.log("ERROR: " + err);
+        }
+    );
 
-//     const list = data && data.map((doc) => `/blog/${doc.slug}`);
+    const list = data && data.map((doc) => `/blog/${doc.slug}`);
 
-//     return {
-//         paths: list,
-//         fallback: true, // n2
-//     };
-// }
+    return {
+        paths: list,
+        fallback: true, // n2
+    };
+}
 
-// export async function getStaticProps({ params }) {
-//     const { slug } = params;
+export async function getStaticProps({ params }) {
+    const { slug } = params;
 
-//     const { data } = await getAPIBack({ url: readBlog(slug) }).catch((err) => {
-//         console.log("ERROR: " + err);
-//     });
+    const { data } = await getAPIBack({ url: readBlog(slug) }).catch((err) => {
+        console.log("ERROR: " + err);
+    });
 
-//     if (data) {
-//         return {
-//             props: { blog: data },
-//             revalidate: 1, // n1 seconds
-//         };
-//     }
-// }
+    if (data) {
+        return {
+            props: { blog: data },
+            revalidate: 1, // n1 seconds
+        };
+    }
+}
 
 /*
 

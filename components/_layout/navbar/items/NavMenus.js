@@ -25,7 +25,7 @@ export default function NavMenus({ Link, path }) {
                         <Link href="/blog">
                             <a
                                 className={`link-nav ${
-                                    path === "/blog" && "current-item"
+                                    path.includes("/blog") && "current-item"
                                 }`}
                             >
                                 Blog
