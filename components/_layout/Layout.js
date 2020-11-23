@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 import Navbar from "./navbar";
-import styles from "../layout.module.css";
 
 const name = "Luis Febro";
 export const siteTitle = "Vocariza | Memorize vocabulários para sempre";

@@ -24,7 +24,7 @@ async function getBlogMap() {
         .map((path) => {
             return `
           <url>
-            <loc>${DOMAIN_PROD}/${path}</loc>
+            <loc>${DOMAIN_PROD}/blog/${path}</loc>
             <lastmod>${getDate}</lastmod>
           </url>
         `;

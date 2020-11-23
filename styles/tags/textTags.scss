@@ -10,7 +10,7 @@
 }
 
 a {
-    color: var(--mainPurple);
+    color: var(--themeP);
     text-decoration: underline;
 }
 
@@ -19,7 +19,7 @@ a:hover {
 }
 
 a:visited {
-    color: var(--themeP);
+    color: var(--mainPurple);
 }
 
 mark {
@@ -31,6 +31,15 @@ h2 {
     font: bold 25px "Poppins", sans-serif;
     letter-spacing: 0.01em;
     color: var(--themeP);
+}
+
+h3 {
+    font: 1.5rem;
+    color: var(--themeP);
+}
+
+h3:before {
+    content: "» ";
 }
 
 // p {
@@ -62,6 +71,10 @@ h2 {
     // p {
     //     font: normal 23px "Poppins", sans-serif;
     // }
+}
+
+footer {
+    margin-top: 1em;
 }
 
 // LISTS
@@ -109,6 +122,11 @@ blockquote {
     & p {
         display: inline;
     }
+}
+
+cite {
+    font-style: normal;
+    color: var(--mainPurple);
 }
 
 /* pressed effect link exemple

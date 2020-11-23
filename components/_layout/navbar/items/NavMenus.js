@@ -16,6 +16,7 @@ export default function NavMenus({ Link, path }) {
                                 className={`link-nav ${
                                     path === "/acesso" && "current-item"
                                 }`}
+                                rel="nofollow"
                             >
                                 Acesso
                             </a>
