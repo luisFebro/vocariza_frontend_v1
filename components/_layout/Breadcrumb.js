@@ -77,12 +77,16 @@ export default function Breadcrumb({
                                     <FontAwesomeIcon
                                         icon={data.icon}
                                         className="mr-1"
+                                        style={{ fontSize: "18px" }}
                                     />
                                 )}
                                 <span itemProp="name">{data.name}</span>
                             </a>
                         </Link>
-                        <meta itemProp="position" content={ind.toString()} />
+                        <meta
+                            itemProp="position"
+                            content={(2 + ind).toString()}
+                        />
                     </li>
                     {needDelimeter && (
                         <li>
@@ -146,7 +150,11 @@ export default function Breadcrumb({
                                 itemType="http://schema.org/Thing"
                                 itemID="/"
                             >
-                                <FontAwesomeIcon icon="home" className="mr-1" />
+                                <FontAwesomeIcon
+                                    icon="home"
+                                    className="mr-1"
+                                    style={{ fontSize: "18px" }}
+                                />
                                 <span itemProp="name">início</span>
                             </a>
                         </Link>
