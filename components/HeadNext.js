@@ -27,15 +27,16 @@ const getMultiLangMeta = ({ languages, urlPath }) => {
 };
 
 export default function HeadNext({
-    metaTitle,
-    metaDesc,
+    metaTitle, // ideal maximo 60 characteres para não extrapolar limite visualização google | o termo de pesquisa para o qual você quer ranquear precisa, necessariamente, aparecer na title tag (geralmente no início ou no fim do texto do título).
+    metaDesc, // minimum 120 characteres
     mainPhoto,
     urlPath,
     languages, // e.g ["br", "en"]
     isArticle = true,
     noSEO = false,
     noIndex = false,
-    robotContent = "all",
+    robotContent,
+    postedBy = "Luis Febro",
 }) {
     const currUrl = `${DOMAIN}${urlPath}`;
     const getOpenGraphMeta = () => (
@@ -63,7 +64,10 @@ export default function HeadNext({
             {noIndex ? (
                 <meta name="robots" content="noindex" />
             ) : (
-                <meta name="robots" content={robotContent} />
+                <meta
+                    name="robots"
+                    content={`index, follow, ${robotContent}`}
+                />
             )}
         </Fragment>
     );
@@ -82,6 +86,7 @@ export default function HeadNext({
             <title>{metaTitle}</title>
             <link rel="canonical" href={currUrl} />
             <meta name="description" content={metaDesc} />
+            <meta name="author" content={postedBy} />
             {needLang && getMultiLangMeta({ languages, urlPath })}
             {getOpenGraphMeta()}
             {getRobots()}

@@ -1,7 +1,9 @@
 import { Fragment, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+
 import "../styles/App.scss"; // LESSON: do not use .module.css for global.
+import "../styles/libs/fontawesome.js";
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
@@ -36,6 +38,8 @@ function MyApp({ Component, pageProps }) {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
+
+                <meta name="creator" content="Vocariza" />
 
                 {/*TOOLBAR COLOR - requires valid HTTPS certification to work #9400d3 = purple*/}
                 <meta name="theme-color" content="#9400d3" />

@@ -6,6 +6,15 @@ import Image from "next/image";
 // import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
 
+/* former descubra for watson speech
+import dynamic from "next/dynamic";
+import Layout from "../components/_layout";
+const DynamicWatson = dynamic(() => import("../components/tts/Watson"), {
+    ssr: false,
+});
+
+ */
+
 export default function Home() {
     const Head = () => (
         <HeadNext

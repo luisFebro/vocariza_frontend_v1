@@ -6,7 +6,7 @@ import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
 import Img from "../../components/Img";
 import AuthorAndDate from "../../components/blog/AuthorAndDate";
-import Layout from "../../components/_layout";
+import Layout, { Breadcrumb } from "../../components/_layout";
 
 // NOT WORKED YET fsdfdlsfljsdjfds
 // import Layout from '../../components/Layout';
@@ -74,49 +74,11 @@ export default function SingleBlog({ blog = {} }) {
             </main>
         </Fragment>
     );
-    // const [related, setRelated] = useState([]);
-
-    // const loadRelated = () => {
-    //     listRelated({ blog }).then(data => {
-    //         if (data.error) {
-    //             console.log(data.error);
-    //         } else {
-    //             setRelated(data);
-    //         }
-    //     });
-    // };
-
-    // useEffect(() => {
-    //     loadRelated();
-    // }, []);
-
-    // const showBlogCategories = blog =>
-    //     blog.categories.map((c, i) => (
-    //         <Link key={i} href={`/categories/${c.slug}`}>
-    //             <a className="btn btn-primary mr-1 ml-1 mt-3">{c.name}</a>
-    //         </Link>
-    //     ));
-
-    // const showBlogTags = blog =>
-    //     blog.tags.map((t, i) => (
-    //         <Link key={i} href={`/tags/${t.slug}`}>
-    //             <a className="btn btn-outline-primary mr-1 ml-1 mt-3">{t.name}</a>
-    //         </Link>
-    //     ));
-
-    // const showRelatedBlog = () => {
-    //     return related.map((blog, i) => (
-    //         <div className="col-md-4" key={i}>
-    //             <article>
-    //                 <SmallCard blog={blog} />
-    //             </article>
-    //         </div>
-    //     ));
-    // };
 
     return (
         <Layout>
             {Head()}
+            <Breadcrumb mainCrumb={blog.title} />
             {showArticleTitleAndAuthor()}
             {showArticleMainContent()}
         </Layout>
@@ -158,12 +120,45 @@ export async function getStaticProps({ params }) {
 }
 
 /*
+  // const [related, setRelated] = useState([]);
 
-/*
-<article>
-    {showArticleEntry()}
-    {showArticleMainContent()}
-</article>
+    // const loadRelated = () => {
+    //     listRelated({ blog }).then(data => {
+    //         if (data.error) {
+    //             console.log(data.error);
+    //         } else {
+    //             setRelated(data);
+    //         }
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     loadRelated();
+    // }, []);
+
+    // const showBlogCategories = blog =>
+    //     blog.categories.map((c, i) => (
+    //         <Link key={i} href={`/categories/${c.slug}`}>
+    //             <a className="btn btn-primary mr-1 ml-1 mt-3">{c.name}</a>
+    //         </Link>
+    //     ));
+
+    // const showBlogTags = blog =>
+    //     blog.tags.map((t, i) => (
+    //         <Link key={i} href={`/tags/${t.slug}`}>
+    //             <a className="btn btn-outline-primary mr-1 ml-1 mt-3">{t.name}</a>
+    //         </Link>
+    //     ));
+
+    // const showRelatedBlog = () => {
+    //     return related.map((blog, i) => (
+    //         <div className="col-md-4" key={i}>
+    //             <article>
+    //                 <SmallCard blog={blog} />
+    //             </article>
+    //         </div>
+    //     ));
+    // };
  */
 
 /* COMMENTS
@@ -183,63 +178,4 @@ alternative format Object variant:
 { params: { slug: '5-vocabularios-mais-dificeis-de-pronunciar-em-ingles' } },
 
 n4: The article tag is used for wrapping an autonomous content on a page. A content is autonomous if it can be removed from the page and put on some another page. The article tag can contain several section tags inside it, like in our example. An article is actually an autonomous section.
-*/
-
-/* ARCHIVES
-<Layout>
-    <main>
-        <article>
-            <div className="container-fluid">
-                <section>
-                    <div className="row" style={{ marginTop: '-30px' }}>
-                        <img
-                            src={`${API}/blog/photo/${blog.slug}`}
-                            alt={blog.title}
-                            className="img img-fluid"
-                            style={styles.featuredImg}
-                        />
-                    </div>
-                </section>
-
-                <section>
-                    <div className="container">
-                        <h1 className="display-2 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h1>
-                        <p className="lead mt-3 mark">
-                            Written by
-                            <Link href={`/profile/${blog.postedBy.username}`}>
-                                <a>{blog.postedBy.name}</a>
-                            </Link> | Published {moment(blog.updatedAt).fromNow()}
-                        </p>
-
-                        <div className="pb-3">
-                            {showBlogCategories(blog)}
-                            {showBlogTags(blog)}
-                            <br />
-                            <br />
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div className="container">
-                <section>
-                    <div className="col-md-12 lead">{renderHTML(blog.body)}</div>
-                </section>
-            </div>
-
-            <div className="container">
-                <h4 className="text-center pt-5 pb-5 h2">Related blogs</h4>
-                <div className="row">{showRelatedBlog()}</div>
-            </div>
-
-            <div className="container pb-5">
-                <DisqusThread
-                    id={blog.id}
-                    title={blog.title}
-                    path={`/blog/${blog.slug}`}
-                />
-            </div>
-        </article>
-    </main>
-</Layout>
 */

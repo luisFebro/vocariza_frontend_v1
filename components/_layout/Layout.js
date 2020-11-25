@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 import Navbar from "./navbar";
+import Breadcrumb from "./Breadcrumb";
 
 const name = "Luis Febro";
-export const siteTitle = "Vocariza | Memorize vocabulários para sempre";
+export const siteTitle = "Vocariza | Memorize vocabulários em inglês";
+export { Breadcrumb };
 
 export default function Layout({ children, home }) {
     return (

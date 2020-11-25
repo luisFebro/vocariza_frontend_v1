@@ -4,7 +4,7 @@ class MyDocument extends Document {
     // n1 about HEAD and metatag
     render() {
         return (
-            <Html lang="pt-br">
+            <Html lang="pt-br" dir="ltr">
                 <Head />
                 <body>
                     <Main />
