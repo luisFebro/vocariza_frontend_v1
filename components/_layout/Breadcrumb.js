@@ -6,15 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const crumbStore = {
     blog: {
         name: "blogues",
-        icon: "pen-square",
     },
     vocabulario: {
         name: "vocabulários",
-        icon: "",
     },
     expressao: {
         name: "expressões",
-        icon: "",
     },
 };
 
@@ -45,12 +42,11 @@ export default function Breadcrumb({
             const isLast = ind === urlNames.length - 1;
 
             currPath += `${n}${!isLast ? "/" : ""}`;
-            const { name, icon } = getCrumbData({ n, isLast, mainCrumb });
+            const { name } = getCrumbData({ n, isLast, mainCrumb });
 
             return {
                 path: currPath,
                 name,
-                icon,
             };
         });
 
@@ -73,13 +69,6 @@ export default function Breadcrumb({
                                 itemType="http://schema.org/Thing"
                                 itemID="/"
                             >
-                                {needDelimeter && (
-                                    <FontAwesomeIcon
-                                        icon={data.icon}
-                                        className="mr-1"
-                                        style={{ fontSize: "18px" }}
-                                    />
-                                )}
                                 <span itemProp="name">{data.name}</span>
                             </a>
                         </Link>

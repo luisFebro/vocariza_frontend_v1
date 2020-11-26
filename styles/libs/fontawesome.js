@@ -5,11 +5,8 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 //ICONS n1
 import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
-// breadscrumb
-import { faPenSquare } from "@fortawesome/free-solid-svg-icons/faPenSquare";
-// end breadscrumb
 
-library.add(faHome, faPenSquare);
+library.add(faHome);
 
 export const awesomeStyle = {
     fontSize: "30px",

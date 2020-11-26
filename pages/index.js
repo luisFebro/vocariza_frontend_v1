@@ -15,6 +15,10 @@ const DynamicWatson = dynamic(() => import("../components/tts/Watson"), {
 
  */
 
+/* INSIGHT FROM GOOGLE TRENDS
+Frases e Palavras são mais populares do que Vocabulários e Expressões.
+ */
+
 export default function Home() {
     const Head = () => (
         <HeadNext
@@ -30,7 +34,7 @@ export default function Home() {
         <Layout home>
             {Head()}
             <section>
-                <h1>Memorize Vocabulários para sempre</h1>
+                <h1>Memorize palavras e frases em inglês</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Image src="/img/logo-name.png" width="200" height="100%" />
                 </div>
