@@ -1,13 +1,14 @@
 const { API } = require("../config");
 // URLs ONLY
 
-// LESSON: the folder api will run on server making es6 syntax incorrect for curr nodejs.
-// Then it was renamed to api-front.
-
 // BLOG
 exports.readBlog = (slug) => `${API}/blog/${slug}`;
 exports.getStaticBlogPathsList = () => `${API}/blog/list/paths`;
 // END BLOG
+
+// VOCAB
+exports.getVocabData = () => `${API}/voca/create`;
+// END VOCAB
 
 // TTS
 exports.getTTSData = () => `${API}/voca/tts/data`;

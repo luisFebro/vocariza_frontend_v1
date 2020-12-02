@@ -1,15 +1,19 @@
 import DateElem from "../DateElem";
+import Img from "../Img";
 
 export default function AuthorAndDate({ author, updatedAt }) {
     return (
         <section>
             <div className="animated fadeInUp delay-2s my-2 container-center">
-                <img
-                    width={80}
-                    height={80}
-                    src="/img/me.jpg"
-                    className="profile-img shadow-elevation"
-                />
+                <div className="shadow-elevation">
+                    <Img
+                        width={80}
+                        height={80}
+                        src="/img/me.jpg"
+                        alt="foto de perfil"
+                        className="profile-img"
+                    />
+                </div>
                 <div className="ml-3 delay-2s">
                     <p className="text-small line-height">
                         <strong className="text-purple">Por: </strong>
@@ -27,7 +31,13 @@ export default function AuthorAndDate({ author, updatedAt }) {
                     .line-height {
                         line-height: 5px;
                     }
-                    .profile-img {
+
+                    .img-wrap {
+                        position: relative;
+                        width: 80px;
+                        height: 80px;
+                    }
+                    :global(.profile-img) {
                         border-radius: 50%;
                     }
                 `}

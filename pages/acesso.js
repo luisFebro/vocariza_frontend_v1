@@ -1,7 +1,7 @@
 import Layout from "../components/_layout";
 import Head from "../components/HeadNext";
 
-export default function acesso() {
+export default function Access() {
     return (
         <Layout>
             <Head noSEO={true} />

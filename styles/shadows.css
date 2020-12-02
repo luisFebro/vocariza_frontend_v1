@@ -8,10 +8,19 @@
     filter: drop-shadow(0.001em 0.001em 0.15em var(--mainDark));
 }
 
+/* from babadoo project */
 .shadow-elevation {
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.2), 0 15px 12px rgba(0, 0, 0, 0.12); /* from babadoo project */
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.2), 0 15px 12px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-elevation-shape {
+    filter: drop-shadow(0 19px 25px rgba(0, 0, 0, 0.3))
+        drop-shadow(0 15px 12px rgba(0, 0, 0, 0.13));
+}
+
+.shadow-elevation-deep {
     /*recommendaded only squared pictures, cards and static square shapes*/
-    /*box-shadow: 0 31px 120px -6px rgba(0, 0, 0, 0.35);*/
+    box-shadow: 0 31px 120px -6px rgba(0, 0, 0, 0.35);
 }
 
 .icon-shadow {

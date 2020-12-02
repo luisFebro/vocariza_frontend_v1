@@ -39,7 +39,35 @@ main {
 }
 
 figure {
-    margin: 1em 40px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.2), 0 15px 12px rgba(0, 0, 0, 0.12);
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+figure img {
+    display: block;
+}
+
+figcaption {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid grey;
+    position: absolute;
+    padding: 0px 10px;
+    color: grey;
+    line-height: 10px;
+    font: normal 0.9em var(--mainFont);
+    bottom: -70px;
+    margin: 0 1rem 2rem;
+}
+
+@media screen and (min-width: 500px) {
+    figcaption {
+        bottom: -55px;
+        max-width: 100%;
+    }
 }
 
 hr {

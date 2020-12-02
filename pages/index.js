@@ -2,18 +2,12 @@ import HeadNext from "../components/HeadNext";
 import Layout, { siteTitle } from "../components/_layout";
 import Link from "next/link";
 import Image from "next/image";
+
+// LESSON: page's name should be in camelcase format otherwise fast refresh won't work.
+
 // import { getSortedPostsData } from "../demo/lib/posts";
 // import Date from "../components/demo/date";
 // import styles from '../styles/Home.module.css'
-
-/* former descubra for watson speech
-import dynamic from "next/dynamic";
-import Layout from "../components/_layout";
-const DynamicWatson = dynamic(() => import("../components/tts/Watson"), {
-    ssr: false,
-});
-
- */
 
 /* INSIGHT FROM GOOGLE TRENDS
 Frases e Palavras são mais populares do que Vocabulários e Expressões.

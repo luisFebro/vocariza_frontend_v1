@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useEffect, Fragment } from "react";
-import { getAPIBack } from "../../api-front/getAPIBack";
-import { readBlog, getStaticBlogPathsList } from "../../api-front/requestsLib";
+import { getAPIBack } from "../../api/getAPIBack";
+import { readBlog, getStaticBlogPathsList } from "../../api/requestsLib";
 import HeadNext from "../../components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly.
 import Img from "../../components/Img";
@@ -51,14 +51,14 @@ export default function SingleBlog({ blog = {} }) {
                 </h1>
                 <AuthorAndDate author="Luis Febro" updatedAt={blog.updatedAt} />
             </section>
-            <section>
-                <Img
-                    src={"/img/blog/7-pronounce.jpg"}
-                    alt={blog.title}
-                    height={400}
-                    width="100%"
-                />
-            </section>
+            <Img
+                src={"/img/blog/7-pronounce.jpg"}
+                alt={blog.title}
+                layout="fill"
+                priority={true}
+                figcaption="5 palavras difíceis que todos tem dificuldade"
+                needFigure={true}
+            />
         </Fragment>
     );
 

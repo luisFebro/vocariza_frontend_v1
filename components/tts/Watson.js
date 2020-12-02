@@ -1,5 +1,5 @@
 import WatsonSpeech from "watson-speech";
-import getAPI, { getTTSData } from "../../api-front/getAPI";
+import getAPI, { getTTSData } from "../../api/getAPI";
 
 export default function Watson() {
     const runTTS = async () => {
