@@ -56,7 +56,7 @@ export default function SingleBlog({ blog = {} }) {
                 alt={blog.title}
                 layout="fill"
                 priority={true}
-                figcaption="5 palavras difíceis que todos tem dificuldade"
+                figcaption=""
                 needFigure={true}
             />
         </Fragment>
