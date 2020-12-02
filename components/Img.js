@@ -5,7 +5,7 @@ export default function Img({
     src,
     height, // integer
     width, // integer n5
-    alt, // the title is the same now
+    alt,
     title, // n8 do not use alt as the same as title
     layout = "intrinsic", // n6
     id,

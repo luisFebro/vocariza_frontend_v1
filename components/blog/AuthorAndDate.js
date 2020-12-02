@@ -5,7 +5,7 @@ export default function AuthorAndDate({ author, updatedAt }) {
     return (
         <section>
             <div className="animated fadeInUp delay-2s my-2 container-center">
-                <div className="shadow-elevation">
+                <div className="shadow-elevation-shape">
                     <Img
                         width={80}
                         height={80}
