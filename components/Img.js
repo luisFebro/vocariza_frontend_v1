@@ -15,7 +15,6 @@ export default function Img({
     priority = false, // n4
     quality = 75, // n1
     sizes, // for dataSrc
-    // advanced props
     unoptimized = false,
     // objectFit, // only used along with layout=fill n7
     // objectPosition, // not recognized by react DOM only used along with layout=fill n3

@@ -5,8 +5,12 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 //ICONS n1
 import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
+// snackbar
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
 
-library.add(faHome);
+library.add(faHome, faCheckCircle, faInfoCircle, faExclamationCircle);
 
 export const awesomeStyle = {
     fontSize: "30px",

@@ -1,6 +1,7 @@
 import { default as useFetcher } from "swr";
+import { useState } from "react";
 import axios from "axios";
-const { API } = require("../config");
+import getId from "../utils/getId";
 export * from "./requestsLib";
 // import { chooseHeader } from "../utils/server/getHeaders";
 
@@ -13,8 +14,10 @@ export default function useSWR({
     timeout = 3000,
     trigger = true,
     updateOnFocus = false,
+    needNanoId = false, // for renrendering
 }) {
     if (!url) throw new Error("url is required!");
+    const [error, setError] = useState(false);
 
     const getConfig = (url) => ({
         url,
@@ -24,7 +27,20 @@ export default function useSWR({
         // headers: chooseHeader({ token, needAuth }),
     });
 
-    const fetcher = (url) => axios(getConfig(url)).then((res) => res.data);
+    const fetcher = (url, trigger) => {
+        if (!trigger) return;
+        return axios(getConfig(url))
+            .then((res) => {
+                setError(false);
+                return res.data;
+            })
+            .catch((e) => {
+                const id = getId();
+                setError(
+                    `${e.response.data.error}${needNanoId ? `ID:${id}` : ""}`
+                );
+            });
+    };
 
     const swrOptions = {
         loadingTimeout: timeout, // timeout to trigger the onLoadingSlow event
@@ -44,9 +60,9 @@ export default function useSWR({
 
     const thisUrl = trigger ? url : null;
 
-    const res = useFetcher(thisUrl, fetcher, swrOptions);
+    const res = useFetcher([thisUrl, trigger], fetcher, swrOptions);
 
-    return { ...res, isLoading: !res.error && !res.data }; // { data, error, isValidating, mutate }
+    return { ...res, isLoading: !error && !res.data, error }; // { data, error, isValidating, mutate }
 }
 
 /* COMMENTS
@@ -74,3 +90,11 @@ And the UI will be always fast and reactive.
 If you need to use one request in several comps:
 The most beautiful thing is that there will be only 1 request sent to the API, because they use the same SWR key and the request is deduped, cached and shared automatically.
  */
+
+/* ARCHIVES
+const [thisUrl, setThisUrl] = useState(null);
+useEffect(() => {
+    if(trigger) setThisUrl(url)
+}, [trigger, url])
+
+*/
