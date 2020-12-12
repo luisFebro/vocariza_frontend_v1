@@ -7,7 +7,9 @@ exports.getStaticBlogPathsList = () => `${API}/blog/list/paths`;
 // END BLOG
 
 // VOCAB
-exports.getVocabData = () => `${API}/voca/create`;
+exports.createVoca = () => `${API}/voca/create`; // post
+exports.getVocaData = () => `${API}/voca/data`; // get
+
 // END VOCAB
 
 // TTS
