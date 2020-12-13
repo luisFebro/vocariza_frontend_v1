@@ -1,5 +1,5 @@
-import Layout from "../components/_layout";
-import Head from "../components/HeadNext";
+import Layout from "components/_layout";
+import Head from "components/HeadNext";
 
 export default function Access() {
     return (

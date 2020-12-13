@@ -1,5 +1,5 @@
-import DateElem from "../DateElem";
-import Img from "../Img";
+import DateElem from "components/DateElem";
+import Img from "components/Img";
 
 export default function AuthorAndDate({ author, updatedAt }) {
     return (
