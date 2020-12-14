@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, Fragment } from "react";
 import HeadNext from "components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly. import Img from "../../components/Img";
-import AuthorAndDate from "./lib/comps/AuthorAndDate";
+import AuthorAndDate from "./lib/AuthorAndDate";
 import Layout, { Breadcrumb } from "components/_layout";
 import Img from "components/Img";
 

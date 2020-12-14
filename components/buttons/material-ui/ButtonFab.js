@@ -1,11 +1,5 @@
 import React, { useState, Fragment } from "react";
 import Fab from "@material-ui/core/Fab";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import HowToRegIcon from "@material-ui/icons/HowToReg";
-import { buttonFabType } from "../../../types";
-
-ButtonFab.propTypes = buttonFabType;
 
 export const muStyle = {
     transform: "scale(1.2)",
@@ -36,18 +30,22 @@ const handleBtnShadow = (shadowColor, custom) => {
 
 // NEED CHANGE ICON TO FONT AWESOME TOBE MORE FLEXIBLE
 export default function ButtonFab({
-    variant,
-    position,
-    size,
+    // main
+    title = "button title",
+    onClick,
+    variant = "extended", // extended or round
+    size = "large", // small, medium, large
+    color = "var(--themeS)",
+    backgroundColor = "var(--themeP)",
+    // endmain
+    position = "relative",
     top,
     right,
     bottom,
     left,
-    color,
     fontSize,
     fontSizeTxt,
     fontWeight,
-    backgroundColor,
     iconMu,
     iconFontAwesome,
     toggleStatus,
@@ -56,10 +54,8 @@ export default function ButtonFab({
     iconMarginLeft,
     iconFontSize,
     needIconShadow = true,
-    onClick,
     shadowColor,
     shadowColorCustom,
-    title,
     titleSize,
     id,
     textTransform,
@@ -79,9 +75,9 @@ export default function ButtonFab({
             marginLeft: iconMarginLeft,
         },
         fab: {
-            fontWeight: fontWeight,
-            fontSize: fontSize,
-            position: position || "absolute",
+            fontWeight,
+            fontSize,
+            position,
             top,
             left,
             bottom,
@@ -90,8 +86,7 @@ export default function ButtonFab({
             width,
             height,
             outline: "none",
-            color: color || "var(--mainWhite)",
-            backgroundColor: backgroundColor || "#4834d4",
+            backgroundColor,
             filter:
                 needBtnShadow &&
                 handleBtnShadow(shadowColor, shadowColorCustom),
@@ -127,58 +122,36 @@ export default function ButtonFab({
         </i>
     );
 
-    const handleToggle = () => {
-        if (toggle) {
-            setToggle("");
-        } else {
-            setToggle(toggleStatus);
-        }
-    };
-
-    const isClickFunc = typeof onClick === "function";
-
-    const handleOnClick = () => {
-        if (iconAfterClick && needClickAndToggle) {
-            handleToggle();
-            if (isClickFunc) onClick();
-        } else if (iconAfterClick) {
-            handleToggle();
-        } else {
-            return false;
-        }
-    };
-
     return (
         <Fab
             id={id}
-            variant={variant || "round"}
-            onClick={() =>
-                handleOnClick() === false
-                    ? isClickFunc && onClick()
-                    : handleOnClick()
-            }
+            variant={variant}
+            onClick={onClick}
             onMouseOver={onMouseOver}
-            size={size || "small"}
+            size={size}
             aria-label={title}
             style={styles.fab}
             disabled={disabled}
         >
-            {typeof title !== "string" && typeof title !== "undefined" ? (
-                <Fragment>{title}</Fragment>
-            ) : (
-                <span
-                    className={`${
-                        needTxtNoWrap ? "text-nowrap" : ""
-                    } d-flex align-self-items text-shadow ${
-                        titleSize ? `text-${titleSize}` : "text-normal"
-                    } font-weight-bold`}
-                    style={{ textTransform: textTransform || "capitalize" }}
-                >
-                    {title}
-                    {showIcon(iconFontAwesome)}
-                    {showMuIcon(iconMu)}
-                </span>
-            )}
+            <span
+                className={`btn-txt ${
+                    needTxtNoWrap ? "text-nowrap" : ""
+                } d-flex align-self-items text-shadow ${
+                    titleSize ? `text-${titleSize}` : "text-normal"
+                } font-weight-bold`}
+                style={{ textTransform: textTransform || "capitalize" }}
+            >
+                {title}
+                {iconFontAwesome && showIcon(iconFontAwesome)}
+                {iconMu && showMuIcon(iconMu)}
+            </span>
+            <style jsx>
+                {`
+                    .btn-txt {
+                        color: ${color};
+                    }
+                `}
+            </style>
         </Fab>
     );
 }

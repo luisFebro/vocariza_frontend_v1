@@ -17,6 +17,7 @@
         "next": "^10.0.1",
         "react": "17.0.1",
         "react-dom": "17.0.1",
+        "react-grid-layout": "^1.2.0",
         "react-render-html": "^0.6.0",
         "sass": "^1.29.0",
         "swr": "^0.3.9",
