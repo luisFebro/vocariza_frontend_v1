@@ -4,8 +4,9 @@ export const getSteps = () => {
     const [currStep, setCurrStep] = useState("definition");
     const [globalData, setGlobalData] = useState({
         vocaEn: "",
-        vocaBR: "",
-        wordData: [],
+        vocaBr: "",
+        wordData: null,
+        sortedDataList: [],
     });
 
     const store = {

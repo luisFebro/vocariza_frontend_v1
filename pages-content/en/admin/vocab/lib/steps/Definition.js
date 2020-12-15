@@ -1,7 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
-import GridLayout from "react-grid-layout";
+import DraggableGrid from "components/DraggableGrid";
 
 const WordCard = ({ wordData, key }) => (
     <Fragment>
@@ -9,9 +9,21 @@ const WordCard = ({ wordData, key }) => (
             <div className="position-relative board">
                 <strong>{wordData.partOfSpeech}</strong>
             </div>
-            <div className="position-relative text-left card">
-                Definition: <strong>{wordData.definition}</strong>
-            </div>
+            <section className="card">
+                <div className="position-relative text-left">
+                    Definition: <strong>{wordData.definition}</strong>
+                </div>
+                <div className="position-relative text-left">
+                    Examples: {!wordData.examples && "no examples"}
+                    {wordData.examples && (
+                        <ul>
+                            {wordData.examples.map((elem) => (
+                                <li>{elem}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </section>
         </section>
         <style jsx global>
             {`
@@ -33,76 +45,88 @@ const WordCard = ({ wordData, key }) => (
 export default function Definition() {
     const {
         setCurrStep,
-        globalData: { vocaBr, vocaEn, wordData },
+        globalData: { vocaBr, vocaEn, wordData = {}, sortedDataList = [] },
+        setGlobalData,
     } = useContext();
 
-    const gotWordData = Boolean(wordData && wordData.length);
+    const gotWordData = Boolean(wordData);
+    const mainData = gotWordData && wordData.treatedWordData;
+    useEffect(() => {
+        if (!mainData) return;
 
-    const layout = [
-        { i: "1", x: 0, y: 0, w: 1, h: 2 },
-        { i: "2", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-        { i: "3", x: 4, y: 0, w: 1, h: 2 },
-    ];
+        setGlobalData((prev) => ({
+            ...prev,
+            sortedDataList: mainData,
+        }));
+    }, [mainData]);
 
-    const list = [{ color: "blue" }, { color: "pink" }, { color: "red" }];
+    const ultimateList =
+        gotWordData &&
+        mainData.map((item) => (
+            <div
+                style={{
+                    cursor: "grab",
+                }}
+                key={item.definition}
+                data-grid={{ i: item.definition, x: 0, y: 0, w: 4, h: 2 }} // use y to check the current dropped position from each element
+            >
+                <WordCard wordData={item} />
+            </div>
+        ));
+
+    const getLayoutResult = (res) => {
+        setGlobalData((prev) => ({
+            ...prev,
+            sortedDataList: res,
+        }));
+    };
+
+    console.log("sortedDataList", sortedDataList);
 
     const showList = () => (
-        <section className="mx-3 my-3 container-center">
-            <GridLayout
-                className="layout"
-                layout={layout}
-                cols={1}
-                rowHeight={60}
-                width={500}
-            >
-                {list.map((l, ind) => (
-                    <div
-                        style={{
-                            color: "#fff",
-                            backgroundColor: l.color,
-                            cursor: "grab",
-                        }}
-                        key={ind}
-                    >
-                        {l.color}
-                    </div>
-                ))}
-            </GridLayout>
-            <style jsx global>
-                {`
-                    .react-grid-layout {
-                        display: flex;
-                        justify-content: center;
-                    }
-                `}
-            </style>
-        </section>
+        <DraggableGrid
+            reactList={ultimateList}
+            rawData={mainData}
+            getLayoutResult={getLayoutResult}
+            targetElem="definition"
+        />
     );
+
+    const getPartsOfSpeech = () => {
+        return (
+            gotWordData &&
+            wordData.allSpeeches.map((part, ind) => {
+                const isLast = wordData.allSpeeches.length === ind + 1;
+                return `${part}${!isLast ? ", " : "."}`;
+            })
+        );
+    };
 
     return (
         <Fragment>
-            <div className="text-subtitle font-weight-bold text-center">
-                {vocaEn} ({vocaBr})
-            </div>
-            <p className="text-center">
-                Parts of Speech:{" "}
-                <strong>{gotWordData && wordData.allSpeeches}</strong>
-            </p>
+            {gotWordData ? (
+                <div className="text-subtitle font-weight-bold text-center">
+                    {vocaEn} ({vocaBr})
+                </div>
+            ) : (
+                <div className="text-subtitle font-weight-bold text-center">
+                    No data.
+                </div>
+            )}
+            {gotWordData && (
+                <p className="text-center">
+                    Parts of Speech: <strong>{getPartsOfSpeech()}</strong>
+                </p>
+            )}
             {gotWordData && showList()}
             <div className="my-5">
                 <CTAs
-                    onClickNext={() => setCurrStep("examples")}
+                    onClickNext={
+                        gotWordData ? () => setCurrStep("examples") : null
+                    }
                     onClickBack={() => setCurrStep("translation")}
                 />
             </div>
         </Fragment>
     );
 }
-
-/*
-{wordData.map((data, ind) => (
-    <Fragment key={data.definition}>
-        <WordCard wordData={data} key={ind} />
-    </Fragment>
-))}
- */

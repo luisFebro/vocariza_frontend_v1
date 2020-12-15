@@ -6,11 +6,11 @@ export default function CTAs({ onClickBack, onClickNext }) {
         <section className="container-center">
             {onClickBack && (
                 <div className="mr-3">
-                    <ButtonLink title="voltar" onClick={onClickBack} />
+                    <ButtonLink title="back" onClick={onClickBack} />
                 </div>
             )}
             {onClickNext && (
-                <ButtonFab title="continuar" onClick={onClickNext} />
+                <ButtonFab title="continue" onClick={onClickNext} />
             )}
         </section>
     );

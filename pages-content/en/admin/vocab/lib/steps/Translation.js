@@ -30,7 +30,7 @@ export default function Translation() {
         setGlobalData({
             vocaBr: vocabData.vocaBr,
             vocaEn: newVocab,
-            wordData: vocabData.treatedWordData,
+            wordData: vocabData,
         });
     }, [vocabData, newVocab]);
 
