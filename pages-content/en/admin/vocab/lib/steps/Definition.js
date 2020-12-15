@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
 import DraggableGrid from "components/DraggableGrid";
-
+//fs
 const WordCard = ({ wordData, key }) => (
     <Fragment>
         <section key={key} className="my-3 root-card position-relative">
