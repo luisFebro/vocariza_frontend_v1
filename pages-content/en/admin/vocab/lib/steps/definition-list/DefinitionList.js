@@ -62,6 +62,24 @@ export default function DefinitionList() {
 }
 
 /*
+const ultimateList = useMemo(() => {
+    return new Array(mainData.length).fill(undefined).map((val, ind) => {
+      return(
+       <div
+           style={{
+               cursor: "grab",
+           }}
+           key={mainData[ind].definition}
+           data-grid={{ i: mainData[ind].definition, x: 0, y: 0, w: 4, h: 2 }} // use y to check the current dropped position from each element
+       >
+           <DefinitionCard wordData={mainData[ind]} ind={ind} />
+       </div>
+      );
+    });
+  }, [mainData.length]);
+ */
+
+/*
  const [skip, setSkip] = useState(0);
     const { businessId } = useAppSystem();
 

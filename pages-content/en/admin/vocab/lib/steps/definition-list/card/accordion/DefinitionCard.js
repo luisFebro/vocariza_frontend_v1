@@ -41,7 +41,7 @@ export default function DefinitionCard({ wordData, ind }) {
                     <div className="delete-btn">
                         <ButtonFab
                             variant="round"
-                            size="small"
+                            size="extra-small"
                             backgroundColor="var(--expenseRed)"
                             faIcon={<FontAwesomeIcon icon="trash-alt" />}
                             onClick={(e) => removeItem(e, ind)}

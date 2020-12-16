@@ -34,7 +34,7 @@ export default function ButtonFab({
     title,
     onClick,
     variant = "extended", // extended or round
-    size = "large", // small, medium, large
+    size = "large", // extra-small, small, medium, large
     color = "var(--themeS)",
     backgroundColor = "var(--themeP)",
     muIcon,
@@ -98,9 +98,9 @@ export default function ButtonFab({
         if (faIcon && typeof faIcon !== "string") {
             return (
                 <i
-                    className={`${variant === "extended" && "ml-2"} ${
+                    className={`${variant === "extended" ? "ml-2" : ""} ${
                         needIconShadow ? "icon-shadow" : ""
-                    }`}
+                    } d-flex align-self-center`}
                 >
                     {toggle ? iconAfterClick : faIcon}
                 </i>
@@ -123,38 +123,69 @@ export default function ButtonFab({
         </i>
     );
 
+    const istTinySize = size === "extra-small" || size === "nano";
+
     return (
-        <Fab
-            id={id}
-            variant={variant}
-            onClick={onClick}
-            onMouseOver={onMouseOver}
-            onMouseDown={onMouseDown}
-            onTouchStart={onTouchStart}
-            size={size}
-            aria-label={title}
-            style={styles.fab}
-            disabled={disabled}
-        >
-            <span
-                className={`btn-txt ${
-                    needTxtNoWrap ? "text-nowrap" : ""
-                } d-flex align-self-items text-shadow ${
-                    titleSize ? `text-${titleSize}` : "text-normal"
-                } font-weight-bold`}
-                style={{ textTransform: textTransform || "capitalize" }}
+        <Fragment>
+            <Fab
+                id={id}
+                variant={variant}
+                onClick={onClick}
+                className={istTinySize ? size : ""}
+                onMouseOver={onMouseOver}
+                onMouseDown={onMouseDown}
+                onTouchStart={onTouchStart}
+                size={istTinySize ? "small" : size}
+                aria-label={title}
+                style={styles.fab}
+                disabled={disabled}
             >
-                {title}
-                {faIcon && showIcon(faIcon)}
-                {muIcon && showMuIcon(muIcon)}
-            </span>
-            <style jsx>
+                <span
+                    className={`btn-txt ${
+                        needTxtNoWrap ? "text-nowrap" : ""
+                    } text-shadow ${
+                        titleSize ? `text-${titleSize}` : "text-normal"
+                    } font-weight-bold`}
+                    style={{ textTransform: textTransform || "capitalize" }}
+                >
+                    {title}
+                    {faIcon && showIcon(faIcon)}
+                    {muIcon && showMuIcon(muIcon)}
+                </span>
+            </Fab>
+            <style jsx global>
                 {`
                     .btn-txt {
                         color: ${color};
                     }
+
+                    .extra-small.MuiFab-sizeSmall {
+                        width: 32px;
+                        height: 32px;
+                    }
+
+                    .extra-small.MuiFab-root {
+                        min-height: 0px;
+                    }
+
+                    .extra-small svg {
+                        height: 0.85em !important;
+                    }
+
+                    .nano.MuiFab-sizeSmall {
+                        width: 25px;
+                        height: 25px;
+                    }
+
+                    .nano.MuiFab-root {
+                        min-height: 0px;
+                    }
+
+                    .nano svg {
+                        height: 0.7em !important;
+                    }
                 `}
             </style>
-        </Fab>
+        </Fragment>
     );
 }
