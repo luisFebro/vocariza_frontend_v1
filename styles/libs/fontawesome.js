@@ -9,8 +9,20 @@ import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
+//
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt"; // delete btn
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons/faTimesCircle"; // closing btn
 
-library.add(faHome, faCheckCircle, faInfoCircle, faExclamationCircle);
+library.add(
+    faHome,
+    faCheckCircle,
+    faInfoCircle,
+    faExclamationCircle,
+    faTrashAlt,
+    faPlus,
+    faTimesCircle
+);
 
 export const awesomeStyle = {
     fontSize: "30px",

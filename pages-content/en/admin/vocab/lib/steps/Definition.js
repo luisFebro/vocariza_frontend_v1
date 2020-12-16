@@ -1,96 +1,15 @@
 import { Fragment, useEffect } from "react";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
-import DraggableGrid from "components/DraggableGrid";
-//fs
-const WordCard = ({ wordData, key }) => (
-    <Fragment>
-        <section key={key} className="my-3 root-card position-relative">
-            <div className="position-relative board">
-                <strong>{wordData.partOfSpeech}</strong>
-            </div>
-            <section className="card">
-                <div className="position-relative text-left">
-                    Definition: <strong>{wordData.definition}</strong>
-                </div>
-                <div className="position-relative text-left">
-                    Examples: {!wordData.examples && "no examples"}
-                    {wordData.examples && (
-                        <ul>
-                            {wordData.examples.map((elem) => (
-                                <li>{elem}</li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </section>
-        </section>
-        <style jsx global>
-            {`
-                .root-card {
-                    width: 500px;
-                }
-
-                .card {
-                    border-radius: 20px;
-                    padding: 10px 15px;
-                    background-color: var(--mainPurple);
-                    color: #fff;
-                }
-            `}
-        </style>
-    </Fragment>
-);
+import DefinitionList from "./definition-list/DefinitionList";
 
 export default function Definition() {
     const {
         setCurrStep,
         globalData: { vocaBr, vocaEn, wordData = {}, sortedDataList = [] },
-        setGlobalData,
     } = useContext();
 
     const gotWordData = Boolean(wordData);
-    const mainData = gotWordData && wordData.treatedWordData;
-    useEffect(() => {
-        if (!mainData) return;
-
-        setGlobalData((prev) => ({
-            ...prev,
-            sortedDataList: mainData,
-        }));
-    }, [mainData]);
-
-    const ultimateList =
-        gotWordData &&
-        mainData.map((item) => (
-            <div
-                style={{
-                    cursor: "grab",
-                }}
-                key={item.definition}
-                data-grid={{ i: item.definition, x: 0, y: 0, w: 4, h: 2 }} // use y to check the current dropped position from each element
-            >
-                <WordCard wordData={item} />
-            </div>
-        ));
-
-    const getLayoutResult = (res) => {
-        setGlobalData((prev) => ({
-            ...prev,
-            sortedDataList: res,
-        }));
-    };
-
-    console.log("sortedDataList", sortedDataList);
-
-    const showList = () => (
-        <DraggableGrid
-            reactList={ultimateList}
-            rawData={mainData}
-            getLayoutResult={getLayoutResult}
-            targetElem="definition"
-        />
-    );
 
     const getPartsOfSpeech = () => {
         return (
@@ -104,21 +23,34 @@ export default function Definition() {
 
     return (
         <Fragment>
-            {gotWordData ? (
-                <div className="text-subtitle font-weight-bold text-center">
-                    {vocaEn} ({vocaBr})
-                </div>
-            ) : (
+            {!gotWordData ? (
                 <div className="text-subtitle font-weight-bold text-center">
                     No data.
                 </div>
+            ) : (
+                <section className="mx-3">
+                    <section className="container-center">
+                        <div className="text-pill d-table text-subtitle font-weight-bold text-center">
+                            {vocaEn} ({vocaBr})
+                        </div>
+                    </section>
+                    <h2 className="text-center">
+                        <strong>{sortedDataList.length}</strong> definitions
+                        found.
+                    </h2>
+                    <h3 className="text-sm-left text-md-center">
+                        Parts of Speech:
+                        <br />
+                        <span className="text-normal font-weight-normal">
+                            {getPartsOfSpeech()}
+                        </span>
+                    </h3>
+                    <p className="text-center">
+                        Drag and drop to arrange definitions below
+                    </p>
+                    <DefinitionList />
+                </section>
             )}
-            {gotWordData && (
-                <p className="text-center">
-                    Parts of Speech: <strong>{getPartsOfSpeech()}</strong>
-                </p>
-            )}
-            {gotWordData && showList()}
             <div className="my-5">
                 <CTAs
                     onClickNext={

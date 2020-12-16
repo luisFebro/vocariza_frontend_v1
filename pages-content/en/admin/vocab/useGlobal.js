@@ -1,6 +1,7 @@
+// GLOBAL STATES FOR THE CURRENT MAIN ROOT COMPONENT.
 import { useState } from "react";
 
-export const getSteps = () => {
+export default function useGlobal() {
     const [currStep, setCurrStep] = useState("definition");
     const [globalData, setGlobalData] = useState({
         vocaEn: "",
@@ -17,4 +18,4 @@ export const getSteps = () => {
     };
 
     return store;
-};
+}

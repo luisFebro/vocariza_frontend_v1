@@ -18,7 +18,7 @@ export const faStyleSmall = {
 
 const handleBtnShadow = (shadowColor, custom) => {
     if (shadowColor) {
-        return `drop-shadow(.001em .15em .2em ${shadowColor})`;
+        return `drop-shadow(.001em .15em .1em ${shadowColor})`;
     }
 
     if (custom) {
@@ -31,13 +31,18 @@ const handleBtnShadow = (shadowColor, custom) => {
 // NEED CHANGE ICON TO FONT AWESOME TOBE MORE FLEXIBLE
 export default function ButtonFab({
     // main
-    title = "button title",
+    title,
     onClick,
     variant = "extended", // extended or round
     size = "large", // small, medium, large
     color = "var(--themeS)",
     backgroundColor = "var(--themeP)",
+    muIcon,
+    faIcon,
     // endmain
+    onMouseOver,
+    onMouseDown,
+    onTouchStart,
     position = "relative",
     top,
     right,
@@ -46,22 +51,18 @@ export default function ButtonFab({
     fontSize,
     fontSizeTxt,
     fontWeight,
-    iconMu,
-    iconFontAwesome,
     toggleStatus,
     iconAfterClick = null,
     needClickAndToggle = false,
     iconMarginLeft,
     iconFontSize,
-    needIconShadow = true,
+    needIconShadow,
     shadowColor,
     shadowColorCustom,
     titleSize,
     id,
     textTransform,
     needTxtNoWrap,
-    needBtnShadow,
-    onMouseOver,
     zIndex,
     width,
     height,
@@ -88,37 +89,37 @@ export default function ButtonFab({
             outline: "none",
             backgroundColor,
             filter:
-                needBtnShadow &&
+                (shadowColor || shadowColorCustom) &&
                 handleBtnShadow(shadowColor, shadowColorCustom),
         },
     };
 
-    const showIcon = (iconFontAwesome) => {
-        if (iconFontAwesome && typeof iconFontAwesome !== "string") {
+    const showIcon = (faIcon) => {
+        if (faIcon && typeof faIcon !== "string") {
             return (
                 <i
                     className={`${variant === "extended" && "ml-2"} ${
                         needIconShadow ? "icon-shadow" : ""
                     }`}
                 >
-                    {toggle ? iconAfterClick : iconFontAwesome}
+                    {toggle ? iconAfterClick : faIcon}
                 </i>
             );
         }
 
         return (
-            iconFontAwesome && (
+            faIcon && (
                 <i
                     style={styles.icon}
-                    className={toggle ? iconAfterClick : iconFontAwesome}
+                    className={toggle ? iconAfterClick : faIcon}
                 ></i>
             )
         );
     };
 
-    const showMuIcon = (iconMu) => (
+    const showMuIcon = (muIcon) => (
         <i className={`${variant === "extended" && "ml-2"} icon-shadow`}>
-            {iconMu}
+            {muIcon}
         </i>
     );
 
@@ -128,6 +129,8 @@ export default function ButtonFab({
             variant={variant}
             onClick={onClick}
             onMouseOver={onMouseOver}
+            onMouseDown={onMouseDown}
+            onTouchStart={onTouchStart}
             size={size}
             aria-label={title}
             style={styles.fab}
@@ -142,8 +145,8 @@ export default function ButtonFab({
                 style={{ textTransform: textTransform || "capitalize" }}
             >
                 {title}
-                {iconFontAwesome && showIcon(iconFontAwesome)}
-                {iconMu && showMuIcon(iconMu)}
+                {faIcon && showIcon(faIcon)}
+                {muIcon && showMuIcon(muIcon)}
             </span>
             <style jsx>
                 {`

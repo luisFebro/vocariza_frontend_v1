@@ -2,6 +2,12 @@
     text-align: left !important;
 }
 
+.text-justify {
+    text-align: justify !important;
+    /*text-align: left;
+    word-spacing: 4px;*/
+}
+
 .text-right {
     text-align: right !important;
 }
@@ -56,4 +62,16 @@
     .text-xl-center {
         text-align: center !important;
     }
+}
+
+.text-lowercase {
+    text-transform: lowercase !important;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.text-capitalize {
+    text-transform: capitalize !important;
 }
