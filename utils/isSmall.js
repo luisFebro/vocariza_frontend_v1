@@ -1,4 +1,6 @@
-export default function isSmallScreen(customWidth) {
+// Check if screen is small
+
+export default function isSmall(customWidth) {
     const width =
         window.innerWidth ||
         document.documentElement.clientWidth ||

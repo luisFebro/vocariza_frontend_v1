@@ -48,3 +48,15 @@
 .font-weight-normal {
     font-weight: normal !important;
 }
+
+.text-modal {
+    font: bolder 25px "Poppins", sans-serif;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .text-modal {
+        font: bolder 35px "Poppins", sans-serif;
+    }
+}

@@ -5,6 +5,8 @@ import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "global/Context";
 import DefinitionMoreBtn from "./more-btn/DefinitionMoreBtn";
+import truncate from "utils/string/truncate";
+import isSmall from "utils/isSmall";
 // import ToggleBtn from "./ToggleBtn";
 // import "./Accordion.scss";
 
@@ -49,7 +51,7 @@ export default function DefinitionCard({ wordData, ind }) {
                     </div>
                 )}
                 <div className="more-btn">
-                    <DefinitionMoreBtn />
+                    <DefinitionMoreBtn data={wordData} />
                 </div>
                 <div className="position-relative board">
                     <strong>{wordData.partOfSpeech}</strong>
@@ -57,7 +59,7 @@ export default function DefinitionCard({ wordData, ind }) {
                 <section className="card">
                     <div className="position-relative">
                         <strong>Definition: </strong>
-                        {wordData.definition}
+                        {truncate(wordData.definition, isSmall() ? 40 : 70)}
                     </div>
                     <div className="position-relative mt-2">
                         <strong>
@@ -114,8 +116,14 @@ export default function DefinitionCard({ wordData, ind }) {
                     .delete-btn {
                         position: absolute;
                         top: -5px;
-                        left: 85px;
+                        left: 70px;
                         z-index: 1000;
+                    }
+
+                    @media screen and (min-width: 768px) {
+                        .delete-btn {
+                            left: 85px;
+                        }
                     }
 
                     .more-btn {

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export default function useGlobal() {
-    const [currStep, setCurrStep] = useState("definition");
+    const [currStep, setCurrStep] = useState("translation");
     const [globalData, setGlobalData] = useState({
         vocaEn: "",
         vocaBr: "",

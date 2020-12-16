@@ -10,7 +10,7 @@ const AsyncDefinitionContent = Dynamic(() =>
     )
 );
 
-export default function DefinitionMoreBtn() {
+export default function DefinitionMoreBtn({ data }) {
     const [fullOpen, setFullOpen] = useState(false);
 
     const stopPropagation = (event) => {
@@ -19,13 +19,14 @@ export default function DefinitionMoreBtn() {
 
     const handleFullOpen = (e) => {
         stopPropagation(e);
-        console.log("HITTT FULL OPNE");
         setFullOpen(true);
     };
 
     const handleFullClose = () => {
         setFullOpen(false);
     };
+
+    const AsyncComp = <AsyncDefinitionContent data={data} />;
 
     return (
         <section>
@@ -39,7 +40,7 @@ export default function DefinitionMoreBtn() {
                 onTouchStart={handleFullOpen}
             />
             <FullModal
-                contentComp={<AsyncDefinitionContent />}
+                contentComp={AsyncComp}
                 fullOpen={fullOpen}
                 setFullOpen={handleFullClose}
             />

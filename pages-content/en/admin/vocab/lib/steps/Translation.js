@@ -46,10 +46,12 @@ export default function Translation() {
             </p>
             <section className="my-3 container-center">
                 <div className="text-center translation-card">
-                    <p className="m-0 p-3 font-size text-em-1-4">
+                    <p className="text-white m-0 p-3 font-size text-em-1-4">
                         Best Translation
                     </p>
-                    <p className="m-0 px-3 text-title">{vocabData.vocaBr}</p>
+                    <p className="text-white m-0 px-3 text-title">
+                        {vocabData.vocaBr}
+                    </p>
                 </div>
             </section>
             <style jsx>
