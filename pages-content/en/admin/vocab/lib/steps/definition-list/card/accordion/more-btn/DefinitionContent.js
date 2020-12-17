@@ -80,7 +80,7 @@ export default function DefinitionContent({ data }) {
                     height={20}
                     alt="american flag"
                 />{" "}
-                {data.definition}
+                {data.definition.en}
             </p>
             {translationOn && (
                 <p className="animated fadeInUp slow">
@@ -90,7 +90,7 @@ export default function DefinitionContent({ data }) {
                         height={20}
                         alt="brazilian flag"
                     />{" "}
-                    {data.definition}
+                    {data.definition.en}
                 </p>
             )}
 
@@ -106,7 +106,7 @@ export default function DefinitionContent({ data }) {
                                     height={20}
                                     alt="american flag"
                                 />{" "}
-                                {e}
+                                {e.en}
                             </li>
                             {translationOn && (
                                 <li className="animated fadeInUp slow">
@@ -116,7 +116,7 @@ export default function DefinitionContent({ data }) {
                                         height={20}
                                         alt="brazilian flag"
                                     />{" "}
-                                    {e}
+                                    {e.en}
                                 </li>
                             )}
                             <span className="ml-3 d-inline-block">
@@ -142,7 +142,7 @@ export default function DefinitionContent({ data }) {
                                     height={20}
                                     alt="american flag"
                                 />{" "}
-                                {s}
+                                {s.en}
                             </li>
                             {translationOn && (
                                 <li className="animated fadeInUp slow">
@@ -152,7 +152,7 @@ export default function DefinitionContent({ data }) {
                                         height={20}
                                         alt="brazilian flag"
                                     />{" "}
-                                    {s}
+                                    {s.en}
                                 </li>
                             )}
                             <span className="ml-3 d-inline-block">
@@ -178,7 +178,7 @@ export default function DefinitionContent({ data }) {
                                     height={20}
                                     alt="american flag"
                                 />{" "}
-                                {a}
+                                {a.en}
                             </li>
                             {translationOn && (
                                 <li className="animated fadeInUp slow">
@@ -188,7 +188,7 @@ export default function DefinitionContent({ data }) {
                                         height={20}
                                         alt="brazilian flag"
                                     />{" "}
-                                    {a}
+                                    {a.en}
                                 </li>
                             )}
                             <span className="ml-3 d-inline-block">

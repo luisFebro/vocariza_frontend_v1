@@ -37,8 +37,8 @@ export default function DefinitionList() {
                 style={{
                     cursor: "grab",
                 }}
-                key={item.definition}
-                data-grid={{ i: item.definition, x: 0, y: 0, w: 4, h: 2 }} // use y to check the current dropped position from each element
+                key={item.definition.en}
+                data-grid={{ i: item.definition.en, x: 0, y: 0, w: 4, h: 2 }} // use y to check the current dropped position from each element
             >
                 <DefinitionCard wordData={item} ind={ind} />
             </div>

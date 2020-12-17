@@ -32,10 +32,10 @@ export default function Translation() {
 
     useEffect(() => {
         if (!vocabData || !newVocab) return;
-        const { frequencyLevel, vocaBr } = vocabData;
+        const { frequencyLevel, mainBr } = vocabData;
 
         setGlobalData({
-            vocaBr,
+            vocaBr: mainBr,
             vocaEn: newVocab,
             frequencyLevel,
             wordData: vocabData,
@@ -50,7 +50,7 @@ export default function Translation() {
     const showTranslationResult = () => (
         <main className="animated fadeInUp">
             <p className="my-3 text-center text-normal">
-                {handlePronounceDelimiters(vocabData.pronounce.en)}
+                {handlePronounceDelimiters(vocabData.mainPronounce.en)}
             </p>
             <section className="my-3 container-center">
                 <div className="text-center translation-card">
@@ -65,7 +65,7 @@ export default function Translation() {
                         Best Translation:
                     </p>
                     <p className="text-white m-0 px-3 text-title">
-                        {vocabData.vocaBr}
+                        {vocabData.mainBr}
                     </p>
                     <p className="text-white text-small">
                         Frequency: {frequencyLevel}

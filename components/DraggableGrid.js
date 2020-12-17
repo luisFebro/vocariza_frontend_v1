@@ -18,7 +18,7 @@ export default function DraggableGrid({
         const finalLayout = sortArray(treatedLayout, { target: "pos" }); // [{"pos":0,"ind":"pink"},{"pos":2,"ind":"blue"},{"pos":4,"ind":"red"}]
 
         const res = finalLayout.map((elemLay) =>
-            rawData.find((elemRaw) => elemRaw[targetElem] === elemLay.i)
+            rawData.find((elemRaw) => elemRaw[targetElem].en === elemLay.i)
         );
         getLayoutResult(res);
     };

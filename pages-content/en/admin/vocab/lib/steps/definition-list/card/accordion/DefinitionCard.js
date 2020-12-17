@@ -54,12 +54,12 @@ export default function DefinitionCard({ wordData, ind }) {
                     <DefinitionMoreBtn data={wordData} />
                 </div>
                 <div className="position-relative board">
-                    <strong>{wordData.partOfSpeech}</strong>
+                    <strong>{wordData.partOfSpeech.en}</strong>
                 </div>
                 <section className="card">
                     <div className="position-relative">
                         <strong>Definition: </strong>
-                        {truncate(wordData.definition, isSmall() ? 40 : 70)}
+                        {truncate(wordData.definition.en, isSmall() ? 40 : 70)}
                     </div>
                     <div className="position-relative mt-2">
                         <strong>
@@ -69,13 +69,13 @@ export default function DefinitionCard({ wordData, ind }) {
                                 !wordData.antonyms &&
                                 "nothing"}
                         </strong>
-                        {wordData.examples
+                        {wordData.examples && wordData.examples.length
                             ? `♦ ${wordData.examples.length} examples. `
                             : ""}
-                        {wordData.synonyms
+                        {wordData.synonyms && wordData.synonyms.length
                             ? `♦ ${wordData.synonyms.length} synonyms. `
                             : ""}
-                        {wordData.antonyms
+                        {wordData.antonyms && wordData.antonyms.length
                             ? `♦ ${wordData.antonyms.length} antonyms.`
                             : ""}
                     </div>
