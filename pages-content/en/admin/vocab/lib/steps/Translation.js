@@ -6,9 +6,14 @@ import getId from "utils/getId";
 import { handlePronounceDelimiters } from "./helpers";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
+import Img from "components/Img";
 
 export default function Translation() {
-    const { setCurrStep, setGlobalData } = useContext();
+    const {
+        setCurrStep,
+        setGlobalData,
+        globalData: { frequencyLevel },
+    } = useContext();
 
     const [trigger, setTrigger] = useState(false);
     const [data, setData] = useState({
@@ -27,9 +32,12 @@ export default function Translation() {
 
     useEffect(() => {
         if (!vocabData || !newVocab) return;
+        const { frequencyLevel, vocaBr } = vocabData;
+
         setGlobalData({
-            vocaBr: vocabData.vocaBr,
+            vocaBr,
             vocaEn: newVocab,
+            frequencyLevel,
             wordData: vocabData,
         });
     }, [vocabData, newVocab]);
@@ -47,10 +55,20 @@ export default function Translation() {
             <section className="my-3 container-center">
                 <div className="text-center translation-card">
                     <p className="text-white m-0 p-3 font-size text-em-1-4">
-                        Best Translation
+                        <Img
+                            src="/img/icons/flags/br.svg"
+                            width={70}
+                            height={30}
+                            alt="brazilian flag"
+                        />
+                        <br />
+                        Best Translation:
                     </p>
                     <p className="text-white m-0 px-3 text-title">
                         {vocabData.vocaBr}
+                    </p>
+                    <p className="text-white text-small">
+                        Frequency: {frequencyLevel}
                     </p>
                 </div>
             </section>
@@ -83,15 +101,33 @@ export default function Translation() {
             )}
             {error && <Snackbar txt={error} type="error" />}
             {vocabData && (
-                <Fragment>
+                <section className="container-result">
                     {showTranslationResult()}
-                    <CTAs
-                        onClickNext={() => {
-                            setCurrStep("definition");
-                        }}
-                    />
-                </Fragment>
+                    <div className="mb-5 mb-md-0 ml-md-5">
+                        <CTAs
+                            onClickNext={() => {
+                                setCurrStep("definition");
+                            }}
+                        />
+                    </div>
+                </section>
             )}
+            <style jsx>
+                {`
+                    .container-result {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-flow: column wrap;
+                    }
+
+                    @media screen and (min-width: 768px) {
+                        .container-result {
+                            flex-flow: row wrap;
+                        }
+                    }
+                `}
+            </style>
         </Fragment>
     );
 }

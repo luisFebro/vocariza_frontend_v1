@@ -39,6 +39,7 @@ export default function ButtonFab({
     backgroundColor = "var(--themeP)",
     muIcon,
     faIcon,
+    imgIcon, // using img tag
     // endmain
     onMouseOver,
     onMouseDown,
@@ -141,7 +142,7 @@ export default function ButtonFab({
                 disabled={disabled}
             >
                 <span
-                    className={`btn-txt ${
+                    className={`btn-txt ${imgIcon ? "d-flex" : ""} ${
                         needTxtNoWrap ? "text-nowrap" : ""
                     } text-shadow ${
                         titleSize ? `text-${titleSize}` : "text-normal"
@@ -151,6 +152,9 @@ export default function ButtonFab({
                     {title}
                     {faIcon && showIcon(faIcon)}
                     {muIcon && showMuIcon(muIcon)}
+                    {imgIcon && (
+                        <span className="d-inline-block ml-1">{imgIcon}</span>
+                    )}
                 </span>
             </Fab>
             <style jsx global>
@@ -183,6 +187,16 @@ export default function ButtonFab({
 
                     .nano svg {
                         height: 0.7em !important;
+                    }
+
+                    @media screen and (min-width: 768px) {
+                        .extra-small svg {
+                            height: 0.65em !important;
+                        }
+
+                        .nano svg {
+                            height: 0.5em !important;
+                        }
                     }
                 `}
             </style>

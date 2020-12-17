@@ -1,11 +1,15 @@
 // GLOBAL STATES FOR THE CURRENT MAIN ROOT COMPONENT.
 import { useState } from "react";
+import { useContext } from "global/Context";
 
 export default function useGlobal() {
     const [currStep, setCurrStep] = useState("translation");
     const [globalData, setGlobalData] = useState({
         vocaEn: "",
         vocaBr: "",
+        mainDefinition: "",
+        frequencyLevel: "",
+        dirtyLevel: "",
         wordData: null,
         sortedDataList: [],
     });

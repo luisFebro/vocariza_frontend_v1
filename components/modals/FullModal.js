@@ -2,6 +2,7 @@ import Dialog from "@material-ui/core/Dialog";
 import ButtonLink from "components/buttons/material-ui/ButtonLink";
 import CloseBtn from "components/buttons/CloseBtn";
 import RadiusBtn from "components/buttons/RadiusBtn";
+import { useEffect } from "react";
 
 const getStyles = ({ needIndex }) => ({
     // assign as false when you need to open other modals above this component like calendar dialog
@@ -32,6 +33,13 @@ export default function FullModal({
         setFullOpen((prevStatus) => !prevStatus);
     };
 
+    // Attempt to avoid body to scrolling when modal is open.
+    // useEffect(() => {
+    //     if(fullOpen) {
+    //         document.body.style.height = "100%";
+    //     }
+    // }, [fullOpen]);
+
     return (
         <Dialog
             PaperProps={{
@@ -39,6 +47,7 @@ export default function FullModal({
                     backgroundColor: backgroundColor || "var(--mainWhite)",
                     maxWidth: "500px",
                     overflowX: "hidden",
+                    zIndex: 1000,
                 },
             }}
             maxWidth="md"

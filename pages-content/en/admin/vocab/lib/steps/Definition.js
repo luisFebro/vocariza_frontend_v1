@@ -6,7 +6,13 @@ import DefinitionList from "./definition-list/DefinitionList";
 export default function Definition() {
     const {
         setCurrStep,
-        globalData: { vocaBr, vocaEn, wordData = {}, sortedDataList = [] },
+        globalData: {
+            vocaBr,
+            vocaEn,
+            frequencyLevel,
+            wordData = {},
+            sortedDataList = [],
+        },
     } = useContext();
 
     const gotWordData = Boolean(wordData);
@@ -30,8 +36,13 @@ export default function Definition() {
             ) : (
                 <section className="mx-3">
                     <section className="container-center">
-                        <div className="text-pill d-table text-subtitle font-weight-bold text-center">
-                            {vocaEn} ({vocaBr})
+                        <div className="root-word-title">
+                            <div className="text-pill d-table text-subtitle font-weight-bold text-center">
+                                {vocaEn} ({vocaBr})
+                            </div>
+                            <p className="position-relative text-small mb-0 text-capitalize">
+                                {frequencyLevel}
+                            </p>
                         </div>
                     </section>
                     <h2 className="text-center">
@@ -45,10 +56,26 @@ export default function Definition() {
                             {getPartsOfSpeech()}
                         </span>
                     </h3>
-                    <p className="text-center">
-                        Drag and drop to arrange definitions below
-                    </p>
+                    <ul>
+                        <li>
+                            Drag and drop to arrange definitions below by the{" "}
+                            <em>level of meaning's quality</em>
+                        </li>
+                        <li>
+                            <em>Generate translation</em> from each one or
+                            delete uncommon definitions instead
+                        </li>
+                    </ul>
                     <DefinitionList />
+                    <style jsx>
+                        {`
+                            .root-word-title p {
+                                font-weight: bold;
+                                top: -10px;
+                                text-align: right;
+                            }
+                        `}
+                    </style>
                 </section>
             )}
             <div className="my-5">

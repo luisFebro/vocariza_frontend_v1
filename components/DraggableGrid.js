@@ -52,7 +52,7 @@ export default function DraggableGrid({
                 {`
                     .grid-container {
                         width: 500px;
-                        margin: 3rem 1rem;
+                        margin: 0rem 1rem 3rem;
                     }
 
                     .layout div {

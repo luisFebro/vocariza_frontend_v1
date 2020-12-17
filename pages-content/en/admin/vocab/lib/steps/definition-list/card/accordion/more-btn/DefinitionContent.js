@@ -1,24 +1,31 @@
+import { Fragment, useState } from "react";
 import { useContext } from "global/Context";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Img from "components/Img";
 
 export default function DefinitionContent({ data }) {
+    const [translationOn, setTranslationOn] = useState(false);
+
     const {
         globalData: { vocaEn, vocaBr },
     } = useContext();
+
+    const handleTranslateAll = () => {
+        // request to translate this definitio chunk
+        setTranslationOn(true);
+    };
 
     const showCTAs = (options) => {
         const { disableDelete } = options;
 
         return (
-            <section
-                className={`${!disableDelete && "d-flex"} content-item-ctas`}
-            >
+            <section className="content-item-ctas">
                 {!disableDelete && (
                     <ButtonFab
                         variant="round"
                         faIcon={<FontAwesomeIcon icon="pencil-alt" />}
-                        size="extra-small"
+                        size="nano"
                         onClick={null}
                     />
                 )}
@@ -26,7 +33,7 @@ export default function DefinitionContent({ data }) {
                     <ButtonFab
                         variant="round"
                         faIcon={<FontAwesomeIcon icon="trash-alt" />}
-                        size={disableDelete ? "nano" : "extra-small"}
+                        size="nano"
                         backgroundColor="var(--expenseRed)"
                         onClick={null}
                     />
@@ -34,20 +41,13 @@ export default function DefinitionContent({ data }) {
                 <style jsx>
                     {`
                         .content-item-ctas {
-                            position: ${disableDelete
-                                ? "relative"
-                                : "absolute"};
-                            top: ${disableDelete ? "" : "-25px"};
-                            ${disableDelete ? "left: -10px" : "right: 0px;"}
+                            display: flex;
+                            align-items: center;
                         }
                     `}
                 </style>
             </section>
         );
-    };
-
-    const handleTranslateAll = () => {
-        //
     };
 
     return (
@@ -60,21 +60,70 @@ export default function DefinitionContent({ data }) {
                 <ButtonFab
                     title="Translate all"
                     size="medium"
+                    imgIcon={
+                        <Img
+                            src="/img/icons/flags/br.svg"
+                            width={40}
+                            height={20}
+                            alt="brazilian flag"
+                        />
+                    }
                     onClick={handleTranslateAll}
                 />
             </div>
 
             <h3>Definition:</h3>
-            <p>{data.definition}</p>
+            <p>
+                <Img
+                    src="/img/icons/flags/us.svg"
+                    width={40}
+                    height={20}
+                    alt="american flag"
+                />{" "}
+                {data.definition}
+            </p>
+            {translationOn && (
+                <p className="animated fadeInUp slow">
+                    <Img
+                        src="/img/icons/flags/br.svg"
+                        width={40}
+                        height={20}
+                        alt="brazilian flag"
+                    />{" "}
+                    {data.definition}
+                </p>
+            )}
 
             <h3>Examples:</h3>
             {data.examples ? (
                 <ul>
                     {data.examples.map((e) => (
-                        <li className="d-inline-block position-relative">
-                            {e}
-                            {showCTAs({})}
-                        </li>
+                        <Fragment>
+                            <li>
+                                <Img
+                                    src="/img/icons/flags/us.svg"
+                                    width={40}
+                                    height={20}
+                                    alt="american flag"
+                                />{" "}
+                                {e}
+                            </li>
+                            {translationOn && (
+                                <li className="animated fadeInUp slow">
+                                    <Img
+                                        src="/img/icons/flags/br.svg"
+                                        width={40}
+                                        height={20}
+                                        alt="brazilian flag"
+                                    />{" "}
+                                    {e}
+                                </li>
+                            )}
+                            <span className="ml-3 d-inline-block">
+                                {showCTAs({})}
+                            </span>
+                            <hr className="lazer-purple" />
+                        </Fragment>
                     ))}
                 </ul>
             ) : (
@@ -85,12 +134,32 @@ export default function DefinitionContent({ data }) {
             {data.synonyms ? (
                 <ul>
                     {data.synonyms.map((s) => (
-                        <li className="position-relative">
-                            <span className="d-inline-block">
+                        <Fragment>
+                            <li>
+                                <Img
+                                    src="/img/icons/flags/us.svg"
+                                    width={40}
+                                    height={20}
+                                    alt="american flag"
+                                />{" "}
+                                {s}
+                            </li>
+                            {translationOn && (
+                                <li className="animated fadeInUp slow">
+                                    <Img
+                                        src="/img/icons/flags/br.svg"
+                                        width={40}
+                                        height={20}
+                                        alt="brazilian flag"
+                                    />{" "}
+                                    {s}
+                                </li>
+                            )}
+                            <span className="ml-3 d-inline-block">
                                 {showCTAs({ disableDelete: true })}
                             </span>
-                            {s} (inteligência)
-                        </li>
+                            <hr className="lazer-purple" />
+                        </Fragment>
                     ))}
                 </ul>
             ) : (
@@ -101,12 +170,32 @@ export default function DefinitionContent({ data }) {
             {data.antonyms ? (
                 <ul>
                     {data.antonyms.map((a) => (
-                        <li className="position-relative">
-                            <span className="d-inline-block">
+                        <Fragment>
+                            <li>
+                                <Img
+                                    src="/img/icons/flags/us.svg"
+                                    width={40}
+                                    height={20}
+                                    alt="american flag"
+                                />{" "}
+                                {a}
+                            </li>
+                            {translationOn && (
+                                <li className="animated fadeInUp slow">
+                                    <Img
+                                        src="/img/icons/flags/br.svg"
+                                        width={40}
+                                        height={20}
+                                        alt="brazilian flag"
+                                    />{" "}
+                                    {a}
+                                </li>
+                            )}
+                            <span className="ml-3 d-inline-block">
                                 {showCTAs({ disableDelete: true })}
                             </span>
-                            {a} (inteligência)
-                        </li>
+                            <hr className="lazer-purple" />
+                        </Fragment>
                     ))}
                 </ul>
             ) : (
