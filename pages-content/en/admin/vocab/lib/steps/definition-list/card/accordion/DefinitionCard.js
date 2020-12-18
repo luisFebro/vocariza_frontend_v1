@@ -29,6 +29,42 @@ export default function DefinitionCard({ wordData, ind }) {
         });
     };
 
+    const showDeleteBtn = () => (
+        <ButtonFab
+            variant="round"
+            position="absolute"
+            right="-10px"
+            top="25px"
+            size="extra-small"
+            backgroundColor="var(--expenseRed)"
+            faIcon={<FontAwesomeIcon icon="trash-alt" />}
+            onClick={(e) => removeItem(e, ind)}
+            onMouseDown={(e) => removeItem(e, ind)}
+            onTouchStart={(e) => removeItem(e, ind)}
+        />
+    );
+
+    const showTranslatedBadge = () => (
+        <Fragment>
+            <p className="badge-translated text-small">Translated</p>
+            <style jsx>
+                {`
+                    .badge-translated {
+                        position: absolute;
+                        font-weight: bold;
+                        bottom: -50px;
+                        right: 50px;
+                        color: #000;
+                        background: var(--incomeGreen);
+                        border-radius: 20px;
+                        border: 3px solid var(--themeP);
+                        padding: 1px 5px;
+                    }
+                `}
+            </style>
+        </Fragment>
+    );
+
     return (
         <Fragment>
             <section className="my-3 root-card position-relative">
@@ -37,19 +73,8 @@ export default function DefinitionCard({ wordData, ind }) {
                 ) : (
                     <p className="main-badge sec">Secondary N.º {ind + 1}</p>
                 )}
-                {ind !== 0 && (
-                    <div className="delete-btn">
-                        <ButtonFab
-                            variant="round"
-                            size="extra-small"
-                            backgroundColor="var(--expenseRed)"
-                            faIcon={<FontAwesomeIcon icon="trash-alt" />}
-                            onClick={(e) => removeItem(e, ind)}
-                            onMouseDown={(e) => removeItem(e, ind)}
-                            onTouchStart={(e) => removeItem(e, ind)}
-                        />
-                    </div>
-                )}
+                {ind !== 0 && showDeleteBtn()}
+                {wordData.definition.br && showTranslatedBadge()}
                 <div className="more-btn">
                     <DefinitionMoreBtn data={wordData} />
                 </div>
@@ -86,6 +111,7 @@ export default function DefinitionCard({ wordData, ind }) {
                     .root-card {
                         width: 100%;
                         height: 140px !important;
+                        position: relative;
                     }
 
                     .card {
@@ -111,19 +137,6 @@ export default function DefinitionCard({ wordData, ind }) {
                     .main-badge.sec {
                         background: var(--mainWhite);
                         border-radius: 20px;
-                    }
-
-                    .delete-btn {
-                        position: absolute;
-                        top: -5px;
-                        left: 70px;
-                        z-index: 1000;
-                    }
-
-                    @media screen and (min-width: 768px) {
-                        .delete-btn {
-                            left: 85px;
-                        }
                     }
 
                     .more-btn {

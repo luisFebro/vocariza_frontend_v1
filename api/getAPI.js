@@ -1,3 +1,4 @@
+// use getAPIBack instead in next.js since it is server rendered.
 import { chooseHeader } from "../utils/server/getHeaders";
 // import { logout } from "../redux/actions/authActions";
 import axios from "axios";

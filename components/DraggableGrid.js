@@ -10,7 +10,7 @@ export default function DraggableGrid({
     targetElem, // target elem from the array list to be sorted
 }) {
     const handleLayout = (layout) => {
-        // layout response example, y indfinalLayouticates the current position: [{"w":4,"h":2,"x":0,"y":2,"i":"blue","moved":false,"static":false},{"w":4,"h":2,"x":0,"y":0,"i":"pink","moved":false,"static":false},{"w":4,"h":2,"x":0,"y":4,"i":"red","moved":false,"static":false}]
+        // layout response example, y ind finalLayout indicates the current position: [{"w":4,"h":2,"x":0,"y":2,"i":"blue","moved":false,"static":false},{"w":4,"h":2,"x":0,"y":0,"i":"pink","moved":false,"static":false},{"w":4,"h":2,"x":0,"y":4,"i":"red","moved":false,"static":false}]
         const treatedLayout = layout.map((elem) => ({
             pos: elem.y,
             i: elem.i,
@@ -39,7 +39,7 @@ export default function DraggableGrid({
                     layout={null}
                     width={500}
                     rowHeight={50}
-                    margin={[0, 40]}
+                    margin={[0, 60]}
                     isResizable={false}
                     isDraggable={true}
                     useCSSTransforms={true} // Uses CSS3 translate() instead of position top/left. This makes about 6x faster paint performance

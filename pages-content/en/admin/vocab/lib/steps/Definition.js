@@ -2,18 +2,15 @@ import { Fragment, useEffect } from "react";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
 import DefinitionList from "./definition-list/DefinitionList";
+import useScrollUp from "hooks/scroll/useScrollUp";
 
 export default function Definition() {
     const {
         setCurrStep,
-        globalData: {
-            vocaBr,
-            vocaEn,
-            frequencyLevel,
-            wordData = {},
-            sortedDataList = [],
-        },
+        globalData: { vocaBr, vocaEn, frequencyLevel, wordData = {} },
     } = useContext();
+
+    useScrollUp();
 
     const gotWordData = Boolean(wordData);
 
@@ -46,8 +43,8 @@ export default function Definition() {
                         </div>
                     </section>
                     <h2 className="text-center">
-                        <strong>{sortedDataList.length}</strong> definitions
-                        found.
+                        <strong>{wordData.treatedWordData.length}</strong>{" "}
+                        definitions found.
                     </h2>
                     <h3 className="text-sm-left text-md-center">
                         Parts of Speech:

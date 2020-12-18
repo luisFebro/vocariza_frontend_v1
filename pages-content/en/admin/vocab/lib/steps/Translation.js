@@ -7,6 +7,8 @@ import { handlePronounceDelimiters } from "./helpers";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
 import Img from "components/Img";
+import Dynamic from "components/Dynamic";
+import runWatson from "utils/tts/runWatson";
 
 export default function Translation() {
     const {
@@ -64,7 +66,12 @@ export default function Translation() {
                         <br />
                         Best Translation:
                     </p>
-                    <p className="text-white m-0 px-3 text-title">
+                    <p
+                        onClick={async () =>
+                            await runWatson({ text: vocabData.mainEn })
+                        }
+                        className="text-white m-0 px-3 text-title"
+                    >
                         {vocabData.mainBr}
                     </p>
                     <p className="text-white text-small">

@@ -1,5 +1,5 @@
 import SinglePage from "pages-content/blog/SingleBlog";
-import { getAPIBack } from "api/getAPIBack";
+import getAPIBack from "api/getAPIBack";
 import { readBlog, getStaticBlogPathsList } from "api/requestsLib";
 
 export default SinglePage;

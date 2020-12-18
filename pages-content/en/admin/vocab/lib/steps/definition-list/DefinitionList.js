@@ -13,14 +13,14 @@ export default function DefinitionList() {
 
     const mainData = gotWordData && wordData.treatedWordData;
 
-    useEffect(() => {
-        if (!mainData) return;
+    // useEffect(() => {
+    //     if (!mainData) return;
 
-        setGlobalData((prev) => ({
-            ...prev,
-            sortedDataList: mainData,
-        }));
-    }, [mainData]);
+    //     setGlobalData((prev) => ({
+    //         ...prev,
+    //         sortedDataList: mainData,
+    //     }));
+    // }, [mainData]);
 
     useEffect(() => {
         if (!sortedDataList.length) return;

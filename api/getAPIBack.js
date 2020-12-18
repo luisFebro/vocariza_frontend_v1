@@ -5,7 +5,7 @@ const axios = require("axios");
 const token = "123"; //localStorage.getItem("token");
 
 // complete promise for inline and programatically requests
-exports.getAPIBack = (options = {}) => {
+const getAPIBack = (options = {}) => {
     const {
         url,
         method = "get",
@@ -71,6 +71,8 @@ exports.getAPIBack = (options = {}) => {
 
     return new Promise(axiosPromise);
 };
+
+module.exports = getAPIBack;
 
 // Alternative
 //fetchUsers(data)

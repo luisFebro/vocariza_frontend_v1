@@ -1,7 +1,7 @@
 const fs = require("fs");
 const globby = require("globby");
 const { DOMAIN_PROD } = require("../../../config");
-const { getAPIBack } = require("../../../api/getAPIBack");
+const getAPIBack = require("../../../api/getAPIBack");
 const { getStaticBlogPathsList } = require("../../../api/requestsLib");
 
 const getDate = new Date().toISOString();
