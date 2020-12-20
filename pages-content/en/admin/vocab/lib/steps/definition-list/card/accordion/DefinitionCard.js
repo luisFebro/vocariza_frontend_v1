@@ -86,12 +86,15 @@ export default function DefinitionCard({ wordData, ind }) {
                         <strong>Definition: </strong>
                         {truncate(wordData.definition.en, isSmall() ? 40 : 70)}
                     </div>
-                    <div className="position-relative mt-2">
+                    <div className="text-small position-relative mt-2">
                         <strong>
                             Found:{" "}
-                            {!wordData.examples &&
-                                !wordData.synonyms &&
-                                !wordData.antonyms &&
+                            {wordData.examples &&
+                                !wordData.examples.length &&
+                                wordData.synonyms &&
+                                !wordData.synonyms.length &&
+                                wordData.antonyms &&
+                                !wordData.antonyms.length &&
                                 "nothing"}
                         </strong>
                         {wordData.examples && wordData.examples.length

@@ -14,6 +14,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt"; // de
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons/faTimesCircle"; // closing btn
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons/faPencilAlt";
+import { faVolumeUp } from "@fortawesome/free-solid-svg-icons/faVolumeUp";
 
 library.add(
     faHome,
@@ -23,7 +24,8 @@ library.add(
     faTrashAlt,
     faPlus,
     faTimesCircle,
-    faPencilAlt
+    faPencilAlt,
+    faVolumeUp
 );
 
 export const awesomeStyle = {

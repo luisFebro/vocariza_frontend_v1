@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     close: {
         padding: theme.spacing(0.5),
+        color: "#fff",
     },
     //colors
     success: {
@@ -83,7 +84,10 @@ export default function Snackbar({ txt, type = "warning", duration = 3000 }) {
     };
 
     const MsgComp = (
-        <span id="message-id" className={`text-normal ${classes.message}`}>
+        <span
+            id="message-id"
+            className={`text-normal text-white ${classes.message}`}
+        >
             <div style={styles.msg}>{variantIcon[type]}</div>
             {msg}
         </span>

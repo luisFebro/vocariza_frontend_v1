@@ -11,7 +11,6 @@ export default function useGlobal() {
         frequencyLevel: "",
         dirtyLevel: "",
         wordData: null,
-        sortedDataList: [],
     });
 
     const store = {

@@ -50,14 +50,17 @@ export default function FullModal({
                     zIndex: 1000,
                 },
             }}
+            onClick={(event) => event.stopPropagation()}
+            onScroll={(event) => event.stopPropagation()}
             maxWidth="md"
             fullWidth
             style={styles.root}
             fullScreen={true}
             open={handleOpen()}
+            disableBackdropClick={true}
+            onExit={null} // Callback fired before the dialog exits.
             aria-labelledby="form-dialog-title"
             className={`${animatedClass || ""}`}
-            onScroll={null}
         >
             {contentComp}
             {exitBtn === "text" ? (

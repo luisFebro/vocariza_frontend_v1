@@ -5,6 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Img from "components/Img";
 import getAPIBack from "api/getAPIBack";
 import { getVocaTranslated } from "api/requestsLib";
+import Field from "components/fields/Field";
+import { setUpdatedEditData } from "./helpers";
+
+const updateGlobalData = async ({ setGlobalData, config }) => {
+    return await setGlobalData((prev) => ({
+        ...prev,
+        wordData: {
+            ...prev.wordData,
+            treatedWordData: setUpdatedEditData(
+                prev.wordData.treatedWordData,
+                config
+            ),
+        },
+    }));
+};
 
 export default function DefinitionContent({ data }) {
     const [translationOn, setTranslationOn] = useState(
@@ -16,13 +31,36 @@ export default function DefinitionContent({ data }) {
         setGlobalData,
     } = useContext();
 
+    const [edit, setEdit] = useState({
+        currEdit: "",
+        currVal: "",
+        currId: "", // same as currVal. the diff is it is changing to identify and make the change in the array of data
+        isArray: false,
+        isDelete: false,
+        elemId: "",
+        lang: "en",
+    });
+    const { currVal, currId, currEdit, lang, isDelete } = edit;
+
+    const restart = () => {
+        setEdit({
+            currEdit: "",
+            currVal: "",
+            currId: "", // same as currVal. the diff is it is changing to identify and make the change in the array of data
+            isArray: false,
+            isDelete: false,
+            elemId: "",
+            lang: "en",
+        });
+    };
+
     const handleTranslateAll = async () => {
         const body = data;
 
         const { data: translated } = await getAPIBack({
             method: "post",
             url: getVocaTranslated(),
-            body: data,
+            body,
         });
         const sortedTranslated = wordData.treatedWordData.map((item) => {
             if (translated.definition.en === item.definition.en) {
@@ -32,29 +70,57 @@ export default function DefinitionContent({ data }) {
             return item;
         });
 
-        (async () => {
-            await setGlobalData((prev) => ({
-                ...prev,
-                wordData: {
-                    ...prev.wordData,
-                    treatedWordData: sortedTranslated,
-                },
-            }));
-            setTranslationOn(true);
-        })();
+        await setGlobalData((prev) => ({
+            ...prev,
+            wordData: {
+                ...prev.wordData,
+                treatedWordData: sortedTranslated,
+            },
+        }));
+
+        setTranslationOn(true);
+    };
+
+    const handleEditDone = async () => {
+        await updateGlobalData({ setGlobalData, config: edit });
+        if (translationOn && lang === "en") {
+            await handleTranslateAll();
+        }
+        restart();
     };
 
     const showCTAs = (options) => {
-        const { disableDelete } = options;
+        const {
+            disableDelete,
+            disableEdit,
+            currEdit,
+            currId,
+            elemId,
+            currVal,
+            lang = "br",
+            isArray,
+        } = options;
 
         return (
             <section className="content-item-ctas">
-                <ButtonFab
-                    variant="round"
-                    faIcon={<FontAwesomeIcon icon="pencil-alt" />}
-                    size="nano"
-                    onClick={null}
-                />
+                {!disableEdit && (
+                    <ButtonFab
+                        variant="round"
+                        faIcon={<FontAwesomeIcon icon="pencil-alt" />}
+                        size="nano"
+                        onClick={() =>
+                            setEdit({
+                                ...edit,
+                                currEdit,
+                                currId,
+                                elemId,
+                                currVal,
+                                lang,
+                                isArray,
+                            })
+                        }
+                    />
+                )}
                 {!disableDelete && (
                     <div className="ml-3">
                         <ButtonFab
@@ -62,7 +128,27 @@ export default function DefinitionContent({ data }) {
                             faIcon={<FontAwesomeIcon icon="trash-alt" />}
                             size="nano"
                             backgroundColor="var(--expenseRed)"
-                            onClick={null}
+                            onClick={async () => {
+                                await setEdit({
+                                    ...edit,
+                                    currEdit,
+                                    currId,
+                                    isDelete: true,
+                                    currVal,
+                                    lang,
+                                    isArray,
+                                });
+                                await updateGlobalData({
+                                    setGlobalData,
+                                    config: {
+                                        ...options,
+                                        isDelete: true,
+                                        currId,
+                                        elemId,
+                                    },
+                                });
+                                restart();
+                            }}
                         />
                     </div>
                 )}
@@ -79,14 +165,13 @@ export default function DefinitionContent({ data }) {
     };
 
     const showTranslateAllBtn = () => (
-        <div className={`${translationOn ? "invisible" : ""} container-center`}>
+        <div className={`${translationOn ? "d-none" : ""} container-center`}>
             <ButtonFab
-                title="Translate all"
+                title="Translate All"
                 size="medium"
                 imgIcon={
                     <Img
                         src="/img/icons/flags/br.svg"
-                        className={`${translationOn ? "invisible" : ""}`}
                         width={40}
                         height={20}
                         alt="brazilian flag"
@@ -97,6 +182,20 @@ export default function DefinitionContent({ data }) {
         </div>
     );
 
+    const defaultProps = {
+        currVal,
+        currEdit,
+        currId,
+        handleEditDone,
+        showCTAs,
+        data,
+        setEdit,
+        lang: "en",
+        currLang: lang,
+        isDelete,
+        translationOn,
+    };
+
     return (
         <section className="mx-3 my-3">
             <h1 className="text-modal">
@@ -106,60 +205,32 @@ export default function DefinitionContent({ data }) {
             {showTranslateAllBtn()}
 
             <h3>Definition:</h3>
-            <p>
-                <Img
-                    src="/img/icons/flags/us.svg"
-                    width={40}
-                    height={20}
-                    alt="american flag"
-                />{" "}
-                {data.definition.en}
-            </p>
-            {translationOn && (
-                <Fragment>
-                    <p className="animated fadeInUp slow">
-                        <Img
-                            src="/img/icons/flags/br.svg"
-                            width={40}
-                            height={20}
-                            alt="brazilian flag"
-                        />{" "}
-                        {data.definition.br}
-                    </p>
-                    <span className="ml-3 d-inline-block">
-                        {showCTAs({ disableDelete: true })}
-                    </span>
-                </Fragment>
-            )}
+            <DefinitionComp {...defaultProps} />
+            <br />
+            {translationOn && <DefinitionComp {...defaultProps} lang="br" />}
 
             <h3>Examples:</h3>
-            {data.examples ? (
+            {data.examples && data.examples.length ? (
                 <ul>
-                    {data.examples.map((e) => (
-                        <Fragment key={e.en}>
-                            <li>
-                                <Img
-                                    src="/img/icons/flags/us.svg"
-                                    width={40}
-                                    height={20}
-                                    alt="american flag"
-                                />{" "}
-                                {e.en}
-                            </li>
+                    {data.examples.map((ex, ind) => (
+                        <Fragment key={ind}>
+                            <ListComps
+                                {...defaultProps}
+                                data={ex}
+                                elemId={ind}
+                                currEdit="examples"
+                            />
+                            <br />
                             {translationOn && (
-                                <li className="animated fadeInUp slow">
-                                    <Img
-                                        src="/img/icons/flags/br.svg"
-                                        width={40}
-                                        height={20}
-                                        alt="brazilian flag"
-                                    />{" "}
-                                    {e.br}
-                                </li>
+                                <ListComps
+                                    {...defaultProps}
+                                    data={ex}
+                                    elemId={ind}
+                                    currEdit="examples"
+                                    disableDelete={true}
+                                    lang="br"
+                                />
                             )}
-                            <span className="ml-3 d-inline-block">
-                                {showCTAs({})}
-                            </span>
                             <hr className="lazer-purple" />
                         </Fragment>
                     ))}
@@ -169,33 +240,27 @@ export default function DefinitionContent({ data }) {
             )}
 
             <h3>Synonyms:</h3>
-            {data.synonyms ? (
+            {data.synonyms && data.synonyms.length ? (
                 <ul>
-                    {data.synonyms.map((s) => (
+                    {data.synonyms.map((s, ind) => (
                         <Fragment key={s.en}>
-                            <li>
-                                <Img
-                                    src="/img/icons/flags/us.svg"
-                                    width={40}
-                                    height={20}
-                                    alt="american flag"
-                                />{" "}
-                                {s.en}
-                            </li>
+                            <ListComps
+                                {...defaultProps}
+                                elemId={ind}
+                                data={s}
+                                currEdit="synonyms"
+                            />
+                            <br />
                             {translationOn && (
-                                <li className="animated fadeInUp slow">
-                                    <Img
-                                        src="/img/icons/flags/br.svg"
-                                        width={40}
-                                        height={20}
-                                        alt="brazilian flag"
-                                    />{" "}
-                                    {s.br}
-                                </li>
+                                <ListComps
+                                    {...defaultProps}
+                                    elemId={ind}
+                                    data={s}
+                                    currEdit="synonyms"
+                                    lang="br"
+                                    disableDelete={true}
+                                />
                             )}
-                            <span className="ml-3 d-inline-block">
-                                {showCTAs({ disableDelete: true })}
-                            </span>
                             <hr className="lazer-purple" />
                         </Fragment>
                     ))}
@@ -205,33 +270,27 @@ export default function DefinitionContent({ data }) {
             )}
 
             <h3>Antonyms:</h3>
-            {data.antonyms ? (
+            {data.antonyms && data.antonyms.length ? (
                 <ul>
-                    {data.antonyms.map((a) => (
-                        <Fragment key={a.en}>
-                            <li>
-                                <Img
-                                    src="/img/icons/flags/us.svg"
-                                    width={40}
-                                    height={20}
-                                    alt="american flag"
-                                />{" "}
-                                {a.en}
-                            </li>
+                    {data.antonyms.map((s, ind) => (
+                        <Fragment key={ind}>
+                            <ListComps
+                                {...defaultProps}
+                                data={s}
+                                elemId={ind}
+                                currEdit="antonyms"
+                            />
+                            <br />
                             {translationOn && (
-                                <li className="animated fadeInUp slow">
-                                    <Img
-                                        src="/img/icons/flags/br.svg"
-                                        width={40}
-                                        height={20}
-                                        alt="brazilian flag"
-                                    />{" "}
-                                    {a.br}
-                                </li>
+                                <ListComps
+                                    {...defaultProps}
+                                    data={s}
+                                    elemId={ind}
+                                    currEdit="antonyms"
+                                    lang="br"
+                                    disableDelete={true}
+                                />
                             )}
-                            <span className="ml-3 d-inline-block">
-                                {showCTAs({ disableDelete: true })}
-                            </span>
                             <hr className="lazer-purple" />
                         </Fragment>
                     ))}
@@ -242,3 +301,139 @@ export default function DefinitionContent({ data }) {
         </section>
     );
 }
+
+function DefinitionComp({
+    currVal,
+    currEdit,
+    handleEditDone,
+    showCTAs,
+    data,
+    setEdit,
+    lang,
+    currLang,
+}) {
+    const handleDefinDisplay = () => {
+        if (currEdit !== "definition") return data.definition[lang];
+        return currLang !== lang && data.definition[lang];
+    };
+
+    return (
+        <Fragment>
+            <span className="d-inline-block">
+                <Img
+                    src={`/img/icons/flags/${lang === "en" ? "us" : lang}.svg`}
+                    width={40}
+                    className="d-inline-block animated fadeInUp slow"
+                    height={20}
+                    alt="flag"
+                />
+                {handleDefinDisplay()}{" "}
+            </span>
+            {currEdit === "definition" && currLang === lang && (
+                <section className="mb-2">
+                    <Field
+                        size="small"
+                        name="currVal"
+                        backgroundColor="#fff"
+                        value={currVal}
+                        multiline={true}
+                        fullWidth={true}
+                        onChangeCallback={setEdit}
+                        enterCallback={handleEditDone}
+                    />
+                </section>
+            )}
+            {(currEdit !== "definition" || !currVal) && (
+                <span className="ml-3">
+                    {showCTAs({
+                        disableDelete: true,
+                        currEdit: "definition",
+                        currId: data.definition[lang],
+                        currVal: data.definition[lang],
+                        lang,
+                    })}
+                </span>
+            )}
+        </Fragment>
+    );
+}
+
+function ListComps({
+    currId,
+    elemId,
+    currVal,
+    currEdit,
+    handleEditDone,
+    showCTAs,
+    data,
+    setEdit,
+    lang,
+    currLang,
+    disableDelete = false,
+    disableEdit = false,
+    isDelete,
+    translationOn,
+}) {
+    const needField =
+        currLang === lang &&
+        currId === data[lang] &&
+        data[lang] !== "" &&
+        !isDelete;
+
+    return (
+        <Fragment>
+            {!needField ? (
+                <Fragment>
+                    <li className="d-inline-block">
+                        <Img
+                            src={`/img/icons/flags/${
+                                lang === "en" ? "us" : lang
+                            }.svg`}
+                            width={40}
+                            height={20}
+                            alt="flag"
+                        />{" "}
+                        {!data[lang] ? "?" : data[lang]}{" "}
+                    </li>
+                    <span className="ml-3 d-inline-block">
+                        {showCTAs({
+                            isArray: true,
+                            disableDelete,
+                            disableEdit,
+                            currEdit,
+                            currId: data[lang],
+                            elemId,
+                            currVal: data[lang],
+                            lang,
+                        })}
+                    </span>
+                </Fragment>
+            ) : (
+                <section className="mb-2">
+                    <Field
+                        size="small"
+                        name="currVal"
+                        backgroundColor="#fff"
+                        value={currVal}
+                        multiline={true}
+                        fullWidth={true}
+                        onChangeCallback={setEdit}
+                        enterCallback={handleEditDone}
+                    />
+                </section>
+            )}
+        </Fragment>
+    );
+}
+/*
+
+<p className="animated fadeInUp slow">
+    <Img
+        src="/img/icons/flags/br.svg"
+        width={40}
+        height={20}
+        alt="brazilian flag"
+    />{" "}
+
+</p>
+ */

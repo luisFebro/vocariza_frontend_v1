@@ -14,8 +14,12 @@ export default function Field({
     variant = "outlined",
     enterCallback,
     onChangeCallback,
+    backgroundColor = "var(--mainWhite)",
+    multiline = false,
+    rows = 3,
+    fullWidth = true,
 }) {
-    const sizes = ["small", "normal", "large"];
+    const sizes = ["small", "medium", "large"];
     const variants = ["filled", "outlined", "standard"];
     const textAligns = ["text-center", "text-left"];
     if (!sizes.includes(size)) throw new Error("Invalid field size");
@@ -36,30 +40,46 @@ export default function Field({
                 onKeyPress={(e) => handleEnterPress(e, enterCallback)}
                 error={error}
                 autoComplete={autoComplete}
+                multiline={multiline ? true : false}
+                rows={multiline ? rows : undefined}
+                fullWidth={fullWidth}
             />
             <style jsx global>
                 {`
-                    .large {
-                        background-color: var(--mainWhite);
-                        margin: 0 10px !important;
-                    }
                     .MuiInputBase-input {
+                        background-color: ${backgroundColor} !important;
                         z-index: 2000;
                         color: var(--themeP) !important;
                         font: var(--mainFont);
                         padding: 10px;
                     }
 
+                    .large {
+                        margin: 0 5px !important;
+                    }
+
                     .large div .MuiInputBase-input {
-                        font-size: 3em;
+                        font-size: 2.5em;
+                    }
+
+                    .large div .MuiInputBase-input .MuiOutlinedInput-input {
+                        padding: 10.5px 14px;
+                    }
+
+                    .medium div .MuiInputBase-input {
+                        font-size: 1.5em;
+                    }
+
+                    .small div .MuiInputBase-input {
+                        font-size: 1em;
                     }
 
                     .text-left div .MuiInputBase-input {
-                        text-align: left;
+                        text-align: left !important;
                     }
 
                     .text-center div .MuiInputBase-input {
-                        text-align: center;
+                        text-align: center !important;
                     }
                 `}
             </style>

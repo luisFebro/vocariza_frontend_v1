@@ -52,6 +52,12 @@ p {
     color: var(--mainPurple);
 }
 
+span {
+    font: normal 18px "Poppins", sans-serif;
+    letter-spacing: 0.01em;
+    color: var(--mainPurple);
+}
+
 @media screen and (min-width: 320px) {
     h2 {
         font: bold calc(25px + (30 - 25) * ((100vw - 300px) / (1000 - 300)))
