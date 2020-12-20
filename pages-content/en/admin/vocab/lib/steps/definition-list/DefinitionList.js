@@ -6,20 +6,12 @@ import DefinitionCard from "./card/accordion/DefinitionCard";
 export default function DefinitionList() {
     const {
         setGlobalData,
-        globalData: { sortedDataList = [], wordData = {} },
+        globalData: { wordData = {} },
     } = useContext();
 
     const gotWordData = Boolean(wordData);
 
     const mainData = gotWordData && wordData.treatedWordData;
-
-    useEffect(() => {
-        if (!sortedDataList.length) return;
-        setGlobalData((prev) => ({
-            ...prev,
-            wordData: { ...prev.wordData, treatedWordData: sortedDataList },
-        }));
-    }, [sortedDataList]);
 
     const ultimateList =
         gotWordData &&
@@ -38,7 +30,7 @@ export default function DefinitionList() {
     const getLayoutResult = (res) => {
         setGlobalData((prev) => ({
             ...prev,
-            sortedDataList: res,
+            wordData: { ...prev.wordData, treatedWordData: res },
         }));
     };
 
@@ -51,6 +43,16 @@ export default function DefinitionList() {
         />
     );
 }
+
+/* ARCHIVES
+useEffect(() => {
+    if (!sortedDataList.length) return;
+    setGlobalData((prev) => ({
+        ...prev,
+        wordData: { ...prev.wordData, treatedWordData: sortedDataList },
+    }));
+}, [sortedDataList]);
+ */
 
 /*
 const ultimateList = useMemo(() => {

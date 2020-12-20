@@ -7,8 +7,10 @@ export default function useGlobal() {
     const [globalData, setGlobalData] = useState({
         vocaEn: "",
         vocaBr: "",
+        allSpeeches: "",
         mainDefinition: "",
         frequencyLevel: "",
+        frequencyGrade: "",
         dirtyLevel: "",
         wordData: null,
     });

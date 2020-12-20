@@ -1,6 +1,5 @@
 const { chooseHeader } = require("../utils/server/getHeaders");
 const axios = require("axios");
-// import { logout } from "../../redux/actions/authActions";
 
 const token = "123"; //localStorage.getItem("token");
 

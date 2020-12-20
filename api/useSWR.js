@@ -62,7 +62,8 @@ export default function useSWR({
 
     const res = useFetcher([thisUrl, trigger], fetcher, swrOptions);
 
-    return { ...res, isLoading: !error && !res.data, error }; // { data, error, isValidating, mutate }
+    const isLoading = !error && !res.data && res.data !== 0;
+    return { ...res, isLoading, error }; // { data, error, isValidating, mutate }
 }
 
 /* COMMENTS

@@ -1,18 +1,62 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CTAs from "./comps/CTAs";
 import { useContext } from "global/Context";
 import DefinitionList from "./definition-list/DefinitionList";
 import useScrollUp from "hooks/scroll/useScrollUp";
+import Snackbar from "components/Snackbar";
+import getAPIBack from "api/getAPIBack";
+import { createVoca } from "api/requestsLib";
 
 export default function Definition() {
+    const [error, setError] = useState("");
     const {
         setCurrStep,
-        globalData: { vocaBr, vocaEn, frequencyLevel, wordData = {} },
+        globalData: {
+            vocaBr,
+            vocaEn,
+            allSpeeches,
+            frequencyLevel,
+            frequencyGrade,
+            wordData = {},
+        },
     } = useContext();
 
     useScrollUp();
 
     const gotWordData = Boolean(wordData);
+
+    const saveWord = async () => {
+        const {
+            definition: mainDefinition,
+            examples: mainExamples,
+            synonyms: mainSynonyms,
+            antonyms: mainAntonyms,
+        } = wordData.treatedWordData[0];
+
+        const ultimateTreatedData = wordData.treatedWordData;
+        const otherDefinitions = ultimateTreatedData.slice(1);
+
+        const body = {
+            mainEn: vocaEn,
+            mainBr: vocaBr,
+            mainPartOfSpeech: wordData.allSpeeches,
+            mainPronounce: wordData.mainPronounce,
+            mainDefinition,
+            allSpeeches,
+            frequencyLevel,
+            frequencyGrade,
+            mainExamples,
+            mainSynonyms,
+            mainAntonyms,
+            otherDefinitions,
+        };
+
+        await getAPIBack({
+            method: "post",
+            url: createVoca(),
+            body,
+        });
+    };
 
     const getPartsOfSpeech = () => {
         return (
@@ -58,10 +102,6 @@ export default function Definition() {
                             Drag and drop to arrange definitions below by the{" "}
                             <em>level of meaning's quality</em>
                         </li>
-                        <li>
-                            <em>Generate translation</em> from each one or
-                            delete uncommon definitions instead
-                        </li>
                     </ul>
                     <DefinitionList />
                     <style jsx>
@@ -77,12 +117,31 @@ export default function Definition() {
             )}
             <div className="my-5">
                 <CTAs
-                    onClickNext={
-                        gotWordData ? () => setCurrStep("examples") : null
-                    }
+                    onClickNext={async () => {
+                        let countTranslated = 0;
+                        wordData.treatedWordData.forEach((elem) => {
+                            if (elem.definition.br) countTranslated += 1;
+                        });
+
+                        const translatedLeft =
+                            wordData.treatedWordData.length - countTranslated;
+                        if (translatedLeft) {
+                            return setError(
+                                `${translatedLeft} definitions missing to be translated, checked or removed`
+                            );
+                        }
+
+                        await saveWord();
+
+                        gotWordData || translatedLeft === 0
+                            ? setCurrStep("success")
+                            : null;
+                    }}
+                    nextTitle="salvar"
                     onClickBack={() => setCurrStep("translation")}
                 />
             </div>
+            {error && <Snackbar txt={error} type="error" />}
         </Fragment>
     );
 }

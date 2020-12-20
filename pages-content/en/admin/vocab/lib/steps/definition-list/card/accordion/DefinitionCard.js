@@ -7,6 +7,7 @@ import { useContext } from "global/Context";
 import DefinitionMoreBtn from "./more-btn/DefinitionMoreBtn";
 import truncate from "utils/string/truncate";
 import isSmall from "utils/isSmall";
+import gotElemArray from "utils/arrays/gotElemArray";
 // import ToggleBtn from "./ToggleBtn";
 // import "./Accordion.scss";
 
@@ -89,12 +90,9 @@ export default function DefinitionCard({ wordData, ind }) {
                     <div className="text-small position-relative mt-2">
                         <strong>
                             Found:{" "}
-                            {wordData.examples &&
-                                !wordData.examples.length &&
-                                wordData.synonyms &&
-                                !wordData.synonyms.length &&
-                                wordData.antonyms &&
-                                !wordData.antonyms.length &&
+                            {!gotElemArray(wordData.examples) &&
+                                !gotElemArray(wordData.synonyms) &&
+                                !gotElemArray(wordData.antonyms) &&
                                 "nothing"}
                         </strong>
                         {wordData.examples && wordData.examples.length

@@ -199,7 +199,7 @@ export default function DefinitionContent({ data }) {
     return (
         <section className="mx-3 my-3">
             <h1 className="text-modal">
-                {vocaEn} ({vocaBr})
+                {data.en} {data.br ? `(${data.br})` : ""}
             </h1>
 
             {showTranslateAllBtn()}

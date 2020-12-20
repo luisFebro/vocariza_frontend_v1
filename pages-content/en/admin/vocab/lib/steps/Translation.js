@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
-import useSWR, { getVocaData } from "api/useSWR";
+import useSWR, { getVocaData, countVocas } from "api/useSWR";
 import Field from "components/fields/Field";
 import Snackbar from "components/Snackbar";
 import getId from "utils/getId";
@@ -29,21 +29,30 @@ export default function Translation() {
     const params = { word: newVocab };
     const { data: vocabData, isLoading, error } = useSWR({
         url: getVocaData(),
-        method: "get",
         trigger,
         params,
         needNanoId: true,
     });
 
+    const { data: vocaCount, isLoading: loadingCount } = useSWR({
+        url: countVocas(),
+    });
+
     useEffect(() => {
         if (!vocabData || !newVocab) return;
-        const { frequencyLevel, frequencyGrade, mainBr } = vocabData;
+        const {
+            frequencyLevel,
+            frequencyGrade,
+            allSpeeches,
+            mainBr,
+        } = vocabData;
 
         setGlobalData({
             vocaBr: mainBr,
             vocaEn: newVocab,
             frequencyLevel,
             frequencyGrade,
+            allSpeeches,
             wordData: vocabData,
         });
     }, [vocabData, newVocab]);
@@ -145,6 +154,10 @@ export default function Translation() {
     return (
         <Fragment>
             <div className="container-center">
+                <p>
+                    <strong>{loadingCount ? "..." : vocaCount} words</strong>{" "}
+                    added so far
+                </p>
                 <Field
                     size="large"
                     fullWidth={false}
