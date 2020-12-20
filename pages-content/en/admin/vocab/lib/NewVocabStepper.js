@@ -12,7 +12,7 @@ const stepStore = {
         title: "Select best definition:",
     },
     success: {
-        title: "Sucesso!",
+        title: "Success!",
     },
 };
 
