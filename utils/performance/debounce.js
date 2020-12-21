@@ -65,7 +65,7 @@ var nativeMax = Math.max,
  * // Cancel the trailing debounced invocation.
  * jQuery(window).on('popstate', debounced.cancel);
  */
-export default function debounce(func, wait = 500, options) {
+export default function debounce(func, wait = 800, options) {
     var lastArgs,
         lastThis,
         result,
@@ -76,9 +76,8 @@ export default function debounce(func, wait = 500, options) {
         maxWait = false,
         trailing = true;
 
-    if (typeof func != "function") {
-        throw new TypeError(FUNC_ERROR_TEXT);
-    }
+    if (typeof func != "function") return; // archives
+
     wait = Number(wait) || 0;
     if (isRealObj(options)) {
         leading = !!options.leading;
@@ -223,3 +222,9 @@ window.onscroll = debounce(() => {
   }
 }, 100);
 */
+
+/* prior condition which break codes with no function. Only return need here from now
+{
+        throw new TypeError(FUNC_ERROR_TEXT);
+    }
+ */

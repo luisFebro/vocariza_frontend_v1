@@ -58,6 +58,7 @@ export default function Translation() {
     }, [vocabData, newVocab]);
 
     const handleEnter = () => {
+        if (!newVocab) return;
         const id = getId();
         setTrigger(id);
     };
