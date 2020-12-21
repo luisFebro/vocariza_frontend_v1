@@ -10,7 +10,7 @@ import Img from "components/Img";
 import runWatson from "utils/tts/runWatson";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
-//dsa
+//dsa dasdsa
 export default function Translation() {
     const {
         setCurrStep,
