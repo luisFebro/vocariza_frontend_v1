@@ -9,7 +9,7 @@ export default function Success({ word = "love", setCurrStep }) {
             <h1>The word {word.toUpperCase()} was saved!</h1>
             <div className="container-center mt-2">
                 <ButtonFab
-                    title="Adicionar outra"
+                    title="Add more"
                     onClick={() => setCurrStep("translation")}
                 />
             </div>
