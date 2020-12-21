@@ -42,8 +42,12 @@ export default function NewField({
 
     const targetName = target.slice(0, -1);
 
-    const change = () => {
-        setOpenNewField(!openNewField);
+    const open = () => {
+        setOpenNewField(true);
+    };
+
+    const close = () => {
+        setOpenNewField(false);
     };
 
     const handleEditDone = async () => {
@@ -53,13 +57,13 @@ export default function NewField({
                 ...prev.wordData,
                 treatedWordData: pushElem(target, {
                     currElem,
-                    newChunk,
+                    newChunk: newChunk && newChunk.toLowerCase(),
                     treatedWordData: prev.wordData.treatedWordData,
                 }),
             },
         }));
+        close();
         await handleTranslateAll();
-        change();
         setData({ ...data, newChunk: "" });
     };
 
@@ -70,7 +74,7 @@ export default function NewField({
                     size="nano"
                     title="new"
                     faIcon={<FontAwesomeIcon icon="plus" />}
-                    onClick={change}
+                    onClick={open}
                 />
             ) : (
                 <Fragment>

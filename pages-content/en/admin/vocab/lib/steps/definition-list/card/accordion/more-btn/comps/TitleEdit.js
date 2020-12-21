@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Field from "components/fields/Field";
 
 const editElem = (options) => {
-    const { currElem, newEdit, treatedWordData, lang = "br" } = options;
+    let { currElem, newEdit, treatedWordData, lang = "br" } = options;
     return treatedWordData.map((main) => {
         if (main.definition.en === currElem.definition.en) {
-            main[lang] = newEdit;
+            main[lang] = newEdit && newEdit.toLowerCase();
         }
         return main;
     });
