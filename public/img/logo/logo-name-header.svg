@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="logo-name-header.svg"
-   inkscape:export-filename="C:\_github-projects\languages\vocariza\client\public\img\logo-name.png"
+   inkscape:export-filename="C:\_github-projects\languages\vocariza\frontend\public\img\logo\logo-name-header.png"
    inkscape:export-xdpi="63"
    inkscape:export-ydpi="63">
   <defs
@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.99674932"
-     inkscape:cx="328.52268"
+     inkscape:cx="323.45957"
      inkscape:cy="84.93974"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -74,7 +74,9 @@
        x="-15.250175"
        y="61.509289"
        id="text26"
-       transform="scale(0.92958176,1.0757526)"><tspan
+       transform="scale(0.92958176,1.0757526)"
+       inkscape:export-xdpi="63"
+       inkscape:export-ydpi="63"><tspan
          sodipodi:role="line"
          id="tspan24"
          x="-15.250175"
@@ -173,7 +175,9 @@
        width="65.051689"
        height="17.506266"
        x="-20.291353"
-       y="-3.3596728" />
+       y="-3.3596728"
+       inkscape:export-xdpi="63"
+       inkscape:export-ydpi="63" />
     <rect
        style="fill:none;stroke-width:0.26458332"
        id="rect3804"
@@ -184,7 +188,9 @@
     <g
        transform="matrix(1.2448984,0,0,1.1047948,-126.84184,-3.4683014)"
        id="g7957-4"
-       style="fill:#00fff3;fill-opacity:1">
+       style="fill:#00fff3;fill-opacity:1"
+       inkscape:export-xdpi="63"
+       inkscape:export-ydpi="63">
       <g
          transform="matrix(0.11340751,0,0,0.11873941,80.978576,3.6144613)"
          id="g111-1-9"

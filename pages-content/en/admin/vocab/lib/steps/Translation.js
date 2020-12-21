@@ -58,14 +58,9 @@ export default function Translation() {
     }, [vocabData, newVocab]);
 
     const handleEnter = () => {
-        if (!newVocab) return;
         const id = getId();
         setTrigger(id);
     };
-
-    // useEffect(() => {
-    //     if(newVocab) handleEnter();
-    // }, [newVocab])
 
     const showPronounce = () => (
         <section className="my-2 container-center">
@@ -158,7 +153,7 @@ export default function Translation() {
 
     return (
         <Fragment>
-            <div className="container-center">
+            <div className="container-center-col">
                 <p>
                     <strong>{loadingCount ? "..." : vocaCount} words</strong>{" "}
                     added so far
@@ -176,7 +171,7 @@ export default function Translation() {
             {isLoading && trigger && (
                 <h1 className="text-center">Loading...</h1>
             )}
-            {error && <Snackbar txt={error} type="error" />}
+            {error && newVocab && <Snackbar txt={error} type="error" />}
             {vocabData && (
                 <Fragment>
                     {showPronounce()}

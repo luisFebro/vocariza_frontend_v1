@@ -76,7 +76,7 @@ export default function debounce(func, wait = 800, options) {
         maxWait = false,
         trailing = true;
 
-    if (typeof func != "function") return; // archives
+    if (typeof func !== "function") return; // archives
 
     wait = Number(wait) || 0;
     if (isRealObj(options)) {
