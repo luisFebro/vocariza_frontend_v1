@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import { handleEnterPress, handleOnChange } from "./helpers/index";
+import debounce from "utils/performance/debounce";
 
 export default function Field({
     size = "normal",
@@ -18,6 +19,7 @@ export default function Field({
     multiline = false,
     rows = 3,
     fullWidth = true,
+    debounceCallback,
 }) {
     const sizes = ["small", "medium", "large"];
     const variants = ["filled", "outlined", "standard"];
@@ -28,6 +30,8 @@ export default function Field({
 
     // Warning: use a <form></form> wrapper to a group or even an individual field.
     // TextField is simply rendered as a raw <input /> tag
+    const handler = useCallback(debounce(debounceCallback), []);
+
     return (
         <Fragment>
             <TextField
@@ -36,7 +40,10 @@ export default function Field({
                 name={name}
                 value={value}
                 variant={variant}
-                onChange={(e) => handleOnChange(e, onChangeCallback)}
+                onChange={(e) => {
+                    handleOnChange(e, onChangeCallback);
+                    debounceCallback && handler();
+                }}
                 onKeyPress={(e) => handleEnterPress(e, enterCallback)}
                 error={error}
                 autoComplete={autoComplete}

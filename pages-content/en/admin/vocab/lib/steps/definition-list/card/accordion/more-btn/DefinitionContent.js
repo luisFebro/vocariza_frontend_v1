@@ -2,11 +2,13 @@ import { Fragment, useState } from "react";
 import { useContext } from "global/Context";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Field from "components/fields/Field";
 import Img from "components/Img";
 import getAPIBack from "api/getAPIBack";
 import { getVocaTranslated } from "api/requestsLib";
-import Field from "components/fields/Field";
 import { setUpdatedEditData } from "./helpers";
+import NewField from "./comps/NewField";
+import TitleEdit from "./comps/TitleEdit";
 
 const updateGlobalData = async ({ setGlobalData, config }) => {
     return await setGlobalData((prev) => ({
@@ -199,7 +201,17 @@ export default function DefinitionContent({ data }) {
     return (
         <section className="mx-3 my-3">
             <h1 className="text-modal">
-                {data.en} {data.br ? `(${data.br})` : ""}
+                {data.en}{" "}
+                {data.br && (
+                    <div className="d-inline-block">
+                        ({data.br}){" "}
+                        <TitleEdit
+                            setGlobalData={setGlobalData}
+                            currElem={data}
+                            currWord={data.br}
+                        />
+                    </div>
+                )}
             </h1>
 
             {showTranslateAllBtn()}
@@ -238,6 +250,12 @@ export default function DefinitionContent({ data }) {
             ) : (
                 <p className="m-0">none found.</p>
             )}
+            <NewField
+                target="examples"
+                setGlobalData={setGlobalData}
+                currElem={data}
+                handleTranslateAll={handleTranslateAll}
+            />
 
             <h3>Synonyms:</h3>
             {data.synonyms && data.synonyms.length ? (
@@ -268,15 +286,21 @@ export default function DefinitionContent({ data }) {
             ) : (
                 <p className="m-0">none found.</p>
             )}
+            <NewField
+                target="synonyms"
+                setGlobalData={setGlobalData}
+                currElem={data}
+                handleTranslateAll={handleTranslateAll}
+            />
 
             <h3>Antonyms:</h3>
             {data.antonyms && data.antonyms.length ? (
                 <ul>
-                    {data.antonyms.map((s, ind) => (
+                    {data.antonyms.map((an, ind) => (
                         <Fragment key={ind}>
                             <ListComps
                                 {...defaultProps}
-                                data={s}
+                                data={an}
                                 elemId={ind}
                                 currEdit="antonyms"
                             />
@@ -284,7 +308,7 @@ export default function DefinitionContent({ data }) {
                             {translationOn && (
                                 <ListComps
                                     {...defaultProps}
-                                    data={s}
+                                    data={an}
                                     elemId={ind}
                                     currEdit="antonyms"
                                     lang="br"
@@ -298,6 +322,12 @@ export default function DefinitionContent({ data }) {
             ) : (
                 <p className="mt-0">none found.</p>
             )}
+            <NewField
+                target="antonyms"
+                setGlobalData={setGlobalData}
+                currElem={data}
+                handleTranslateAll={handleTranslateAll}
+            />
         </section>
     );
 }
@@ -374,11 +404,8 @@ function ListComps({
     isDelete,
     translationOn,
 }) {
-    const needField =
-        currLang === lang &&
-        currId === data[lang] &&
-        data[lang] !== "" &&
-        !isDelete;
+    data[lang] = data[lang] ? data[lang] : "?";
+    const needField = currLang === lang && currId === data[lang] && !isDelete;
 
     return (
         <Fragment>
@@ -393,7 +420,7 @@ function ListComps({
                             height={20}
                             alt="flag"
                         />{" "}
-                        {!data[lang] ? "?" : data[lang]}{" "}
+                        {data[lang]}{" "}
                     </li>
                     <span className="ml-3 d-inline-block">
                         {showCTAs({

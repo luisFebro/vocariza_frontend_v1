@@ -1,20 +1,5 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import Fab from "@material-ui/core/Fab";
-
-export const muStyle = {
-    transform: "scale(1.2)",
-    marginLeft: "3px",
-};
-
-export const faStyle = {
-    fontSize: "30px",
-    filter: "drop-shadow(.5px .5px 1.5px black)",
-    color: "white",
-};
-
-export const faStyleSmall = {
-    fontSize: "25px",
-};
 
 const handleBtnShadow = (shadowColor, custom) => {
     if (shadowColor) {
@@ -40,6 +25,7 @@ export default function ButtonFab({
     muIcon,
     faIcon,
     imgIcon, // using img tag
+    textTransform = "capitalize",
     // endmain
     onMouseOver,
     onMouseDown,
@@ -52,9 +38,6 @@ export default function ButtonFab({
     fontSize,
     fontSizeTxt,
     fontWeight,
-    toggleStatus,
-    iconAfterClick = null,
-    needClickAndToggle = false,
     iconMarginLeft,
     iconFontSize,
     needIconShadow,
@@ -62,14 +45,15 @@ export default function ButtonFab({
     shadowColorCustom,
     titleSize,
     id,
-    textTransform,
     needTxtNoWrap,
     zIndex,
     width,
     height,
     disabled = false,
 }) {
-    const [toggle, setToggle] = useState("");
+    const isExtended = variant === "extended";
+    const istTinySize = size === "extra-small" || size === "nano";
+    const gotIcon = (faIcon || muIcon || imgIcon) && isExtended;
 
     const styles = {
         icon: {
@@ -95,36 +79,33 @@ export default function ButtonFab({
         },
     };
 
-    const showIcon = (faIcon) => {
-        if (faIcon && typeof faIcon !== "string") {
-            return (
-                <i
-                    className={`${variant === "extended" ? "ml-2" : ""} ${
-                        needIconShadow ? "icon-shadow" : ""
-                    } d-flex align-self-center`}
-                >
-                    {toggle ? iconAfterClick : faIcon}
-                </i>
-            );
-        }
-
-        return (
-            faIcon && (
-                <i
-                    style={styles.icon}
-                    className={toggle ? iconAfterClick : faIcon}
-                ></i>
-            )
-        );
-    };
-
-    const showMuIcon = (muIcon) => (
-        <i className={`${variant === "extended" && "ml-2"} icon-shadow`}>
-            {muIcon}
-        </i>
+    const showFaIcon = (faIcon) => (
+        <Fragment>
+            <i
+                className={`fa-icon ${variant} ${
+                    needIconShadow ? "icon-shadow" : ""
+                } d-flex align-self-center`}
+            >
+                {faIcon}
+            </i>
+            <style jsx global>
+                {`
+                    .fa-icon.extended {
+                        margin-left: 0.5rem !important;
+                    }
+                `}
+            </style>
+        </Fragment>
     );
 
-    const istTinySize = size === "extra-small" || size === "nano";
+    const showMuIcon = (muIcon) => (
+        <i className={`${isExtended && "ml-2"} icon-shadow`}>{muIcon}</i>
+    );
+
+    const handleDisplay = () => {
+        if (imgIcon) return "d-inline-block";
+        return gotIcon ? "d-flex" : "";
+    };
 
     return (
         <Fragment>
@@ -132,7 +113,7 @@ export default function ButtonFab({
                 id={id}
                 variant={variant}
                 onClick={onClick}
-                className={istTinySize ? size : ""}
+                className={istTinySize ? `${size} ${variant}` : ""}
                 onMouseOver={onMouseOver}
                 onMouseDown={onMouseDown}
                 onTouchStart={onTouchStart}
@@ -142,18 +123,17 @@ export default function ButtonFab({
                 disabled={disabled}
             >
                 <span
-                    className={`btn-txt ${imgIcon ? "d-flex" : ""} ${
+                    className={`btn-txt ${
+                        isExtended ? "extended" : ""
+                    } ${handleDisplay()} ${
                         needTxtNoWrap ? "text-nowrap" : ""
-                    } text-shadow ${
-                        titleSize ? `text-${titleSize}` : "text-normal"
-                    } font-weight-bold`}
-                    style={{ textTransform: textTransform || "capitalize" }}
+                    } text-shadow text-normal font-weight-bold`}
                 >
                     {title}
-                    {faIcon && showIcon(faIcon)}
+                    {faIcon && showFaIcon(faIcon)}
                     {muIcon && showMuIcon(muIcon)}
                     {imgIcon && (
-                        <span className="d-inline-block ml-1">{imgIcon}</span>
+                        <p className="m-0 d-inline-block ml-1">{imgIcon}</p>
                     )}
                 </span>
             </Fab>
@@ -161,40 +141,53 @@ export default function ButtonFab({
                 {`
                     .btn-txt {
                         color: ${color};
+                        text-transform: ${textTransform};
                     }
 
-                    .extra-small.MuiFab-sizeSmall {
+                    .extra-small.MuiFab-sizeSmall.round {
                         width: 32px;
+                        height: 32px;
+                    }
+                    .extra-small.MuiFab-sizeSmall.extended {
                         height: 32px;
                     }
 
                     .extra-small.MuiFab-root {
                         min-height: 0px;
                     }
-
+                    .extra-small.MuiFab-sizeSmall .btn-txt.extended {
+                        font-size: 1.1em !important;
+                    }
                     .extra-small svg {
                         height: 0.85em !important;
                     }
 
-                    .nano.MuiFab-sizeSmall {
+                    .nano.MuiFab-sizeSmall.extended {
+                        height: 25px;
+                    }
+                    .nano.MuiFab-sizeSmall .btn-txt.extended {
+                        font-size: 0.9em !important;
+                    }
+                    .nano.MuiFab-sizeSmall.round {
                         width: 25px;
                         height: 25px;
                     }
-
                     .nano.MuiFab-root {
                         min-height: 0px;
                     }
-
-                    .nano svg {
+                    .nano.round svg {
                         height: 0.7em !important;
+                    }
+                    .nano.extended svg {
+                        height: 0.9em !important;
                     }
 
                     @media screen and (min-width: 768px) {
-                        .extra-small svg {
+                        .extra-small.round svg {
                             height: 0.65em !important;
                         }
 
-                        .nano svg {
+                        .nano.round svg {
                             height: 0.5em !important;
                         }
                     }
@@ -203,3 +196,18 @@ export default function ButtonFab({
         </Fragment>
     );
 }
+
+export const muStyle = {
+    transform: "scale(1.2)",
+    marginLeft: "3px",
+};
+
+export const faStyle = {
+    fontSize: "30px",
+    filter: "drop-shadow(.5px .5px 1.5px black)",
+    color: "white",
+};
+
+export const faStyleSmall = {
+    fontSize: "25px",
+};

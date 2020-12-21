@@ -65,7 +65,7 @@ var nativeMax = Math.max,
  * // Cancel the trailing debounced invocation.
  * jQuery(window).on('popstate', debounced.cancel);
  */
-export default function debounce(func, wait, options) {
+export default function debounce(func, wait = 500, options) {
     var lastArgs,
         lastThis,
         result,

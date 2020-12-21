@@ -62,6 +62,10 @@ export default function Translation() {
         setTrigger(id);
     };
 
+    // useEffect(() => {
+    //     if(newVocab) handleEnter();
+    // }, [newVocab])
+
     const showPronounce = () => (
         <section className="my-2 container-center">
             <p className="text-normal">
@@ -164,8 +168,8 @@ export default function Translation() {
                     name="newVocab"
                     value={newVocab}
                     onChangeCallback={setData}
+                    debounceCallback={handleEnter}
                     textAlign="text-center"
-                    enterCallback={handleEnter}
                 />
             </div>
             {isLoading && trigger && (
