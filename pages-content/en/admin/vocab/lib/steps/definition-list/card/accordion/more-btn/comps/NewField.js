@@ -1,11 +1,15 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import Field from "components/fields/Field";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const pushElem = (target, options) => {
-    const { currElem, newChunk, treatedWordData } = options;
-    const newElem = { en: newChunk, br: "" };
+    const { currElem, newChunk, newUrl, treatedWordData } = options;
+    const newElem = { en: newChunk, br: "", ref: newUrl };
+
+    if (!newUrl) {
+        delete newElem.ref;
+    }
 
     if (!currElem[target]) {
         return treatedWordData.map((main) => {
@@ -32,13 +36,24 @@ export default function NewField({
     target,
     setGlobalData,
     currElem,
+    currVoca,
     handleTranslateAll,
 }) {
     const [openNewField, setOpenNewField] = useState(false);
     const [data, setData] = useState({
         newChunk: "",
+        newUrl: "",
     });
-    const { newChunk } = data;
+    const { newChunk, newUrl } = data;
+
+    useEffect(() => {
+        setData({
+            ...data,
+            newUrl: `https://www.lexico.com/en/definition/${
+                currVoca && currVoca.toLowerCase()
+            }`,
+        });
+    }, []);
 
     const targetName = target.slice(0, -1);
 
@@ -57,6 +72,10 @@ export default function NewField({
                 ...prev.wordData,
                 treatedWordData: pushElem(target, {
                     currElem,
+                    newUrl:
+                        target === "examples"
+                            ? newUrl && newUrl.toLowerCase()
+                            : undefined,
                     newChunk: newChunk && newChunk.toLowerCase(),
                     treatedWordData: prev.wordData.treatedWordData,
                 }),
@@ -64,7 +83,7 @@ export default function NewField({
         }));
         close();
         await handleTranslateAll();
-        setData({ ...data, newChunk: "" });
+        setData({ ...data, newChunk: "", newUrl: "" });
     };
 
     return (
@@ -89,6 +108,20 @@ export default function NewField({
                         onChangeCallback={setData}
                         enterCallback={handleEditDone}
                     />
+                    {target === "examples" && (
+                        <section className="mt-3">
+                            <p className="strong m-0">Site reference:</p>
+                            <Field
+                                size="small"
+                                name="newUrl"
+                                backgroundColor="#fff"
+                                value={newUrl}
+                                fullWidth={true}
+                                onChangeCallback={setData}
+                                enterCallback={handleEditDone}
+                            />
+                        </section>
+                    )}
                 </Fragment>
             )}
         </Fragment>

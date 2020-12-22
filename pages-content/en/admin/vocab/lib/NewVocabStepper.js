@@ -6,7 +6,7 @@ import { useContext } from "global/Context";
 
 const stepStore = {
     translation: {
-        title: "Which word to add?", //, Febro
+        title: "Which word to add, Febro?",
     },
     definition: {
         title: "Select best definition:",

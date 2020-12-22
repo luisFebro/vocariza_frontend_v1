@@ -9,6 +9,7 @@ import { getVocaTranslated } from "api/requestsLib";
 import { setUpdatedEditData } from "./helpers";
 import NewField from "./comps/NewField";
 import TitleEdit from "./comps/TitleEdit";
+import getSiteName from "utils/string/getSiteName";
 
 const updateGlobalData = async ({ setGlobalData, config }) => {
     return await setGlobalData((prev) => ({
@@ -37,18 +38,20 @@ export default function DefinitionContent({ data }) {
         currEdit: "",
         currVal: "",
         currId: "", // same as currVal. the diff is it is changing to identify and make the change in the array of data
+        currRef: "",
         isArray: false,
         isDelete: false,
         elemId: "",
         lang: "en",
     });
-    const { currVal, currId, currEdit, lang, isDelete } = edit;
+    const { currVal, currId, currEdit, lang, currRef, isDelete } = edit;
 
     const restart = () => {
         setEdit({
             currEdit: "",
             currVal: "",
             currId: "", // same as currVal. the diff is it is changing to identify and make the change in the array of data
+            currRef: "",
             isArray: false,
             isDelete: false,
             elemId: "",
@@ -98,6 +101,7 @@ export default function DefinitionContent({ data }) {
             currEdit,
             currId,
             elemId,
+            currRef,
             currVal,
             lang = "br",
             isArray,
@@ -115,6 +119,7 @@ export default function DefinitionContent({ data }) {
                                 ...edit,
                                 currEdit,
                                 currId,
+                                currRef,
                                 elemId,
                                 currVal,
                                 lang,
@@ -188,6 +193,7 @@ export default function DefinitionContent({ data }) {
         currVal,
         currEdit,
         currId,
+        currRef,
         handleEditDone,
         showCTAs,
         data,
@@ -254,6 +260,7 @@ export default function DefinitionContent({ data }) {
                 target="examples"
                 setGlobalData={setGlobalData}
                 currElem={data}
+                currVoca={vocaEn}
                 handleTranslateAll={handleTranslateAll}
             />
 
@@ -393,6 +400,7 @@ function ListComps({
     elemId,
     currVal,
     currEdit,
+    currRef,
     handleEditDone,
     showCTAs,
     data,
@@ -407,6 +415,12 @@ function ListComps({
     data[lang] = data[lang] ? data[lang] : "?";
     const needField = currLang === lang && currId === data[lang] && !isDelete;
 
+    const handleSiteName = () => {
+        const siteName = getSiteName(data.ref);
+        if (siteName === "lexico") return "lexico, oxford";
+        return data.ref ? siteName : "wordsApi";
+    };
+
     return (
         <Fragment>
             {!needField ? (
@@ -420,7 +434,22 @@ function ListComps({
                             height={20}
                             alt="flag"
                         />{" "}
-                        {data[lang]}{" "}
+                        {data[lang]}
+                        <br />
+                        {currEdit === "examples" && lang === "en" && (
+                            <a
+                                className="no-text-decoration"
+                                href={
+                                    data.ref ? data.ref : "https://wordsapi.com"
+                                }
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <em className="text-gray text-small">
+                                    - {handleSiteName()}
+                                </em>
+                            </a>
+                        )}{" "}
                     </li>
                     <span className="ml-3 d-inline-block">
                         {showCTAs({
@@ -431,9 +460,11 @@ function ListComps({
                             currId: data[lang],
                             elemId,
                             currVal: data[lang],
+                            currRef: data.ref,
                             lang,
                         })}
                     </span>
+                    <br />
                 </Fragment>
             ) : (
                 <section className="mb-2">
@@ -447,6 +478,20 @@ function ListComps({
                         onChangeCallback={setEdit}
                         enterCallback={handleEditDone}
                     />
+                    {currEdit === "examples" && lang === "en" && (
+                        <section className="mt-3">
+                            <p className="strong m-0">Site reference:</p>
+                            <Field
+                                size="small"
+                                name="currRef"
+                                backgroundColor="#fff"
+                                value={currRef}
+                                fullWidth={true}
+                                onChangeCallback={setEdit}
+                                enterCallback={handleEditDone}
+                            />
+                        </section>
+                    )}
                 </section>
             )}
         </Fragment>

@@ -12,6 +12,7 @@ export default function useGlobal() {
         frequencyLevel: "",
         frequencyGrade: "",
         dirtyLevel: "",
+        etymology: "",
         wordData: null,
     });
 

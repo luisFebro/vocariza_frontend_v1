@@ -3,6 +3,7 @@ export const setUpdatedEditData = (wordDataArray, config) => {
         lang,
         currVal,
         currId,
+        currRef,
         elemId,
         isArray: isTargetArray,
         currEdit: targetElem,
@@ -23,6 +24,7 @@ export const setUpdatedEditData = (wordDataArray, config) => {
                     if (elemId === ind) {
                         if (!isDelete) {
                             subElem[lang] = currVal;
+                            subElem.ref = currRef;
                             modifiedItem = true;
                             return newArray.push(subElem);
                         }

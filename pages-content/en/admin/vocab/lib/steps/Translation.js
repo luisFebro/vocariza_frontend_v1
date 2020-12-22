@@ -45,6 +45,7 @@ export default function Translation() {
             frequencyGrade,
             allSpeeches,
             mainBr,
+            etymology,
         } = vocabData;
 
         setGlobalData({
@@ -53,6 +54,7 @@ export default function Translation() {
             frequencyLevel,
             frequencyGrade,
             allSpeeches,
+            etymology,
             wordData: vocabData,
         });
     }, [vocabData, newVocab]);

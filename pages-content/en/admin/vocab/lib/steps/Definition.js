@@ -6,6 +6,7 @@ import useScrollUp from "hooks/scroll/useScrollUp";
 import Snackbar from "components/Snackbar";
 import getAPIBack from "api/getAPIBack";
 import { createVoca } from "api/requestsLib";
+import Etymology from "./comps/Etymology";
 
 export default function Definition() {
     const [error, setError] = useState("");
@@ -18,6 +19,7 @@ export default function Definition() {
             frequencyLevel,
             frequencyGrade,
             wordData = {},
+            etymology,
         },
     } = useContext();
 
@@ -49,6 +51,7 @@ export default function Definition() {
             mainSynonyms,
             mainAntonyms,
             otherDefinitions,
+            etymology,
         };
 
         await getAPIBack({
@@ -68,8 +71,19 @@ export default function Definition() {
         );
     };
 
+    const showInstru = () => (
+        <section className="container">
+            <ul className="max-w-500">
+                <li className="text-sm-left text-md-center">
+                    Drag and drop to arrange definitions below by the{" "}
+                    <em>level of meaning's quality</em>
+                </li>
+            </ul>
+        </section>
+    );
+
     return (
-        <Fragment>
+        <section>
             {!gotWordData ? (
                 <div className="text-subtitle font-weight-bold text-center">
                     No data.
@@ -97,12 +111,7 @@ export default function Definition() {
                             {getPartsOfSpeech()}
                         </span>
                     </h3>
-                    <ul>
-                        <li>
-                            Drag and drop to arrange definitions below by the{" "}
-                            <em>level of meaning's quality</em>
-                        </li>
-                    </ul>
+                    {showInstru()}
                     <DefinitionList />
                     <style jsx>
                         {`
@@ -115,6 +124,7 @@ export default function Definition() {
                     </style>
                 </section>
             )}
+            <Etymology ety={etymology} currWord={vocaEn} />
             <div className="my-5">
                 <CTAs
                     onClickNext={async () => {
@@ -142,6 +152,6 @@ export default function Definition() {
                 />
             </div>
             {error && <Snackbar txt={error} type="error" />}
-        </Fragment>
+        </section>
     );
 }

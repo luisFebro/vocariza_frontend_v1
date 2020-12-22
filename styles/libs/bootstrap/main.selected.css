@@ -167,18 +167,18 @@
 
 /* LAYOUT AND RESPONSIVENESS*/
 .container {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    /*width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: auto;*/
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+.max-w-500 {
+    max-width: 500px !important;
+    margin: 0 1rem !important;
 }
 
 .d-none {
