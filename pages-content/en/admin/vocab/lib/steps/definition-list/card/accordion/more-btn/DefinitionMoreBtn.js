@@ -26,7 +26,9 @@ export default function DefinitionMoreBtn({ data }) {
         setFullOpen(false);
     };
 
-    const AsyncComp = <AsyncDefinitionContent data={data} />;
+    const AsyncComp = (
+        <AsyncDefinitionContent data={data} handleFullClose={handleFullClose} />
+    );
 
     return (
         <section>

@@ -8,6 +8,7 @@ import DefinitionMoreBtn from "./more-btn/DefinitionMoreBtn";
 import truncate from "utils/string/truncate";
 import isSmall from "utils/isSmall";
 import gotElemArray from "utils/arrays/gotElemArray";
+import PartOfSpeech from "./comps/PartOfSpeech";
 // import ToggleBtn from "./ToggleBtn";
 // import "./Accordion.scss";
 
@@ -79,9 +80,7 @@ export default function DefinitionCard({ wordData, ind }) {
                 <div className="more-btn">
                     <DefinitionMoreBtn data={wordData} />
                 </div>
-                <div className="position-relative board">
-                    <strong>{wordData.partOfSpeech.en}</strong>
-                </div>
+                <PartOfSpeech wordData={wordData} />
                 <section className="card">
                     <div className="position-relative">
                         <strong>Definition: </strong>

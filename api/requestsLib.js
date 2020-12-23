@@ -11,6 +11,7 @@ exports.createVoca = () => `${API}/voca/create`; // post
 exports.getVocaData = () => `${API}/voca/data`; // get
 exports.getVocaTranslated = () => `${API}/voca/data/translated`; // post
 exports.countVocas = () => `${API}/voca/count/total`;
+exports.translate = (txt) => `${API}/voca/translate?text=${txt}`; // get
 // END VOCAB
 
 // TTS

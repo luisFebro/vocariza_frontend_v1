@@ -27,13 +27,13 @@ export default function DraggableGrid({
         <section className="container-center">
             <div className="grid-container">
                 <ResponsiveGridLayout
-                    onDragStop={(
-                        layout,
-                        oldItem,
-                        newItem,
-                        placeholder,
-                        e,
-                        element
+                    onLayoutChange={(
+                        layout
+                        // oldItem,
+                        // newItem,
+                        // placeholder,
+                        // e,
+                        // element
                     ) => handleLayout(layout)}
                     className="layout"
                     layout={null}

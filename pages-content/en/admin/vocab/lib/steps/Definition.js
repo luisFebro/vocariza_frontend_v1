@@ -29,6 +29,8 @@ export default function Definition() {
 
     const saveWord = async () => {
         const {
+            en: mainEn,
+            br: mainBr,
             definition: mainDefinition,
             examples: mainExamples,
             synonyms: mainSynonyms,
@@ -36,15 +38,16 @@ export default function Definition() {
             dialect: mainDialect,
             langRegister: mainLangRegister,
             vulgarLevel: mainVulgarLevel,
+            partOfSpeech: mainPartOfSpeech,
         } = wordData.treatedWordData[0];
 
         const ultimateTreatedData = wordData.treatedWordData;
         const otherDefinitions = ultimateTreatedData.slice(1);
 
         const body = {
-            mainEn: vocaEn,
-            mainBr: vocaBr,
-            mainPartOfSpeech: wordData.allSpeeches,
+            mainEn,
+            mainBr,
+            mainPartOfSpeech,
             mainPronounce: wordData.mainPronounce,
             mainDefinition,
             allSpeeches,

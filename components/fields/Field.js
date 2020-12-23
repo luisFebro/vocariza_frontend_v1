@@ -46,7 +46,9 @@ export default function Field({
                     handleOnChange(e, onChangeCallback);
                     debounceCallback && handler();
                 }}
-                onKeyPress={(e) => handleEnterPress(e, enterCallback)}
+                onKeyPress={(e) => {
+                    handleEnterPress(e, enterCallback);
+                }}
                 error={error}
                 autoComplete={autoComplete}
                 multiline={multiline ? true : false}

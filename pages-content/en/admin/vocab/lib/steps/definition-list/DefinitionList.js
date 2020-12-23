@@ -2,15 +2,38 @@ import { Fragment, useEffect } from "react";
 import DraggableGrid from "components/DraggableGrid";
 import { useContext } from "global/Context";
 import DefinitionCard from "./card/accordion/DefinitionCard";
+import ButtonFab from "components/buttons/material-ui/ButtonFab";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import getId from "utils/getId";
+
+const getNewCardPattern = (word) => {
+    return {
+        en: word,
+        br: "",
+        definition: {
+            en: getId(),
+            br: "",
+        },
+        partOfSpeech: {
+            en: "noun",
+            br: "",
+        },
+        synonyms: [],
+        antonyms: [],
+        dialect: "american",
+        langRegister: "neutral",
+        vulgarLevel: "none",
+        isNew: true, // to enable edit the part of speech button
+    };
+};
 
 export default function DefinitionList() {
     const {
         setGlobalData,
-        globalData: { wordData = {} },
+        globalData: { wordData = {}, vocaEn },
     } = useContext();
 
     const gotWordData = Boolean(wordData);
-
     const mainData = gotWordData && wordData.treatedWordData;
 
     const ultimateList =
@@ -27,6 +50,18 @@ export default function DefinitionList() {
             </div>
         ));
 
+    const handleNewCard = () => {
+        const newCard = getNewCardPattern(vocaEn);
+
+        setGlobalData((prev) => ({
+            ...prev,
+            wordData: {
+                ...prev.wordData,
+                treatedWordData: [newCard, ...mainData],
+            },
+        }));
+    };
+
     const getLayoutResult = (res) => {
         setGlobalData((prev) => ({
             ...prev,
@@ -35,12 +70,22 @@ export default function DefinitionList() {
     };
 
     return (
-        <DraggableGrid
-            reactList={ultimateList}
-            rawData={mainData}
-            getLayoutResult={getLayoutResult}
-            targetElem="definition"
-        />
+        <Fragment>
+            <div className="container-center mt-5">
+                <ButtonFab
+                    title="Add Card"
+                    size="medium"
+                    faIcon={<FontAwesomeIcon icon="plus" />}
+                    onClick={handleNewCard}
+                />
+            </div>
+            <DraggableGrid
+                reactList={ultimateList}
+                rawData={mainData}
+                getLayoutResult={getLayoutResult}
+                targetElem="definition"
+            />
+        </Fragment>
     );
 }
 

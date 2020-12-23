@@ -14,7 +14,7 @@ export default function Etymology({ ety, currWord }) {
                             height={20}
                             alt="flag"
                         />{" "}
-                        {ety.en}
+                        {ety.en ? ety.en : "not found"}
                     </li>
                     <br />
                     <li>
@@ -24,7 +24,7 @@ export default function Etymology({ ety, currWord }) {
                             height={20}
                             alt="flag"
                         />{" "}
-                        {ety.br}
+                        {ety.br ? ety.br : "not found"}
                     </li>
                 </ul>
                 <a

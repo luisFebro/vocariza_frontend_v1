@@ -5,12 +5,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Field from "components/fields/Field";
 import Img from "components/Img";
 import getAPIBack from "api/getAPIBack";
-import { getVocaTranslated } from "api/requestsLib";
+import { getVocaTranslated, translate } from "api/requestsLib";
 import { setUpdatedEditData } from "./helpers";
-import NewField from "./comps/NewField";
-import TitleEdit from "./comps/TitleEdit";
 import getSiteName from "utils/string/getSiteName";
+import Dynamic from "components/Dynamic";
+// import NewField from "";
+// import TitleEdit from "./comps/TitleEdit";
 import { LinguisticStyle, Dialect } from "./comps/Selectors";
+
+const NewField = Dynamic(() =>
+    import("./comps/NewField" /* webpackChunkName: "field-comp-lazy" */)
+);
+
+const TitleEdit = Dynamic(() =>
+    import("./comps/TitleEdit" /* webpackChunkName: "field-comp-lazy" */)
+);
+
+const translateTxt = async (txt) => {
+    const { data: translated } = await getAPIBack({
+        url: translate(txt),
+    });
+
+    return translated;
+};
 
 const updateGlobalData = async ({ setGlobalData, config }) => {
     return await setGlobalData((prev) => ({
@@ -25,7 +42,7 @@ const updateGlobalData = async ({ setGlobalData, config }) => {
     }));
 };
 
-export default function DefinitionContent({ data }) {
+export default function DefinitionContent({ data, handleFullClose }) {
     const [translationOn, setTranslationOn] = useState(
         data.definition.br || false
     );
@@ -46,6 +63,48 @@ export default function DefinitionContent({ data }) {
         lang: "en",
     });
     const { currVal, currId, currEdit, lang, currRef, isDelete } = edit;
+
+    const translateOneElem = async (currVal, options = {}) => {
+        const { currElem, target, isArray } = options;
+        const translated = await translateTxt(currVal);
+
+        if (!edit.isArray && !isArray) {
+            return wordData.treatedWordData.map((main) => {
+                if (main.definition.en === currElem.definition.en) {
+                    main[target].br = translated;
+                }
+                return main;
+            });
+        }
+
+        const sortedTranslated = wordData.treatedWordData.map((main) => {
+            if (
+                JSON.stringify(main[target]) ===
+                JSON.stringify(currElem[target])
+            ) {
+                if (Array.isArray(currElem[target])) {
+                    const updated = main[target].map((elem) => {
+                        if (elem.en === currVal) {
+                            elem.br = translated && translated.toLowerCase();
+                        }
+                        return elem;
+                    });
+
+                    main[target] = updated;
+                }
+            }
+
+            return main;
+        });
+
+        await setGlobalData((prev) => ({
+            ...prev,
+            wordData: {
+                ...prev.wordData,
+                treatedWordData: sortedTranslated,
+            },
+        }));
+    };
 
     const restart = () => {
         setEdit({
@@ -90,7 +149,10 @@ export default function DefinitionContent({ data }) {
     const handleEditDone = async () => {
         await updateGlobalData({ setGlobalData, config: edit });
         if (translationOn && lang === "en") {
-            await handleTranslateAll();
+            await translateOneElem(currVal, {
+                currElem: data,
+                target: currEdit,
+            });
         }
         restart();
     };
@@ -205,6 +267,12 @@ export default function DefinitionContent({ data }) {
         translationOn,
     };
 
+    const showFinishBtn = () => (
+        <section className="container-center my-4">
+            <ButtonFab title="Done!" size="large" onClick={handleFullClose} />
+        </section>
+    );
+
     return (
         <section className="mx-3 my-3">
             <h1 className="text-modal">
@@ -268,7 +336,7 @@ export default function DefinitionContent({ data }) {
                 setGlobalData={setGlobalData}
                 currElem={data}
                 currVoca={vocaEn}
-                handleTranslateAll={handleTranslateAll}
+                translateOneElem={translateOneElem}
             />
 
             <h3>Synonyms:</h3>
@@ -304,7 +372,7 @@ export default function DefinitionContent({ data }) {
                 target="synonyms"
                 setGlobalData={setGlobalData}
                 currElem={data}
-                handleTranslateAll={handleTranslateAll}
+                translateOneElem={translateOneElem}
             />
 
             <h3>Antonyms:</h3>
@@ -340,8 +408,9 @@ export default function DefinitionContent({ data }) {
                 target="antonyms"
                 setGlobalData={setGlobalData}
                 currElem={data}
-                handleTranslateAll={handleTranslateAll}
+                translateOneElem={translateOneElem}
             />
+            {showFinishBtn()}
         </section>
     );
 }

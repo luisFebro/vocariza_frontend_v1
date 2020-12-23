@@ -37,7 +37,7 @@ export default function NewField({
     setGlobalData,
     currElem,
     currVoca,
-    handleTranslateAll,
+    translateOneElem = { translateOneElem },
 }) {
     const [openNewField, setOpenNewField] = useState(false);
     const [data, setData] = useState({
@@ -82,7 +82,7 @@ export default function NewField({
             },
         }));
         close();
-        await handleTranslateAll();
+        await translateOneElem(newChunk, { currElem, target, isArray: true });
         setData({
             ...data,
             newChunk: "",
