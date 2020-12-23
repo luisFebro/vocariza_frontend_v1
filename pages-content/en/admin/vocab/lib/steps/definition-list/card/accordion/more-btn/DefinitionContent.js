@@ -10,6 +10,7 @@ import { setUpdatedEditData } from "./helpers";
 import NewField from "./comps/NewField";
 import TitleEdit from "./comps/TitleEdit";
 import getSiteName from "utils/string/getSiteName";
+import { LinguisticStyle, Dialect } from "./comps/Selectors";
 
 const updateGlobalData = async ({ setGlobalData, config }) => {
     return await setGlobalData((prev) => ({
@@ -69,7 +70,7 @@ export default function DefinitionContent({ data }) {
         });
         const sortedTranslated = wordData.treatedWordData.map((item) => {
             if (translated.definition.en === item.definition.en) {
-                return translated;
+                return { ...item, ...translated }; // avoid overdrive values which does not require translation such as dialect and style.
             }
 
             return item;
@@ -226,6 +227,12 @@ export default function DefinitionContent({ data }) {
             <DefinitionComp {...defaultProps} />
             <br />
             {translationOn && <DefinitionComp {...defaultProps} lang="br" />}
+
+            <h3>Style:</h3>
+            <LinguisticStyle setGlobalData={setGlobalData} currElem={data} />
+
+            <h3>Dialect:</h3>
+            <Dialect setGlobalData={setGlobalData} currElem={data} />
 
             <h3>Examples:</h3>
             {data.examples && data.examples.length ? (
@@ -412,7 +419,7 @@ function ListComps({
     isDelete,
     translationOn,
 }) {
-    data[lang] = data[lang] ? data[lang] : "?";
+    data[lang] = data[lang] ? data[lang] : "...";
     const needField = currLang === lang && currId === data[lang] && !isDelete;
 
     const handleSiteName = () => {

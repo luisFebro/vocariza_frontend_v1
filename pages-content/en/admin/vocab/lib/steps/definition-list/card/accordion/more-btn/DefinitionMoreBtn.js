@@ -43,6 +43,7 @@ export default function DefinitionMoreBtn({ data }) {
                 contentComp={AsyncComp}
                 fullOpen={fullOpen}
                 setFullOpen={handleFullClose}
+                needIndex={false}
             />
         </section>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import Img from "components/Img";
-//teste
+
 export default function Etymology({ ety, currWord }) {
     return (
         <section className="container">

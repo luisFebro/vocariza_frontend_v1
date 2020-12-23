@@ -1,6 +1,7 @@
 // extract only domain name from an url.
 
 export default function getSiteName(url) {
+    if (!url) return;
     return url.replace(/.+\/\/|www.|\..+/g, "");
 }
 

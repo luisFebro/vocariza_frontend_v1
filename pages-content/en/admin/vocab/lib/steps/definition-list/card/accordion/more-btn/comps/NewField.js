@@ -83,7 +83,13 @@ export default function NewField({
         }));
         close();
         await handleTranslateAll();
-        setData({ ...data, newChunk: "", newUrl: "" });
+        setData({
+            ...data,
+            newChunk: "",
+            newUrl: `https://www.lexico.com/en/definition/${
+                currVoca && currVoca.toLowerCase()
+            }`,
+        });
     };
 
     return (

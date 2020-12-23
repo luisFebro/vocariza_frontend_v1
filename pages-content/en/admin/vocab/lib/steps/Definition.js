@@ -33,6 +33,9 @@ export default function Definition() {
             examples: mainExamples,
             synonyms: mainSynonyms,
             antonyms: mainAntonyms,
+            dialect: mainDialect,
+            langRegister: mainLangRegister,
+            vulgarLevel: mainVulgarLevel,
         } = wordData.treatedWordData[0];
 
         const ultimateTreatedData = wordData.treatedWordData;
@@ -50,6 +53,9 @@ export default function Definition() {
             mainExamples,
             mainSynonyms,
             mainAntonyms,
+            mainDialect,
+            mainLangRegister,
+            mainVulgarLevel,
             otherDefinitions,
             etymology,
         };
