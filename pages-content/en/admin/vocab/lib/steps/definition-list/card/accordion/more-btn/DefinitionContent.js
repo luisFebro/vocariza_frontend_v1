@@ -42,6 +42,16 @@ const updateGlobalData = async ({ setGlobalData, config }) => {
     }));
 };
 
+const setGlobal = async (func, data) => {
+    return await func((prev) => ({
+        ...prev,
+        wordData: {
+            ...prev.wordData,
+            treatedWordData: data,
+        },
+    }));
+};
+
 export default function DefinitionContent({ data, handleFullClose }) {
     const [translationOn, setTranslationOn] = useState(
         data.definition.br || false
@@ -68,42 +78,38 @@ export default function DefinitionContent({ data, handleFullClose }) {
         const { currElem, target, isArray } = options;
         const translated = await translateTxt(currVal);
 
-        if (!edit.isArray && !isArray) {
-            return wordData.treatedWordData.map((main) => {
+        let sortedTranslated;
+        if (!isArray) {
+            sortedTranslated = wordData.treatedWordData.map((main) => {
                 if (main.definition.en === currElem.definition.en) {
                     main[target].br = translated;
                 }
                 return main;
             });
+        } else {
+            sortedTranslated = wordData.treatedWordData.map((main) => {
+                if (
+                    JSON.stringify(main[target]) ===
+                    JSON.stringify(currElem[target])
+                ) {
+                    if (Array.isArray(currElem[target])) {
+                        const updated = main[target].map((elem) => {
+                            if (elem.en === currVal) {
+                                elem.br =
+                                    translated && translated.toLowerCase();
+                            }
+                            return elem;
+                        });
+
+                        main[target] = updated;
+                    }
+                }
+
+                return main;
+            });
         }
 
-        const sortedTranslated = wordData.treatedWordData.map((main) => {
-            if (
-                JSON.stringify(main[target]) ===
-                JSON.stringify(currElem[target])
-            ) {
-                if (Array.isArray(currElem[target])) {
-                    const updated = main[target].map((elem) => {
-                        if (elem.en === currVal) {
-                            elem.br = translated && translated.toLowerCase();
-                        }
-                        return elem;
-                    });
-
-                    main[target] = updated;
-                }
-            }
-
-            return main;
-        });
-
-        await setGlobalData((prev) => ({
-            ...prev,
-            wordData: {
-                ...prev.wordData,
-                treatedWordData: sortedTranslated,
-            },
-        }));
+        await setGlobal(setGlobalData, sortedTranslated);
     };
 
     const restart = () => {
@@ -135,13 +141,7 @@ export default function DefinitionContent({ data, handleFullClose }) {
             return item;
         });
 
-        await setGlobalData((prev) => ({
-            ...prev,
-            wordData: {
-                ...prev.wordData,
-                treatedWordData: sortedTranslated,
-            },
-        }));
+        await setGlobal(setGlobalData, sortedTranslated);
 
         setTranslationOn(true);
     };
@@ -152,6 +152,7 @@ export default function DefinitionContent({ data, handleFullClose }) {
             await translateOneElem(currVal, {
                 currElem: data,
                 target: currEdit,
+                isArray: currEdit === "definition" ? false : true,
             });
         }
         restart();

@@ -37,7 +37,7 @@ export default function NewField({
     setGlobalData,
     currElem,
     currVoca,
-    translateOneElem = { translateOneElem },
+    translateOneElem,
 }) {
     const [openNewField, setOpenNewField] = useState(false);
     const [data, setData] = useState({

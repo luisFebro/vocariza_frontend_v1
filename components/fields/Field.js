@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from "react";
+import { useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import { handleEnterPress, handleOnChange } from "./helpers/index";
 import debounce from "utils/performance/debounce";
@@ -35,7 +35,7 @@ export default function Field({
     const handler = useCallback(debounce(debounceCallback), []);
 
     return (
-        <Fragment>
+        <section className="field">
             <TextField
                 className={`${size} ${textAlign}`}
                 placeholder={placeholder}
@@ -57,7 +57,7 @@ export default function Field({
             />
             <style jsx global>
                 {`
-                    .MuiInputBase-input {
+                    .field .MuiInputBase-input {
                         background-color: ${backgroundColor} !important;
                         z-index: 2000;
                         color: var(--themeP) !important;
@@ -94,7 +94,7 @@ export default function Field({
                     }
                 `}
             </style>
-        </Fragment>
+        </section>
     );
 }
 
