@@ -15,8 +15,8 @@ const changeElem = (target, options = {}) => {
 
 export function LinguisticStyle({ setGlobalData, currElem }) {
     const [data, setData] = useState({
-        vulgar: "none",
-        style: "neutral",
+        vulgar: "",
+        style: "",
     });
     const { vulgar, style } = data;
 
@@ -69,7 +69,7 @@ export function LinguisticStyle({ setGlobalData, currElem }) {
 }
 
 export function Dialect({ setGlobalData, currElem }) {
-    const [dialect, setDialect] = useState("american");
+    const [dialect, setDialect] = useState("");
 
     const handleSelect = async (val) => {
         setDialect(val);

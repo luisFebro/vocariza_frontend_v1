@@ -449,7 +449,7 @@ function DefinitionComp({
                         size="small"
                         name="currVal"
                         backgroundColor="#fff"
-                        value={currVal}
+                        value={currVal || "no definition"}
                         multiline={true}
                         fullWidth={true}
                         onChangeCallback={setEdit}
