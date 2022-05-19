@@ -1,6 +1,6 @@
 // GLOBAL STATES FOR THE CURRENT MAIN ROOT COMPONENT.
 import { useState } from "react";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 
 export default function useGlobal() {
     const [currStep, setCurrStep] = useState("translation");

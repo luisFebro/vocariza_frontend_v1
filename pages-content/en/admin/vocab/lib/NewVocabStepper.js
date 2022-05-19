@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import Translation from "./steps/Translation";
 import Definition from "./steps/Definition";
 import Success from "./steps/Success";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 
 const stepStore = {
     translation: {

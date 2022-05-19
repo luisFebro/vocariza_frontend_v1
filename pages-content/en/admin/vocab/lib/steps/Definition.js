@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import CTAs from "./comps/CTAs";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import DefinitionList from "./definition-list/DefinitionList";
 import useScrollUp from "hooks/scroll/useScrollUp";
 import Snackbar from "components/Snackbar";

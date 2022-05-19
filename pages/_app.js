@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+// import Script from 'next/script';
 
 import "../styles/App.scss"; // LESSON: do not use .module.css for global.
 import "../styles/libs/fontawesome.js";
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }) {
 
                 <meta name="creator" content="Vocariza" />
 
-                {/*TOOLBAR COLOR - requires valid HTTPS certification to work #9400d3 = purple*/}
+                {/* TOOLBAR COLOR - requires valid HTTPS certification to work #9400d3 = purple */}
                 <meta name="theme-color" content="#9400d3" />
                 <meta name="msapplication-TileColor" content="#9400d3" />
                 <meta name="msapplication-navbutton-color" content="#9400d3" />
@@ -49,7 +50,7 @@ function MyApp({ Component, pageProps }) {
                     name="apple-mobile-web-app-status-bar-style"
                     content="#9400d3"
                 />
-                {/*END TOOLBAR COLOR*/}
+                {/* END TOOLBAR COLOR */}
 
                 {/* FAVICON */}
                 <link

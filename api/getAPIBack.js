@@ -24,6 +24,10 @@ const getAPIBack = (options = {}) => {
 
         const stopRequest = setTimeout(() => {
             cancel();
+            // LESSON: do not use Promise.reject inside a pure promise like this where there is reject method already. the request will fail
+            return reject({
+                error: "Tempo de espera terminou. Tente novamente",
+            });
         }, timeout);
 
         const config = {

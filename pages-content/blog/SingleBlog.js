@@ -1,9 +1,9 @@
+import HeadNext from "components/HeadNext";
+import Layout, { Breadcrumb } from "components/_layout";
 import Link from "next/link";
 import { useEffect, Fragment } from "react";
-import HeadNext from "components/HeadNext";
 import renderHTML from "react-render-html"; // LESSON: renderHTML use a wrapper tag such as <section> around body content, otherwise it will return an object instead of HTML node and it will not be deployed properly. import Img from "../../components/Img";
 import AuthorAndDate from "./lib/AuthorAndDate";
-import Layout, { Breadcrumb } from "components/_layout";
 import Img from "components/Img";
 
 // NOT WORKED YET fsdfdlsfljsdjfds
@@ -14,7 +14,6 @@ import Img from "components/Img";
 
 // LESSON: if data obj like blog, then add an empty {} because it gets undefined before get filled;
 export default function SingleBlog({ blog = {} }) {
-    console.log("blog", blog);
     const Head = () => (
         <HeadNext
             metaTitle={blog.metaTitle}
@@ -77,7 +76,7 @@ export default function SingleBlog({ blog = {} }) {
     return (
         <Layout>
             {Head()}
-            <Breadcrumb mainCrumb={blog.title} />
+            <Breadcrumb txt={blog.title} />
             {showArticleTitleAndAuthor()}
             {showArticleMainContent()}
         </Layout>

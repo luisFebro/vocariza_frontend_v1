@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Field from "components/fields/Field";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import Snackbar from "components/Snackbar";
 
 const partsOfSpeech_pt = {

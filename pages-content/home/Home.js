@@ -1,7 +1,8 @@
-import HeadNext from "../components/HeadNext";
-import Layout, { siteTitle } from "../components/_layout";
+import HeadNext from "components/HeadNext";
+import Layout, { siteTitle } from "components/_layout";
 import Link from "next/link";
 import Image from "next/image";
+import CategoryGallery from "./CategoryGallery.js";
 
 // LESSON: page's name should be in camelcase format otherwise fast refresh won't work.
 
@@ -27,15 +28,15 @@ export default function Home() {
     return (
         <Layout home>
             {Head()}
-            <section>
-                <h1>Memorize palavras e frases em inglês</h1>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Image src="/img/logo-name.png" width="200" height="100%" />
-                </div>
+            <section className="container-center">
+                <h1 className="text-center text-pill">Escolha uma categoria</h1>
             </section>
+            <CategoryGallery />
         </Layout>
     );
 }
+
+/*
 
 // export const getStaticProps = async ({ query }) => {
 //     const { data } = await getAPI({

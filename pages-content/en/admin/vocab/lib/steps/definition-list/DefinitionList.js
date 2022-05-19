@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from "react";
 import DraggableGrid from "components/DraggableGrid";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import DefinitionCard from "./card/accordion/DefinitionCard";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

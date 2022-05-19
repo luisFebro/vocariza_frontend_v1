@@ -5,7 +5,7 @@ import Snackbar from "components/Snackbar";
 import getId from "utils/getId";
 import { handlePronounceDelimiters } from "./helpers";
 import CTAs from "./comps/CTAs";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import Img from "components/Img";
 import runWatson from "utils/tts/runWatson";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

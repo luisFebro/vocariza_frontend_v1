@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Field from "components/fields/Field";

@@ -3,7 +3,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ButtonFab from "components/buttons/material-ui/ButtonFab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "global/Context";
+import useContext from "global/Context";
 import DefinitionMoreBtn from "./more-btn/DefinitionMoreBtn";
 import truncate from "utils/string/truncate";
 import isSmall from "utils/isSmall";

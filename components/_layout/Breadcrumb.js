@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const crumbStore = {
+    cat: {
+        name: "categorias",
+    },
     blog: {
         name: "blogues",
     },
@@ -15,10 +18,11 @@ const crumbStore = {
     },
 };
 
-const getCrumbData = ({ n, isLast, mainCrumb }) => {
+const getCrumbData = ({ n, isLast, txt }) => {
+    // txt === mainCrumb
     if (isLast) {
         return {
-            name: mainCrumb,
+            name: txt,
         };
     }
 
@@ -26,7 +30,7 @@ const getCrumbData = ({ n, isLast, mainCrumb }) => {
 };
 
 export default function Breadcrumb({
-    mainCrumb = "the main title in the page",
+    txt = "the main title in the page",
     crumbList,
 }) {
     const router = useRouter();
@@ -42,7 +46,7 @@ export default function Breadcrumb({
             const isLast = ind === urlNames.length - 1;
 
             currPath += `${n}${!isLast ? "/" : ""}`;
-            const { name } = getCrumbData({ n, isLast, mainCrumb });
+            const { name } = getCrumbData({ n, isLast, txt });
 
             return {
                 path: currPath,

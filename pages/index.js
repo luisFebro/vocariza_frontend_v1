@@ -1,2 +1,2 @@
-import Home from "pages-content/Home";
+import Home from "pages-content/home/Home.js";
 export default Home;

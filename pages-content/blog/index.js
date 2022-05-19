@@ -1,9 +1,9 @@
-import HeadNext from "../../components/HeadNext";
+import HeadNext from "components/HeadNext";
 import Link from "next/link";
 import { useState, Fragment } from "react";
 import { API, DOMAIN, APP_NAME, FB_APP_ID } from "../../config";
 import { useRouter } from "next/router";
-import Layout from "../../components/_layout";
+import Layout, { Breadcrumb } from "components/_layout";
 
 // import Layout from '../../components/Layout';
 // import { listBlogsWithCategoriesAndTags } from '../../actions/blog';
@@ -22,7 +22,7 @@ export default function Blogs({
     const Head = () => (
         <HeadNext
             metaTitle={`Blogs | ${APP_NAME}`}
-            metaDesc="Vocariza - memorizar vocabulários em Inglês para sempre"
+            metaDesc="Vocariza - memorizar vocabulários em Inglês"
             mainPhoto="/img/logo.png"
             urlPath={`/blog`}
             languages={null}
@@ -97,7 +97,14 @@ export default function Blogs({
     return (
         <Layout>
             {Head()}
-            <h1>Hello World! I am the blog Index</h1>
+            <Breadcrumb txt="blogues" />
+            <ul>
+                <li>
+                    <Link href="/blog/5-vocabularios-mais-dificeis-de-pronunciar-em-ingles">
+                        <a>First article</a>
+                    </Link>
+                </li>
+            </ul>
         </Layout>
     );
 }

@@ -2,9 +2,16 @@
 which means instead especify a class such home-to-right, create a more general class such as mv-right.
 */
 
+/*
+    https://css-tricks.com/box-sizing/
+But, the * selector makes it difficult for developers to use content-box or padding-box elsewhere in the CSS. Which brings us to the current frontrunner (vanguarda, líder) for best practice
+*/
+html {
+    box-sizing: border-box;
+}
 *,
-:after,
-:before {
+*:after,
+*:before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
