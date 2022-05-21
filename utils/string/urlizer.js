@@ -1,5 +1,5 @@
-export default function addSpacingPlusToQuery(query) {
-    let res;
+export default function urlizer(query, options = {}) {
+    const { symb = "_" } = options;
     if (!query) {
         return null;
     }
@@ -7,8 +7,9 @@ export default function addSpacingPlusToQuery(query) {
         query = query.toString();
     }
 
+    let res;
     if (query) {
-        res = query.split(" ").join("+").toLowerCase();
+        res = query.split(" ").join(symb).toLowerCase();
     }
 
     return res;

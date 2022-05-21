@@ -4,17 +4,17 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const crumbStore = {
-    cat: {
+    c: {
         name: "categorias",
+    },
+    s: {
+        name: "subs",
+    },
+    v: {
+        name: "vokas",
     },
     blog: {
         name: "blogues",
-    },
-    vocabulario: {
-        name: "vocabulários",
-    },
-    expressao: {
-        name: "expressões",
     },
 };
 
@@ -29,10 +29,7 @@ const getCrumbData = ({ n, isLast, txt }) => {
     return crumbStore[n];
 };
 
-export default function Breadcrumb({
-    txt = "the main title in the page",
-    crumbList,
-}) {
+export default function Breadcrumb({ txt, crumbList }) {
     const router = useRouter();
 
     const isHome = router.route === "/";

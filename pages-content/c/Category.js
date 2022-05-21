@@ -1,10 +1,19 @@
 import HeadNext from "components/HeadNext";
 import Layout, { Breadcrumb } from "components/_layout";
+import { useRouter } from "next/router";
+import cap from "utils/string/cap";
 
 export default function Category() {
+    const router = useRouter();
+    const {
+        query: { c },
+    } = router;
+
     const cat = {
-        metaTitle: "Gírias",
-        metaDesc: "Aprenda palavras de GÍRIAS em Inglês",
+        metaTitle: c,
+        metaDesc: `Aprenda palavras e expressões de ${
+            c && c.toUpperCase()
+        } em Inglês`,
     };
 
     return (
@@ -13,11 +22,12 @@ export default function Category() {
                 metaTitle={cat.metaTitle}
                 metaDesc={cat.metaDesc}
                 mainPhoto={cat.photo}
-                urlPath={`/cat/${cat.slug}`}
+                urlPath={`/c/${cat.slug}`}
                 languages={cat.languages}
                 noIndex={true} // temp while editing the blog.
             />
-            <Breadcrumb txt="Gírias" />
+            <Breadcrumb />
+            <h1 className="text-center">{cap(c)}</h1>
         </Layout>
     );
 }

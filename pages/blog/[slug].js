@@ -8,7 +8,7 @@ export default SinglePage;
 // Then, check backend because can have an API issue...
 // 2. Verify if dates are getting undefined values when passing to server side.
 export async function getStaticPaths() {
-    // n3 dsadsadsa
+    // n3
     const { data } = await getAPIBack({ url: getStaticBlogPathsList() }).catch(
         (err) => {
             console.log("ERROR: " + err);

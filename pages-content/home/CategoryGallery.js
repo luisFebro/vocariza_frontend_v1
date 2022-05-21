@@ -1,4 +1,5 @@
 import Link from "next/link";
+import urlizer from "utils/string/urlizer";
 // reference: https://codepen.io/Manolavelle/pen/XeWwJz
 
 const categories = [
@@ -25,7 +26,7 @@ export default function CategoryGallery() {
             {categories.map((e) => (
                 <figure className="snip hover">
                     <div className="image">
-                        <Link href={`/cat/${e.category}`}>
+                        <Link href={`/c/${urlizer(e.category)}`}>
                             <img src={e.img} alt={e.category} />
                         </Link>
                     </div>
